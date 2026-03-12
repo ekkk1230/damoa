@@ -1,0 +1,9 @@
+echo ".DS_Store
+*.zip
+card-api.zip
+node_modules/
+dist/
+build/
+.gradle/
+.idea/
+out/" > .gitignore
