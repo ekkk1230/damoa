@@ -6,4 +6,18 @@ dist/
 build/
 .gradle/
 .idea/
-out/" > .gitignore
+out/
+
+# React / Node
+dist-ssr/
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/
+*.swp
+*.patch" > .gitignore
