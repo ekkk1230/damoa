@@ -1,47 +1,16 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { CARD_LIST } from './data/cardData';
 import type { Card } from './type/Card';
-
-const CARD_LIST: Card[] = [ 
-  {
-    id: 1,
-    name: "톡톡카드",
-    company: "삼성카드",
-    annualFee: 10000,
-    image: "https://placehold.co/200x120/png",
-    mainBenefits: ["스타벅스 50% 할인"],
-    categories: ["카페", "주유"],
-    isOwned: true,
-  },
-  {
-    id: 2,
-    name: "해피카드",
-    company: "신한카드",
-    annualFee: 10000,
-    image: "https://placehold.co/200x120/png",
-    mainBenefits: ["주유 50% 할인"],
-    categories: ["주유", "도서"],
-    isOwned: true,
-  },
-  {
-    id: 3,
-    name: "절약카드",
-    company: "우리카드",
-    annualFee: 10000,
-    image: "https://placehold.co/200x120/png",
-    mainBenefits: ["온라인쇼핑몰 50% 할인"],
-    categories: ["식당", "쇼핑"],
-    isOwned: false,
-  },
-]
+import GenderChart from './components/GenderChart';
+import AgeChart from './components/AgeChart';
 
 const companyType = ["전체", "삼성카드", "신한카드", "우리카드", "국민카드", "하나카드", "현대카드"];
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCompany, setSelectedCompany] = useState("전체");
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const filteredCards = CARD_LIST.filter(card => {
     const isSearchMatch = card.name.includes(searchTerm.toLowerCase()) || card.company.includes(searchTerm.toLowerCase()) || card.categories.some( category => category.includes(searchTerm.toLowerCase()) );
@@ -51,24 +20,132 @@ function App() {
   });
 
   const myCards = filteredCards.filter(card => card.isOwned === true);
-  const recommendCards = filteredCards.filter(card => card.isOwned === false);
+  // const recommendCards = filteredCards.filter(card => card.isOwned === false);
 
-  const recommendFilterCards = recommendCards.filter(card => {
+  const recommendFilterCards = filteredCards.filter(card => {
     if (searchTerm.trim() == "") return;
     return card.categories.some(category => category.includes(searchTerm.toLowerCase()));
   })
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      {selectedCard && (
+        <>
+{/* [상단: Identity]
+브랜드 텍스트: company (예: "신한카드")
+
+카드 타입 태그: type (신용/체크/하이브리드)
+
+카드 이름: name
+
+감성 요약: summary (예: "자취생의 구원자...")
+
+보유 뱃지: isOwned가 true일 때만 "MY" 혹은 "보유 중" 표시
+
+[중앙: Visualization (Killer Content)]
+성별 비율: statistics.gender.male & female 수치 활용
+
+연령대 분포: statistics.ageGroup 배열 활용 (20대~50대+ 비율)
+
+데이터 출처 안내: "본 데이터는 혜택 선호도를 기반으로 생성된 가상 데이터입니다." 문구 삽입
+
+[하단: Key Benefits & Details]
+TOP 3 혜택: mainBenefits 배열의 앞의 3개 아이템만 추출
+
+비용 정보:
+
+연회비: annualFee (예: 15,000원) -> 단, 체크카드면 "없음"으로 조건부 렌더링
+
+이용 조건: condition (예: "전월 실적 30만원 이상")
+
+최대 혜택 금액: maxBenefit (예: "월 최대 5만원 할인")
+
+[액션: CTA]
+상세 보기: id값을 이용해 상세 페이지(cards/${id})로 연결
+
+비교함 담기: 해당 카드 객체 전체를 담는 핸들러 연결
+
+카드사메인 컬러 (HEX)느낌 및 활용 
+팁신한카드#0046FF신뢰감을 주는 진한 블루. 흰색 글자와 대비가 좋습니다.
+삼성카드#222222최근에는 세련된 블랙이나 짙은 블루를 많이 씁니다.
+현대카드#000000'현대카드=블랙' 공식이 있을 정도로 검정색과 무채색을 선호합니다.
+KB국민카드#FFBC00친근하고 밝은 노란색. 검정색 글자와 잘 어울립니다.
+롯데카드#ED1C24강렬한 레드. 포인트 컬러로 쓰기 좋습니다.
+우리카드#007BC3시원하고 깨끗한 느낌의 스카이 블루.
+하나카드#008485하나금융 특유의 청록색(Teal). 고급스러운 느낌을 줍니다.
+NH농협카드#ED9100따뜻한 느낌의 오렌지색 혹은 농협 특유의 초록색을 섞어 씁니다.
+BC카드#F0131E롯데보다 조금 더 밝고 선명한 레드입니다.
+IBK기업은행#0059A6정직하고 무게감 있는 블루. */}
+
+          <div className="modal-overlay" onClick={() => setSelectedCard(null)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              {/* 카드 상단 포인트 띠 (카드사별 색상 적용 가능) */}
+              <div className="modal-top-bar" style={{ backgroundColor: '#0046FF' }}></div>
+
+              <button className="modal-close-btn" onClick={() => setSelectedCard(null)}>✕</button>
+
+              <div className="modal-inner">
+                {/* 1. 헤더 영역 */}
+                <div className="modal-header">
+                  <div className="badge-group">
+                    <span className="badge company">{selectedCard.company}</span>
+                    <span className={`badge type ${selectedCard.type === '신용' ? 'credit' : 'check'}`}>
+                      {selectedCard.type}
+                    </span>
+                    {selectedCard.isOwned && <span className="badge owned">MY</span>}
+                  </div>
+                  <h2 className="card-name">{selectedCard.name}</h2>
+                  <p className="card-summary">"{selectedCard.summary}"</p>
+                </div>
+                
+                {/* 2. 차트 영역 (추후 직접 구현할 자리) */}
+                <div className="chart-placeholder">
+                  <p>데이터 시각화 차트가 들어갈 자리입니다</p>
+                  <AgeChart data={selectedCard.statistics?.ageGroup} />
+                  <GenderChart data={selectedCard.statistics?.gender} />
+                </div>
+
+                {/* 3. 혜택 리스트 */}
+                <div className="benefit-section">
+                  <h3>주요 혜택</h3>
+                  <div className="benefit-list">
+                    {selectedCard.mainBenefits.slice(0, 3).map((benefit, idx) => (
+                      <div key={idx} className="benefit-item">
+                        <span className="icon">✨</span> {benefit}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 4. 비용 정보 박스 */}
+                <div className="info-grid">
+                  <div className="info-item">
+                    <span className="label">연회비</span>
+                    <span className="value">
+                      {selectedCard.annualFee !== 0 ? `${selectedCard.annualFee.toLocaleString()}원` : '없음'}
+                    </span>
+                  </div>
+                  <div className="info-item">
+                    <span className="label">최대 혜택</span>
+                    <span className="value">{selectedCard.maxBenefit}</span>
+                  </div>
+                  <div className="info-item full">
+                    <span className="label">이용 조건</span>
+                    <span className="value">{selectedCard.condition}</span>
+                  </div>
+                </div>
+
+                {/* 5. 액션 버튼 */}
+                <div className="button-group">
+                  <button className="btn-primary">상세 정보 보기</button>
+                  <button className="btn-secondary">비교함 담기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
       {/* 검색창 컨테이너 */}
       <div style={{ 
         backgroundColor: '#f8f9fa', 
@@ -229,12 +306,16 @@ function App() {
     
                 {/* 2. 텍스트 정보 */}
                 <div style={{ textAlign: 'left' }}>
-                  <p style={{ 
-                    margin: '0', 
-                    fontWeight: 'bold', 
-                    fontSize: '18px', 
-                    lineHeight: '1.2' 
-                  }}>
+                  <p 
+                    style={{ 
+                      margin: '0', 
+                      fontWeight: 'bold', 
+                      fontSize: '18px', 
+                      lineHeight: '1.2', 
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => setSelectedCard(card)}
+                  >
                     {card.name}
                   </p>
                   <p style={{ 
@@ -267,12 +348,14 @@ function App() {
                 {card.categories.map((cate) => (
                   <li key={cate} style={{ 
                     background: '#f1f3f5', 
-                    padding: '4px 10px', 
                     borderRadius: '15px', 
                     fontSize: '12px',
                     color: '#666'
                   }}>
-                    #{cate}
+                    <button 
+                      onClick={() => setSearchTerm(cate)}
+                      className="tag-button"
+                    >#{cate}</button>
                   </li>
                 ))}
               </ul>
@@ -338,14 +421,14 @@ function App() {
               <strong>맞춤형 카드를 추천</strong>해 드릴게요!
             </p>
           </div>
-        ) : recommendCards.length >= 1 ? (
+        ) : recommendFilterCards.length >= 1 ? (
           /* 2. 추천 결과가 있을 때 */
           <div style={{ textAlign: 'left' }}>
             <p style={{ marginBottom: '20px', paddingLeft: '10px', color: '#444' }}>
               ✨ <strong>'{searchTerm}'</strong> 혜택이 담긴 추천 카드들이에요!
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-              {recommendCards.map(card => ( // ( ) 소괄호를 써서 바로 return 하게 수정!
+              {recommendFilterCards.map(card => ( // ( ) 소괄호를 써서 바로 return 하게 수정!
                 <div key={card.id} style={{ 
                   border: '1px solid #eee', 
                   borderRadius: '12px', 
