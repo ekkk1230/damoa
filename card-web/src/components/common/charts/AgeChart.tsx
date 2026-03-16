@@ -1,5 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import * as S from '../App.styles';
+import * as S from '../../CardModal/CardModal.styles'
 
 const AgeChart = ({ data }: { data: { label: string; value: number }[] | undefined }) => {
   if (!data || data.length === 0) return null;
@@ -11,6 +11,7 @@ const AgeChart = ({ data }: { data: { label: string; value: number }[] | undefin
         <BarChart 
           data={data} 
           margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
+          barCategoryGap="30%"
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eee" />
           <XAxis 
@@ -36,7 +37,7 @@ const AgeChart = ({ data }: { data: { label: string; value: number }[] | undefin
           <Bar 
             dataKey="value"
             radius={[4, 4, 0, 0]} 
-            barSize={30}
+            barSize={23}
             isAnimationActive={true} // 애니메이션 활성화 확인
             animationBegin={0}       // 0초 대기
             animationDuration={1000} // 1초 동안 실행
