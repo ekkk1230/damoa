@@ -14,7 +14,7 @@ export const MOCK_SPENDING = [
 	  amount: 28500,
 	  category: "식비",
 	  date: "2026-03-12",
-	  cardId: "kb-001", 
+	  cardId: 1, 
 	},
 	{
 	  id: 2,
@@ -30,7 +30,7 @@ export const MOCK_SPENDING = [
 	  amount: 45000,
 	  category: "건강/쇼핑",
 	  date: "2026-03-15",
-	  cardId: 2, 
+	  cardId: 1, 
 	},
 	{
 	  id: 4,
@@ -38,7 +38,7 @@ export const MOCK_SPENDING = [
 	  amount: 6100,
 	  category: "카페",
 	  date: "2026-03-16",
-	  cardId: 1,
+	  cardId: 2,
 	},
 	{
 	  id: 5,
@@ -50,14 +50,16 @@ export const MOCK_SPENDING = [
 	}
 ];
 
-
 export const HomePage = () => {
 	const topCategory = "식비";
 
-	const recommendaedCards = useMemo(() => {
-		const filtered = CARD_LIST.filter(card => card.categories.includes(topCategory));
-		return [...filtered].sort(() => Math.random() - .5).slice(0, 5);
-	}, [topCategory]);
+	const spendingMap = MOCK_SPENDING.reduce((acc: {[key: number]: number}, cur) => {
+		const id = Number(cur.cardId);
+
+		acc[id] = (acc[id] || 0) + cur.amount;
+		return acc;
+	}, {} as Record<number, number>);
+
 
 	const myCards = useMemo(() => {
 		return CARD_LIST
@@ -66,9 +68,20 @@ export const HomePage = () => {
 					cardInfo: card,
 					nickname: `${card.company} ${card.name}`,
 					targetAmount: 3000000,
-					currentAmount: 1250000,
+					currentAmount: spendingMap[card.id] || 0,
 				}))
-	}, []);
+	}, [spendingMap]);
+
+	const totalSpending = useMemo(() => {
+		return Object.values(spendingMap).reduce((acc, cur) => acc + cur, 0);
+	}, [spendingMap]);
+
+	const totalBenefit = Math.floor(totalSpending * 0.015);
+
+	const recommendaedCards = useMemo(() => {
+		const filtered = CARD_LIST.filter(card => card.categories.includes(topCategory));
+		return [...filtered].sort(() => Math.random() - .5).slice(0, 5);
+	}, [topCategory]);
 
     return (
         <S.HomeContainer>
@@ -76,8 +89,8 @@ export const HomePage = () => {
             <S.SummaryCard>
                 <S.SummaryInfo>
                     <p className="label">이번 달 총 지출</p>
-                    <h2 className="total-amount">1,250,000원</h2>
-                    <p className="benefit-amount">이번 달 혜택 <span>+32,400원</span></p>
+                    <h2 className="total-amount">{totalSpending.toLocaleString()}원</h2>
+                    <p className="benefit-amount">이번 달 혜택 <span>+{totalBenefit.toLocaleString()}</span></p>
                 </S.SummaryInfo>
                 <S.QuickAddBtn>
                     <span className="icon">📸</span> 
