@@ -1,5 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import * as S from '../../CardModal/CardModal.styles'
+import * as S from '../../Modal/ModalComponents.styles'
 
 const AgeChart = ({ data }: { data: { label: string; value: number }[] | undefined }) => {
   if (!data || data.length === 0) return null;

@@ -1,0 +1,42 @@
+export const MOCK_SPENDING = [
+	{
+	  id: 1,
+	  storeName: "주식회사 위대한상상", 
+	  amount: 280500,
+	  category: "식비",
+	  date: "2026-03-12",
+	  cardId: 1, 
+	},
+	{
+	  id: 2,
+	  storeName: "김가네 상암점", 
+	  amount: 9500,
+	  category: "식비",
+	  date: "2026-03-14",
+	  cardId: 1,
+	},
+	{
+	  id: 3,
+	  storeName: "(주)이삼오구", 
+	  amount: 45000,
+	  category: "건강/쇼핑",
+	  date: "2026-03-15",
+	  cardId: 1, 
+	},
+	{
+	  id: 4,
+	  storeName: "스타벅스 안양역점", 
+	  amount: 6100,
+	  category: "카페",
+	  date: "2026-03-16",
+	  cardId: 2,
+	},
+	{
+	  id: 5,
+	  storeName: "DB손해보험", 
+	  amount: 55000,
+	  category: "금융/보험",
+	  date: "2026-03-10",
+	  cardId: 2,
+	}
+];

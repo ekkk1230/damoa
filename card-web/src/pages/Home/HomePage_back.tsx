@@ -2,7 +2,7 @@ import { CARD_LIST } from "../../data/cardData"
 import CardItem from '../../components/CardItem/CardItem';
 import * as S from '../../App.styles copy';
 import RecommendationSection from '../../components/RecommendationSection/RecommendationSection';
-import CardModal from '../../components/CardModal/CardModal';
+import CardModal from "../../components/Modal/CardModal"; 
 import { useCardStore } from '../../store/useCardStore';
 
 function HomePage_() {

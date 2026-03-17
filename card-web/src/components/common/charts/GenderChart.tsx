@@ -1,5 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
-import * as S from '../../CardModal/CardModal.styles'
+import * as S from '../../Modal/ModalComponents.styles'
 
 const COLORS = ['#4dabf7', '#ff8787'];
 

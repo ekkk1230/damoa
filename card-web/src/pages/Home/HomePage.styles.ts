@@ -152,76 +152,74 @@ export const ProgressFill = styled.div<{ $width: number }>`
   transition: width 0.5s ease-in-out;
 `;
 
-export const RecommendBanner = styled.div`
-   margin-top: 1rem;
-  background: white;
-  border-radius: 2.4rem;
-  padding: 2.2rem;
-  box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.04);
+export const RecommendBanner = styled.section`
+  background-color: #ffffff; /* 이모지가 없으니 배경을 흰색으로 하고 테두리를 살짝 주는 게 깔끔해요 */
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin: 24px 0;
+`;
 
-  .banner-header {
-    margin-bottom: 2rem;
-    .banner-title {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-        .emoji { font-size: 2.4rem; }
-        .description {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            strong { color: #07958c; font-weight: 700; }
-        }
+export const BannerHeader = styled.div`
+  margin-bottom: 20px;
+
+  .description {
+    font-size: 15px;
+    color: #444;
+    line-height: 1.5;
+
+    strong {
+      color: #000; /* 이모지가 없으므로 텍스트 강조를 더 뚜렷하게 */
+      font-weight: 800;
+      border-bottom: 2px solid #e2e8f0; /* 밑줄 효과로 포인트 */
+      padding-bottom: 1px;
     }
   }
 `;
 
 export const CardListMini = styled.div`
   display: flex;
-  gap: 1.2rem;
+  gap: 12px;
   overflow-x: auto;
-  padding-bottom: 1rem;
-
+  padding-bottom: 8px;
+  
   &::-webkit-scrollbar { display: none; }
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  .no-data {
+    width: 100%;
+    padding: 20px 0;
+    color: #bbb;
+    font-size: 13px;
+    text-align: center;
+  }
 `;
 
 export const MiniCardItem = styled.div<{ $brandColor?: string }>`
-  flex-shrink: 0;
-  width: 11rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  min-width: 150px;
+  background: #fdfdfd;
+  border-radius: 10px;
+  border: 1px solid #f1f1f1;
+  border-top: 3px solid ${props => props.$brandColor || '#ccc'}; /* 왼쪽 대신 위쪽 테두리로 변경 */
+  padding: 16px 12px;
+  transition: transform 0.2s;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
 
   .card-thumb {
-    width: 100%;
-    height: 7rem;
-    background: ${props => props.$brandColor || '#e9ecef'};
-    border-radius: 1rem;
-    padding: 1.2rem;
-    display: flex;
-    align-items: flex-end; 
-    box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.1);
-    position: relative;
-    overflow: hidden;
-
+    margin-bottom: 12px;
     .name {
-      font-size: 1.1rem;
+      font-size: 13px;
       font-weight: 700;
-      line-height: 1.3;
-      word-break: keep-all;
-      color: ${props => 
-        (props.$brandColor === "#ffeb00" || props.$brandColor === "#ffbc00") 
-        ? "#222" : "white"
-      };
-      z-index: 1;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.05) 100%);
+      color: #333;
     }
   }
 
@@ -229,24 +227,15 @@ export const MiniCardItem = styled.div<{ $brandColor?: string }>`
     ul {
       list-style: none;
       padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-
       li {
-        font-size: 1.1rem;
-        color: #07958c;
-        font-weight: 600;
+        font-size: 11px;
+        color: #777;
+        margin-bottom: 6px;
         line-height: 1.4;
         
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
         &::before {
-          content: '• ';
-          margin-right: 0.3rem;
+          content: "•";
+          margin-right: 4px;
         }
       }
     }
@@ -254,15 +243,15 @@ export const MiniCardItem = styled.div<{ $brandColor?: string }>`
 `;
 
 export const BannerFooter = styled.div`
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #f1f3f5;
-  font-size: 1.3rem;
-  color: var(--text-sub);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px dashed #eee; /* 구분선 추가 */
+  text-align: center;
+  font-size: 12px;
+  color: #888;
   font-weight: 500;
 
-  span { font-size: 1.6rem; color: #ced4da; }
+  span {
+    margin-left: 2px;
+  }
 `;
