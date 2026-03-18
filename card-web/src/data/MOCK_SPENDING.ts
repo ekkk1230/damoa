@@ -38,5 +38,13 @@ export const MOCK_SPENDING = [
 	  category: "금융/보험",
 	  date: "2026-03-10",
 	  cardId: 2,
+	},
+	{
+	  id: 6,
+	  storeName: "안양 주유소", 
+	  amount: 55000,
+	  category: "주유",
+	  date: "2026-03-09",
+	  cardId: 1,
 	}
 ];

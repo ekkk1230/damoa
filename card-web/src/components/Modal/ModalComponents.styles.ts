@@ -424,3 +424,130 @@ export const ItemActionGroup = styled.div`
     &:hover { background: #fff1f0; }
   }
 `;
+
+/* --- 실적 달성률 (Progress Bar) --- */
+export const ProgressWrapper = styled.div`
+    margin: 2rem 0;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 1.6rem;
+
+    .label-group {
+        display: flex; justify-content: space-between; align-items: flex-end;
+        margin-bottom: 1rem;
+        
+        span { font-size: 1.3rem; color: #64748b; font-weight: 500; }
+        strong { font-size: 2rem; color: #3b82f6; font-weight: 800; }
+    }
+`;
+
+export const ProgressBar = styled.div<{ $percent: number }>`
+    width: 100%; height: 1.2rem;
+    background: #e2e8f0;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        display: block;
+        width: ${props => Math.min(props.$percent, 100)}%;
+        height: 100%;
+        background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        border-radius: 1rem;
+        transition: width 1s ease-in-out;
+    }
+`;
+
+/* --- 추천 카드 섹션 --- */
+export const RecommendSection = styled.div`
+    margin-top: 4rem;
+    
+    h3 {
+        font-size: 1.8rem; font-weight: 700; color: #1e293b;
+        margin-bottom: 1.5rem;
+    }
+`;
+
+export const RecommendGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1.5rem;
+`;
+
+export const RecommendCardItem = styled.div`
+    padding: 1.5rem;
+    background: #fff;
+    border: 1.5px solid #f1f5f9;
+    border-radius: 1.2rem;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        border-color: #3b82f6;
+    }
+
+    .company { font-size: 1.1rem; color: #94a3b8; margin-bottom: 0.4rem; }
+    .card-name { font-size: 1.4rem; font-weight: 700; color: #334155; margin-bottom: 1rem; }
+    
+    .mini-categories {
+        display: flex; flex-wrap: wrap; gap: 0.4rem;
+        list-style: none; padding: 0;
+        
+        li {
+            font-size: 1rem; color: #3b82f6; background: #eff6ff;
+            padding: 0.2rem 0.6rem; border-radius: 0.4rem;
+        }
+    }
+`;
+
+/* --- 최근 지출 내역 리스트 --- */
+export const SpendSummary = styled.div`
+    margin-top: 2rem;
+    .spend-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+`;
+
+export const ButtonGroup = styled.div`
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 3rem;
+    
+    a {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.4rem;
+        border-radius: 1.2rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+
+    .official-btn {
+        background: #f1f5f9;
+        color: #475569;
+        &:hover { background: #e2e8f0; }
+    }
+
+    .detail-btn {
+        background: #3b82f6;
+        color: #ffffff;
+        &:hover { background: #2563eb; }
+    }
+`;
+
+export const FeeInfo = styled.div`
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span { font-size: 1.4rem; color: #64748b; }
+    strong { font-size: 1.6rem; color: #1e293b; font-weight: 700; }
+`;

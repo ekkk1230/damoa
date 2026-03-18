@@ -9,31 +9,32 @@ import { BRAND_COLORS } from "../../App.styles";
 import { useCardStore } from "../../store/useCardStore";
 import CardModal from "../../components/Modal/CardModal";
 import SpendingAddModal from "../../components/Modal/SpendingAddModal";
+import { USER_CARDS } from "../../data/userCardData";
 
 export const HomePage = () => {
-	const { openModal, spedings } = useCardStore();
+	const { openModal, spendings } = useCardStore();
 
 	const spendingCategory = useMemo(() => {
-		return spedings.reduce((acc: {[key: string]: number}, cur) => {
+		return spendings.reduce((acc: {[key: string]: number}, cur) => {
 			const id = cur.category;
 			acc[id] = (acc[id] || 0) + cur.amount;
 			return acc;
 		}, {} as Record<string, number>);
-	}, [spedings]);
+	}, [spendings]);
 
 	// console.log(spendingCategory);
 
 	const topCategory = useMemo(() => {
-		if (spedings.length === 0) return "지출 없음";
+		if (spendings.length === 0) return "지출 없음";
 
 		return Object.keys(spendingCategory).reduce((prev, cur) => {
 			return spendingCategory[cur] > spendingCategory[prev] ? cur : prev;
 		})
-	}, [spendingCategory, spedings]);
+	}, [spendingCategory, spendings]);
 
 	// console.log(topCategory)
 
-	const spendingMap = spedings.reduce((acc: {[key: number]: number}, cur) => {
+	const spendingMap = spendings.reduce((acc: {[key: number]: number}, cur) => {
 		const id = Number(cur.cardId);
 
 		acc[id] = (acc[id] || 0) + cur.amount;
@@ -58,6 +59,10 @@ export const HomePage = () => {
 
 	const totalBenefit = Math.floor(totalSpending * 0.015);
 
+	const recentSpendList = spendings.sort((a, b) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
+
 	const recommendaedCards = useMemo(() => {
 		const filtered = CARD_LIST.filter(card => card.categories.includes(topCategory));
 		return [...filtered].sort(() => Math.random() - .5).slice(0, 5);
@@ -69,7 +74,7 @@ export const HomePage = () => {
 				{/* 1. 상단 요약 섹션 */}
 				<S.SummaryCard>
 					<S.SummaryInfo>
-						<p className="label">이번 달 총 지출</p>
+						<p className="label">{new Date().getMonth() + 1}월 예상 지출 내역</p>
 						<h2 className="total-amount">{totalSpending.toLocaleString()}원</h2>
 						<p className="benefit-amount">이번 달 혜택 <span>+{totalBenefit.toLocaleString()}</span></p>
 					</S.SummaryInfo>
@@ -98,7 +103,7 @@ export const HomePage = () => {
 							const progress = Math.min(Math.round((currentAmount / targetAmount) * 100), 100);
 
 							return (
-								<SwiperSlide key={cardInfo.id}>
+								<SwiperSlide key={cardInfo.id} onClick={() => openModal('CARD_DETAIL', cardInfo)}>
 									<S.CreditCardBox $brandColor={BRAND_COLORS[cardInfo.company]}>
 											<div className="card-top">
 												<span className="nickname">{nickname}</span>
@@ -122,7 +127,36 @@ export const HomePage = () => {
 					</Swiper>
 				</S.CardSection>
 
-				{/* 2. 추천 카드 섹션 */}
+				{/* 3. 최근 지출 내역 */}
+				<S.RecentSection>
+					<div className="section-header">
+						<h3>최근 지출 내역</h3>
+						<button className="more-btn">전체보기</button>
+					</div>
+					
+					<S.SpendList>
+						{recentSpendList.slice(0, 5).map(item => {
+							const usedCard = USER_CARDS.find(card => card.cardInfo.id === item.cardId);
+
+							return (
+								<S.SpendItem key={item.id}>
+									<div className="item-left">
+									<div className="info">
+										<p className="name">{usedCard?.cardInfo.name}</p>
+										<p className="store">{item.store}</p>
+										<p className="date">{item.date} · {item.category}</p>
+									</div>
+									</div>
+									<div className="item-right">
+									<p className="amount">-{item.amount.toLocaleString()}원</p>
+									</div>
+								</S.SpendItem>
+							)
+						})}
+					</S.SpendList>
+				</S.RecentSection>
+
+				{/* 4. 추천 카드 섹션 */}
 				<S.RecommendBanner>
 					<div className="banner-content">
 						<div className="text-group">

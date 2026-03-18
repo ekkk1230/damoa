@@ -1,9 +1,9 @@
 import * as S from './ModalComponents.styles'
 import { getCardColor } from '../../utils/cardUtils';
-import GenderChart from '../common/charts/GenderChart';
-import AgeChart from '../common/charts/AgeChart';
 import { useCardStore } from '../../store/useCardStore';
-import ModalLayout from '../common/Modal/ModalLayout';
+import ModalLayout from '../common/ModalLayout/ModalLayout';
+import MyCard from './ModalBody/MyCard';
+import RecommendCard from './ModalBody/RecommendCard';
 
 const CardModal = () => {
     const { selectedCard, modalType } = useCardStore();
@@ -12,6 +12,8 @@ const CardModal = () => {
 
     const color = getCardColor(selectedCard.company);
     const imageUrl = `https://placehold.co/100x64/${color}/${color}`;
+
+    const isMyCard = selectedCard.isOwned;
 
     return (
         <ModalLayout title="카드 상세 안내">
@@ -24,24 +26,11 @@ const CardModal = () => {
             </S.ModalHeader>
 
             <S.ModalBody>
-                <S.DetailItem>
-                    <h4>주요 혜택</h4>
-                    <p>{selectedCard.mainBenefits.join(', ')}</p>
-                </S.DetailItem>
-
-                <S.DetailItem>
-                    <h4>카테고리</h4>
-                    <ul className="category-list">
-                    {selectedCard.categories.map((cate, idx) => (
-                        <li key={idx}>{cate}</li>
-                    ))}
-                    </ul>
-                </S.DetailItem>
-
-                <S.ChartContainer>
-                    <GenderChart data={selectedCard.statistics?.gender} />
-                    <AgeChart data={selectedCard.statistics?.ageGroup} />
-                </S.ChartContainer>
+                {isMyCard ? (
+                    <MyCard data={selectedCard} />
+                ) : (
+                    <RecommendCard data={selectedCard} />
+                )}
             </S.ModalBody>
         </ModalLayout>
     )

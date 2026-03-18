@@ -1,6 +1,6 @@
 import * as S from './ModalComponents.styles'
 import { useCardStore } from '../../store/useCardStore';
-import ModalLayout from '../common/Modal/ModalLayout';
+import ModalLayout from '../common/ModalLayout/ModalLayout';
 import type { Card } from '../../type/Card';
 import React, { useState } from 'react';
 
@@ -77,18 +77,23 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
         }, 1500);
     }
 
-    const handleUpdateItem = (id, field, value) => {
+    const handleUpdateItem = (id: number, field: string, value: string) => {
+        const finalValue = field === 'amount' ? Number(value.replace(/[^0-9]/g, '')) : value;
         setAnalyzedList(prevList => 
             prevList.map(item => 
                 item.id === id 
-                    ? { ...item, [field]: value }
+                    ? { ...item, [field]: finalValue }
                     : item 
             )
         );
     };
 
-    const handleDelete = () => {
-        console.log('delete')
+    const handleSave = () => setEditingId(null);
+
+    const handleDelete = (id: number) => {
+        setAnalyzedList(prevList =>
+            prevList.filter(item => item.id !== id)
+        )
     }
 
     return (
@@ -199,10 +204,13 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
                                                     </span>
                                                     <span className="date-cat">
                                                         {item.date} · 
-                                                        <S.GhostSelect value={item.category}>
-                                                            <option value="식비">식비</option>
-                                                            <option value="카페">카페</option>
-                                                            <option value="교통/주유">교통/주유</option>
+                                                        <S.GhostSelect 
+                                                            value={item.category}
+                                                            onChange={e => handleUpdateItem(item.id, 'category', e.target.value)}
+                                                        >
+                                                            {CATEGORIES.map(cate => (
+                                                                <option value={cate}>{cate}</option>
+                                                            ))}
                                                         </S.GhostSelect>
                                                     </span>
                                                 </div>
@@ -217,7 +225,7 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
                                                         />원
                                                     </div>
                                                     <S.ItemActionGroup>
-                                                        <button className="confirm-btn">적용</button>
+                                                        <button className="confirm-btn" onClick={() => handleSave()}>적용</button>
                                                         <button onClick={() => setEditingId(null)}>취소</button>
                                                     </S.ItemActionGroup>
                                                 </div>
@@ -235,7 +243,7 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
                                                     <div className="amount">{item.amount.toLocaleString()}원</div>
                                                     <S.ItemActionGroup>
                                                         <button onClick={() => setEditingId(item.id)}>수정</button>
-                                                        <button className="delete-btn" onClick={handleDelete}>삭제</button>
+                                                        <button className="delete-btn" onClick={() => handleDelete(item.id)}>삭제</button>
                                                     </S.ItemActionGroup>
                                                 </div>
                                             </div>
