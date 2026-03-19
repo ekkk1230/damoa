@@ -1,5 +1,5 @@
 import type { UserCard } from '../type/User';
-import { CARD_LIST } from './cardData';
+import { CARD_LIST } from './CARD_LIST';
 
 export const USER_CARDS: UserCard[] = CARD_LIST
     .filter(card => card.isOwned)

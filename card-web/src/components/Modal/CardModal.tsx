@@ -27,9 +27,9 @@ const CardModal = () => {
 
             <S.ModalBody>
                 {isMyCard ? (
-                    <MyCard data={selectedCard} />
+                    <MyCard />
                 ) : (
-                    <RecommendCard data={selectedCard} />
+                    <RecommendCard />
                 )}
             </S.ModalBody>
         </ModalLayout>

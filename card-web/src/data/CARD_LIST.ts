@@ -5,47 +5,48 @@ export const CARD_LIST: Card[] = [
     id: 1,
     name: "신한카드 Mr.Life",
     company: "신한카드",
-    type: "신용",
     annualFee: 15000,
+    type: "신용",
     image: "https://placehold.co/100x64?text=SHINHAN",
-    mainBenefits: ["공과금 10% 할인", "편의점 10% 할인"],
-    categories: ["생활", "편의점", "쇼핑", "공과금"],
+    mainBenefits: ["공과금 10% 할인", "편의점 10% 할인", "병원/약국 10% 할인"],
+    categories: ["공과금", "편의점", "의료", "식비", "쇼핑"],
     isOwned: true,
-    summary: "자취생의 구원자, 월납요금부터 편의점까지 빈틈없는 할인",
-    condition: "전월 실적 30만원 이상",
-    maxBenefit: "월 최대 5만원 할인",
-    officialLink: "https://www.shinhancard.com",
     detailBenefits: [
-      { title: "공과금", content: "전기/도시가스 요금 10% 할인", limit: "월 최대 1만원" },
-      { title: "타임할인", content: "오후 9시~오전 9시 온라인 쇼핑 10% 할인", limit: "월 최대 1만원" }
+      { title: "월납요금(공과금) 10% 할인", content: "전기, 도시가스, 통신요금 10% 할인", limit: "월 최대 1만원" },
+      { title: "편의점/병원/약국 10% 할인", content: "편의점 및 의료 가맹점 10% 할인", limit: "월 최대 5천원" },
+      { title: "식음료/온라인쇼핑 10% 할인", content: "오후 9시 ~ 오전 9시 10% 할인", limit: "월 최대 1만원" }
     ],
-    statistics: {
-      ageGroup: [{ label: "20대", value: 45 }, { label: "30대", value: 35 }, { label: "40대", value: 15 }, { label: "50대+", value: 5 }],
-      gender: { male: 42, female: 58 }
-    }
+    benefitRules: [
+      { category: "공과금", rate: 0.1, type: "DISCOUNT", limit: 10000 },
+      { category: "편의점", rate: 0.1, type: "DISCOUNT", limit: 5000 },
+      { category: "의료", rate: 0.1, type: "DISCOUNT", limit: 5000 },
+      { category: "식비", rate: 0.1, type: "DISCOUNT", limit: 10000 },
+      { category: "쇼핑", rate: 0.1, type: "DISCOUNT", limit: 10000 }
+    ],
+    baseRate: 0, // 💡 특정 카테고리 외 기본 혜택 없음
   },
   {
     id: 2,
-    name: "삼성 taptap O",
+    name: "삼성카드 taptap O",
     company: "삼성카드",
-    type: "신용",
     annualFee: 10000,
+    type: "신용",
     image: "https://placehold.co/100x64?text=SAMSUNG",
-    mainBenefits: ["스타벅스 50% 할인", "대중교통 10% 할인"],
-    categories: ["카페", "교통", "쇼핑", "영화"],
+    mainBenefits: ["스타벅스 50% 할인", "대중교통 10% 할인", "쇼핑 7% 할인"],
+    categories: ["카페", "교통", "통신", "쇼핑"],
     isOwned: true,
-    summary: "내 맘대로 고르는 라이프스타일 패키지",
-    condition: "전월 실적 30만원 이상",
-    maxBenefit: "월 최대 3만원 할인",
-    officialLink: "https://www.samsungcard.com",
     detailBenefits: [
-      { title: "커피", content: "스타벅스 50% 또는 10대 커피 전문점 30% 할인", limit: "월 1만원" },
-      { title: "쇼핑", content: "오픈마켓/소셜커머스/트렌디숍 7% 할인", limit: "월 5천원" }
+      { title: "커피 전문점 50% 할인", content: "스타벅스 50% 할인", limit: "월 최대 1만원" },
+      { title: "교통/통신 10% 할인", content: "버스, 지하철, 택시, 통신비 10% 할인", limit: "월 최대 5천원" },
+      { title: "쇼핑 7% 할인", content: "오픈마켓(쿠팡, 티몬 등) 7% 할인", limit: "월 최대 5천원" }
     ],
-    statistics: {
-      ageGroup: [{ label: "20대", value: 50 }, { label: "30대", value: 30 }, { label: "40대", value: 15 }, { label: "50대+", value: 5 }],
-      gender: { male: 38, female: 62 }
-    }
+    benefitRules: [
+      { category: "카페", rate: 0.5, type: "DISCOUNT", limit: 10000 },
+      { category: "교통", rate: 0.1, type: "DISCOUNT", limit: 5000 },
+      { category: "통신", rate: 0.1, type: "DISCOUNT", limit: 5000 },
+      { category: "쇼핑", rate: 0.07, type: "DISCOUNT", limit: 5000 }
+    ],
+    baseRate: 0.01, // 💡 쇼핑/카페 외 일반 가맹점 1% 적립
   },
   {
     id: 3,

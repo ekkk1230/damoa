@@ -1,4 +1,4 @@
-import { CARD_LIST } from "../../data/cardData"
+import { CARD_LIST } from "../../data/CARD_LIST"
 import CardItem from '../../components/CardItem/CardItem';
 import * as S from '../../App.styles copy';
 import RecommendationSection from '../../components/RecommendationSection/RecommendationSection';

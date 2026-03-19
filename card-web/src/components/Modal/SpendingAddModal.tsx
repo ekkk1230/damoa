@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 interface SpendingAddModalProps {
     cards: {
         cardInfo: Card;
-        nickname: string;
         currentAmount: number;
         targetAmount: number;
     }[];
@@ -161,7 +160,7 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
                     >
                         <option value="" hidden>카드를 선택해주세요</option>
                         {cards.map(item => (
-                            <option key={item.cardInfo.id} value={item.cardInfo.id}>{item.nickname}</option>
+                            <option key={item.cardInfo.id} value={item.cardInfo.id}>{item.cardInfo.name}</option>
                         ))}
                     </S.StyledSelect>
 

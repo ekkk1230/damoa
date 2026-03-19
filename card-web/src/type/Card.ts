@@ -3,10 +3,17 @@ export interface CardStatistics {
     gender: { male: number, female: number }; // 성비 남 45 : 여 : 55
 }
 
+export interface BenefitRule {
+    category: string;
+    rate: number;         // 0.1 (10%)
+    type: 'DISCOUNT' | 'SAVE' | 'FIXED'; 
+    limit: number;        // 숫자형 한도 (AI 계산용)
+}
+
 export interface DetailBenefit {
     title: string;
     content: string;
-    limit: string;
+    limit?: string;        // 텍스트형 설명 ("월 최대 1만원")
 }
 
 export interface Card {
@@ -21,8 +28,10 @@ export interface Card {
     type: "신용" | "체크" | "하이브리드";
     summary?: string;
     statistics?: CardStatistics;
-    detailBenefits?: DetailBenefit[];
+    detailBenefits?: DetailBenefit[]; 
+    benefitRules?: BenefitRule[]; 
     condition?: string;
     maxBenefit?: string;
     officialLink?: string;
+    baseRate?: number;
 }
