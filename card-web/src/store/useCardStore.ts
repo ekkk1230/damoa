@@ -65,8 +65,8 @@ const analyzeSpendings = (spendings: any[]) => {
         .slice(0, 5);
 
     const recentSpend: Card[] = spendings.sort((a, b) => {
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-    })
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 
     return { topCategory, spendingMap, categoryMap, totalSpending, myCards, recommendedCards, recentSpend, totalBenefit };
 }
@@ -102,9 +102,18 @@ interface CardState {
     recentSpendList: any[];
 
     totalBenefit: number;
+
+    // 영수증 분석
+    analyzedList: any[],
+    isAnalyzing: boolean, 
+    uploadAndAnalyze: (file: File) => Promise<void>;
+    deleteAnalyzedItem: (id: number) => void;
+    confirmAllSpendings: (cardId: number) => void;
+    updateAnalyzedItem: (id:number, updatedItem: any) => void;
+  
 }
 
-export const useCardStore = create<CardState>((set) => {
+export const useCardStore = create<CardState>((set, get) => {
 
     const initial = analyzeSpendings(MOCK_SPENDING);
 
@@ -140,6 +149,7 @@ export const useCardStore = create<CardState>((set) => {
                 getMyCards: result.myCards,
                 recommendedCards: result.recommendedCards,
                 recentSpendList: result.recentSpend,
+                totalBenefit: result.totalBenefit,
             }
         }),
 
@@ -152,5 +162,48 @@ export const useCardStore = create<CardState>((set) => {
         recentSpendList: initial.recentSpend,
 
         totalBenefit: initial.totalBenefit,
+
+        analyzedList: [], 
+        isAnalyzing: false, 
+        uploadAndAnalyze: async (file: File) => {
+            set({ isAnalyzing: true });
+
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+
+            const mockResult = [
+                { id: Date.now(), storeName: "안양주유소", amount: 50000, date: "2026-03-15", category: "교통/주유" },
+                { id: Date.now() + 1, storeName: "스타벅스", amount: 6100, date: "2026-03-16", category: "카페" },
+            ];
+
+            set({ 
+                analyzedList: mockResult, 
+                isAnalyzing: false 
+            });
+        },
+
+        deleteAnalyzedItem: (id) => {
+            set((state) => ({
+                analyzedList: state.analyzedList.filter(item => item.id !== id)
+            }))
+        },
+
+        confirmAllSpendings: (cardId: number) => {
+            const { analyzedList, addSpending } = get();
+
+            analyzedList.forEach(item => {
+                addSpending({
+                    ...item,
+                    cardId: cardId
+                })
+            })
+
+            set({ analyzedList: []});
+        },
+
+        updateAnalyzedItem: (id: number, updatedItem: any) => {
+            set((state) => ({
+                analyzedList: state.analyzedList.map(item => item.id === id ? { ...item, ...updatedItem } : item)
+            }))
+        },
     }
 });

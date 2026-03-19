@@ -1,47 +1,12 @@
-import type { Card } from '../../../type/Card'
-import { USER_CARDS } from '../../../data/USER_CARD_LIST'
 import { useCardStore } from '../../../store/useCardStore'
-import { CARD_LIST } from '../../../data/CARD_LIST';
-import { useMemo } from 'react';
 import * as S from '../ModalComponents.styles';
 
 
 function MyCard() {
-    const { selectedCard } = useCardStore();
+    const { selectedCard, recentSpendList, getMyCards, recommendedCards } = useCardStore();
 
-    const userCardArr = [...new Set(USER_CARDS)];
-    // console.log('userCardArr', userCardArr)
+    const achievementRate = getMyCards.find(card => card.cardInfo.id === selectedCard?.id)?.progress || 0;
 
-    const { spendings } = useCardStore();
-    // console.log('selectedCard', selectedCard)
-    
-    const selectedCardDetail = USER_CARDS.filter(userCard => userCard.cardInfo.id === selectedCard?.id);
-    // console.log('selectedCardDetail', selectedCardDetail)
-
-    const recentSpendList = spendings.filter(item => item.cardId === selectedCard?.id);
-    // console.log('recentSpendList', recentSpendList);
-
-    const achievementRate = (selectedCardDetail[0].currentAmount / selectedCardDetail[0].targetAmount) * 100;
-
-    let userCardsCategories: string[] = [];
-    selectedCardDetail.map(card => {
-        userCardsCategories = card.cardInfo.categories;
-    })
-
-    // console.log('userCardsCategories', userCardsCategories)
-
-    const userCardId = userCardArr.map(userCard => userCard.cardInfo.id);
-
-    const filteredCards = useMemo(() => {
-    
-        const notOwnedCards = CARD_LIST.filter(card => !userCardId.includes(card.id));
-        return notOwnedCards
-            .filter(card => card.categories.some(cate => userCardsCategories.includes(cate)))
-            .sort(() => Math.random() - 0.5) 
-            .slice(0, 3);
-    
-    }, [selectedCard?.id]);
-    
     return (
         <>
             <S.DetailItem>
@@ -103,12 +68,12 @@ function MyCard() {
             <S.RecommendSection>
                 <h3>비슷한 혜택의 추천 카드</h3>
                 <S.RecommendGrid>
-                    {filteredCards.map(card => (
+                    {recommendedCards.map(card => (
                         <S.RecommendCardItem key={card.id}>
                             <p className="company">{card.company}</p>
                             <p className="card-name">{card.name}</p>
                             <ul className="mini-categories">
-                                {card.categories.slice(0, 2).map((cate, index) => (
+                                {card.categories.slice(0, 5).map((cate, index) => (
                                     <li key={index}>{cate}</li>
                                 ))}
                             </ul>

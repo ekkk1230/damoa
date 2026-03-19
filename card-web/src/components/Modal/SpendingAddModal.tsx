@@ -23,11 +23,9 @@ interface AnalyzedItem {
 const CATEGORIES = ['식비', '카페', '교통/주유', '쇼핑', '금융/보험', '의료/건강', '기타'];
 
 const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
-    const { modalType, addSpending, closeModal } = useCardStore();
+    const { modalType, addSpending, closeModal, analyzedList, isAnalyzing, uploadAndAnalyze, deleteAnalyzedItem, confirmAllSpendings, updateAnalyzedItem } = useCardStore();
 
     const [activeTab, setActiveTab] = useState<'manual' | 'upload'>('manual');
-    const [isAnalyzing, setIsAnalyzing] = useState(false);
-    const [analyzedList, setAnalyzedList] = useState<AnalyzedItem[]>([]);
     const [editingId, setEditingId] = useState<number | null>(null);
 
     const [form, setForm] = useState({
@@ -46,54 +44,31 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
             return;
         }
 
-        const newEntry = {
+        addSpending({
             id: Date.now(),
             ...form,
             amount: Number(form.amount),
             cardId: Number(form.cardId)
-        };
-
-        addSpending(newEntry);
+        });
+        
         closeModal();
-
         setForm({ amount: '', cardId: '', storeName: '', date: new Date().toISOString().split('T')[0], category: '식비' });
-    }
+    };
 
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
+        
+        await uploadAndAnalyze(file);
+    };
 
-        setIsAnalyzing(true);
-
-        setTimeout(() => {
-            const mockResult: AnalyzedItem[] = [
-                { id: 1, storeName: "안양주유소", amount: 50000, date: "2026-03-15", category: "교통/주유" },
-                { id: 2, storeName: "스타벅스", amount: 6100, date: "2026-03-16", category: "카페" },
-            ]
-
-            setAnalyzedList(mockResult);
-            setIsAnalyzing(false);
-        }, 1500);
-    }
-
-    const handleUpdateItem = (id: number, field: string, value: string) => {
-        const finalValue = field === 'amount' ? Number(value.replace(/[^0-9]/g, '')) : value;
-        setAnalyzedList(prevList => 
-            prevList.map(item => 
-                item.id === id 
-                    ? { ...item, [field]: finalValue }
-                    : item 
-            )
-        );
+    const handleUpdateItem = (id: number, field: string, value: string | number) => {
+        const finalValue = field === 'amount' ? Number(String(value).replace(/[^0-9]/g, '')) : value;
+        
+        updateAnalyzedItem(id, { [field]: finalValue });
     };
 
     const handleSave = () => setEditingId(null);
-
-    const handleDelete = (id: number) => {
-        setAnalyzedList(prevList =>
-            prevList.filter(item => item.id !== id)
-        )
-    }
 
     return (
         <ModalLayout title="지출 내역 등록">
@@ -242,7 +217,7 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
                                                     <div className="amount">{item.amount.toLocaleString()}원</div>
                                                     <S.ItemActionGroup>
                                                         <button onClick={() => setEditingId(item.id)}>수정</button>
-                                                        <button className="delete-btn" onClick={() => handleDelete(item.id)}>삭제</button>
+                                                        <button className="delete-btn" onClick={() => deleteAnalyzedItem(item.id)}>삭제</button>
                                                     </S.ItemActionGroup>
                                                 </div>
                                             </div>
@@ -252,18 +227,12 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
                             </S.ResultList>
                             <button 
                                 onClick={() => {
-                                    analyzedList.forEach(item => {
-                                        addSpending({...item, cardId: Number(form.cardId) || 1});
-                                    });
+                                    confirmAllSpendings(Number(form.cardId));
                                     closeModal();
-                                    setAnalyzedList([]);
                                 }}
                                 style={{width: '100%', padding: '15px', marginTop: '20px', background: '#333', color: '#fff'}}
                             >
                                 {analyzedList.length}건 모두 등록하기
-                            </button>
-                            <button onClick={() => setAnalyzedList([])} style={{width: '100%', background: 'none', border: 'none', color: '#888', marginTop: '10px'}}>
-                                다시 업로드하기
                             </button>
                         </>
                     )}
