@@ -20,7 +20,7 @@ function RecentSection() {
                             <div className="item-left">
                             <div className="info">
                                 <p className="name">{usedCard?.cardInfo.name}</p>
-                                <p className="store">{item.store}</p>
+                                <p className="store">{item.storeName}</p>
                                 <p className="date">{item.date} · {item.category}</p>
                             </div>
                             </div>

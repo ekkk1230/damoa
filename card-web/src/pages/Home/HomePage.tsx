@@ -75,7 +75,7 @@ export const HomePage = () => {
 				<RecentSection />
 
 				{/* 4. 추천 카드 섹션 */}
-				<RecommendSection />
+				<RecommendSection variant="main" />
 			</S.HomeContainer>
 
 			<CardModal />

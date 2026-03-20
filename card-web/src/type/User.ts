@@ -13,11 +13,9 @@ export interface UserCard {
     }
 }
 
-export interface Spending {
-    id: string;
-    date: string;
-    store: string;
-    amount: number;
-    category: string;
-    cardId: number;
-}
+export interface MyCardProgress {
+    cardInfo: Card;
+    targetAmount: number;
+    currentAmount: number;
+    progress: number;
+};

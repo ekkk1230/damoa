@@ -19,14 +19,6 @@ function RecommendCard() {
                 <h4>주요 혜택</h4>
                 <p>{selectedCard?.mainBenefits.join(', ')}</p>
             </S.DetailItem>
-            <S.DetailItem>
-                <h4>카테고리</h4>
-                <ul className="category-list">
-                    {selectedCard?.categories.map((cate, idx) => (
-                        <li key={idx}>{cate}</li>
-                    ))}
-                </ul>
-            </S.DetailItem>
 
             {selectedCard?.annualFee !== 0 && (
                 <S.FeeInfo>

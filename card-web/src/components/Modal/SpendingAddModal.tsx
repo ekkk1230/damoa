@@ -12,14 +12,6 @@ interface SpendingAddModalProps {
     }[];
 }
 
-interface AnalyzedItem {
-    id: number;
-    storeName: string;
-    amount: number;
-    date: string;
-    category: string;
-}
-
 const CATEGORIES = ['식비', '카페', '교통/주유', '쇼핑', '금융/보험', '의료/건강', '기타'];
 
 const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
@@ -63,9 +55,7 @@ const SpendingAddModal = ({ cards }: SpendingAddModalProps) => {
     };
 
     const handleUpdateItem = (id: number, field: string, value: string | number) => {
-        const finalValue = field === 'amount' ? Number(String(value).replace(/[^0-9]/g, '')) : value;
-        
-        updateAnalyzedItem(id, { [field]: finalValue });
+        updateAnalyzedItem(id, { [field]: value });
     };
 
     const handleSave = () => setEditingId(null);

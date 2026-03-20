@@ -1,27 +1,23 @@
 import { create } from 'zustand';
 import type { Card } from '../type/Card';
-import type { UserCard } from '../type/User';
+import type { MyCardProgress, UserCard } from '../type/User';
+import type { AnalyzedReceipt, Spending } from '../type/Spending';
 import { MOCK_SPENDING } from '../data/MOCK_SPENDING';
 import { CARD_LIST } from '../data/CARD_LIST';
 import { USER_CARDS } from '../data/USER_CARD_LIST';
+import { fetchReceiptAnalysis } from '../api/receipt';
 
 type ModalType = 'CARD_DETAIL' | 'SPENDING_ADD' | null;
 
-interface MyCardProgress {
-    cardInfo: Card;
-    targetAmount: number;
-    currentAmount: number;
-    progress: number;
-};
-
 const analyzeSpendings = (spendings: any[]) => {
     if (spendings.length === 0) {
-        return { topCategory: "지출 없음", spendingMap: {}, totalSpending: 0, myCards: [], recommendedCards: [], recentSpend: [], totalBenefit: 0 };
+        return { topCategory: "지출 없음", spendingMap: {}, totalSpending: 0, myCards: [], recommendedCards: [], recentSpend: [], totalBenefit: 0, benefitMap: {} };
     };
 
     let totalSpending = 0;
     const categoryMap: Record<string, number> = {}; // 카테고리별 지출 내역
     const spendingMap: Record<number, number> = {}; // 카드별 지출 내역
+    const benefitMap: Record<number, number> = {};  // 카드별 혜택
 
     let totalBenefit = 0;
 
@@ -29,14 +25,16 @@ const analyzeSpendings = (spendings: any[]) => {
         totalSpending += s.amount;
         
         const cardId = Number(s.cardId);
-        spendingMap[cardId] = (spendingMap[cardId] || 0) + s.amount;
-
-        categoryMap[s.category] = (categoryMap[s.category] || 0) + s.amount;
-
         const card = CARD_LIST.find(c => c.id === Number(s.cardId));
         const rule = card?.benefitRules?.find(r => r.category === s.category);
         const rate = rule ? Number(rule.rate) : Number(card?.baseRate);
-        totalBenefit += Math.floor(s.amount * rate);
+        const benefit = Math.floor(s.amount * rate);
+
+        spendingMap[cardId] = (spendingMap[cardId] || 0) + s.amount;
+        categoryMap[s.category] = (categoryMap[s.category] || 0) + s.amount;
+
+        totalBenefit += benefit;
+        benefitMap[cardId] = (benefitMap[cardId] || 0) + benefit;
     });
 
     const topCategory = Object.keys(categoryMap).reduce((acc, cur) => {
@@ -64,11 +62,11 @@ const analyzeSpendings = (spendings: any[]) => {
         .sort(() => Math.random() - .5)
         .slice(0, 5);
 
-    const recentSpend: Card[] = spendings.sort((a, b) => {
+    const recentSpend: AnalyzedReceipt[] = spendings.sort((a, b) => {
         return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
 
-    return { topCategory, spendingMap, categoryMap, totalSpending, myCards, recommendedCards, recentSpend, totalBenefit };
+    return { topCategory, spendingMap, categoryMap, totalSpending, myCards, recommendedCards, recentSpend, totalBenefit, benefitMap };
 }
  
 interface CardState {
@@ -90,8 +88,8 @@ interface CardState {
     userCards: UserCard[]
 
     // 지출 내역 등록
-    spendings: any[];
-    addSpending: (newSpending: any) => void;
+    spendings: Spending[];
+    addSpending: (newSpending: Spending) => void;
 
     topSpendingCategory: string;    
     totalSpending: number;
@@ -99,12 +97,13 @@ interface CardState {
     getMyCards: MyCardProgress[];
     recommendedCards: Card[];
 
-    recentSpendList: any[];
+    recentSpendList: Spending[];
 
     totalBenefit: number;
+    benefit: any;
 
     // 영수증 분석
-    analyzedList: any[],
+    analyzedList: AnalyzedReceipt[],
     isAnalyzing: boolean, 
     uploadAndAnalyze: (file: File) => Promise<void>;
     deleteAnalyzedItem: (id: number) => void;
@@ -150,6 +149,7 @@ export const useCardStore = create<CardState>((set, get) => {
                 recommendedCards: result.recommendedCards,
                 recentSpendList: result.recentSpend,
                 totalBenefit: result.totalBenefit,
+                benefit: result.benefitMap,
             }
         }),
 
@@ -162,24 +162,25 @@ export const useCardStore = create<CardState>((set, get) => {
         recentSpendList: initial.recentSpend,
 
         totalBenefit: initial.totalBenefit,
+        benefit: initial.benefitMap,
 
         analyzedList: [], 
         isAnalyzing: false, 
         uploadAndAnalyze: async (file: File) => {
             set({ isAnalyzing: true });
 
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+            try {
+                const data: any[] = await fetchReceiptAnalysis(file);
 
-            const mockResult = [
-                { id: Date.now(), storeName: "안양주유소", amount: 50000, date: "2026-03-15", category: "교통/주유" },
-                { id: Date.now() + 1, storeName: "스타벅스", amount: 6100, date: "2026-03-16", category: "카페" },
-            ];
-
-            set({ 
-                analyzedList: mockResult, 
-                isAnalyzing: false 
-            });
-        },
+                set({ 
+                    analyzedList: data, 
+                    isAnalyzing: false 
+                });
+            } catch(err) {
+                console.error("분석 중 오류 발생:", err);
+                set({ isAnalyzing: false });
+            }
+        }, 
 
         deleteAnalyzedItem: (id) => {
             set((state) => ({
@@ -202,7 +203,12 @@ export const useCardStore = create<CardState>((set, get) => {
 
         updateAnalyzedItem: (id: number, updatedItem: any) => {
             set((state) => ({
-                analyzedList: state.analyzedList.map(item => item.id === id ? { ...item, ...updatedItem } : item)
+                analyzedList: state.analyzedList.map(item => item.id === id ? 
+                    { ...item, ...updatedItem, 
+                        amount: updatedItem.amount !== undefined 
+                        ? Number(String(updatedItem.amount).replace(/[^0-9]/g, ''))  
+                        : item.amount } 
+                    : item)
             }))
         },
     }
