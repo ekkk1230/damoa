@@ -13,7 +13,7 @@ export const CARD_LIST: Card[] = [
     isOwned: true,
     summary: "생활 밀착형 공과금 및 1인 가구 특화 할인 카드",
     condition: "전월 실적 30만원 이상",
-    maxBenefit: "월 최대 2.5만원",
+    maxBenefit: "월 최대 3만원 (항목별 합산)",
     baseRate: 0,
     statistics: {
       ageGroup: [
@@ -42,7 +42,7 @@ export const CARD_LIST: Card[] = [
     isOwned: true,
     summary: "커피와 쇼핑 혜택을 내 마음대로 선택하는 트렌디 카드",
     condition: "전월 실적 30만원 이상",
-    maxBenefit: "월 최대 2만원",
+    maxBenefit: "월 최대 3만원",
     baseRate: 0.01,
     statistics: {
       ageGroup: [
@@ -70,6 +70,7 @@ export const CARD_LIST: Card[] = [
     isOwned: false,
     summary: "나에게 진심인 당신을 위한 맞춤형 혜택",
     condition: "전월 실적 40만원 이상",
+    maxBenefit: "월 최대 2.5만원 (나한테 진심 서비스 기준)",
     statistics: {
       ageGroup: [
         { label: "20대", value: 48 },
@@ -91,6 +92,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["업종별 최대 3% 적립", "온라인 간편결제 5% 적립"],
     categories: ["쇼핑", "카페", "해외"],
     isOwned: false,
+    summary: "M포인트 적립에 집중된 현대카드의 스테디셀러",
+    condition: "전월 실적 50만원 이상",
+    maxBenefit: "한도 없는 적립 (일부 영역 제외)",
     statistics: {
       ageGroup: [
         { label: "20대", value: 22 },
@@ -112,6 +116,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["음식점 60% 할인", "커피 60% 할인", "배달앱 60% 할인"],
     categories: ["식비", "카페"],
     isOwned: false,
+    summary: "식비와 카페 할인에 올인한 미식가용 카드",
+    condition: "전월 실적 40만원 이상",
+    maxBenefit: "통합 월 1.3만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 58 },
@@ -133,6 +140,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["전 가맹점 0.7% 적립", "주유 리터당 80원 적립"],
     categories: ["기타", "주유", "쇼핑"],
     isOwned: false,
+    summary: "전월 실적 조건 없이 무조건 적립되는 카드",
+    condition: "실적 조건 없음",
+    maxBenefit: "무제한 적립 (포인트 적립 방식)",
     statistics: {
       ageGroup: [
         { label: "20대", value: 15 },
@@ -154,6 +164,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["많이 쓰는 영역 30% 할인", "교통/통신 10% 할인"],
     categories: ["식비", "카페", "교통"],
     isOwned: false,
+    summary: "매달 가장 많이 쓴 영역을 알아서 할인해주는 지능형 카드",
+    condition: "전월 실적 30만원 이상",
+    maxBenefit: "월 최대 2만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 35 },
@@ -175,6 +188,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["스타벅스 50% 할인", "온라인 간편결제 10% 적립"],
     categories: ["카페", "쇼핑"],
     isOwned: false,
+    summary: "간편결제와 카페 이용이 많은 MZ세대를 위한 카드",
+    condition: "전월 실적 40만원 이상",
+    maxBenefit: "월 최대 2.3만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 62 },
@@ -196,6 +212,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["모든 가맹점 0.7% 적립", "Pay 결제 1.0% 적립"],
     categories: ["기타", "쇼핑"],
     isOwned: false,
+    summary: "어디서나 고민 없이 적립받는 올라운더 카드",
+    condition: "실적 조건 없음",
+    maxBenefit: "적립 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 20 },
@@ -217,6 +236,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["모든 가맹점 0.7% 할인", "생활 필수 영역 1.2% 할인"],
     categories: ["기타", "식비", "편의점"],
     isOwned: false,
+    summary: "복잡한 조건 없이 일상 모든 곳에서 할인",
+    condition: "실적 조건 없음",
+    maxBenefit: "할인 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 32 },
@@ -238,6 +260,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["모든 가맹점 1% 할인"],
     categories: ["기타", "쇼핑"],
     isOwned: false,
+    summary: "기본 1% 할인에 실적에 따른 추가 캐시백",
+    condition: "실적 조건 없음",
+    maxBenefit: "할인 한도 없음 (추가 캐시백은 별도)",
     statistics: {
       ageGroup: [
         { label: "20대", value: 20 },
@@ -259,6 +284,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["스트리밍 50% 할인", "온라인 쇼핑 10% 할인"],
     categories: ["OTT", "쇼핑"],
     isOwned: false,
+    summary: "구독 서비스 이용자에게 최적화된 디지털 특화 카드",
+    condition: "전월 실적 40만원 이상",
+    maxBenefit: "월 최대 1.5만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 68 },
@@ -280,6 +308,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["모든 가맹점 최대 1.5% 적립"],
     categories: ["기타", "해외"],
     isOwned: false,
+    summary: "국내외 어디서나 높은 적립률을 제공하는 실속 카드",
+    condition: "전월 실적 100만원 미만 1.0%, 이상 1.5% 적립",
+    maxBenefit: "적립 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 25 },
@@ -301,6 +332,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["국내 가맹점 0.9% 할인"],
     categories: ["기타", "쇼핑"],
     isOwned: false,
+    summary: "플레이리스트처럼 매일 즐기는 기본 할인 카드",
+    condition: "실적 조건 없음",
+    maxBenefit: "할인 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 42 },
@@ -322,6 +356,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["교통/통신/에너지 10% 할인"],
     categories: ["교통", "통신", "주유"],
     isOwned: false,
+    summary: "이동 수단과 고정 지출에 혜택을 집중한 직장인 카드",
+    condition: "전월 실적 50만원 이상",
+    maxBenefit: "월 최대 2만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 25 },
@@ -343,6 +380,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["대중교통/통신 10% 할인"],
     categories: ["교통", "통신", "식비"],
     isOwned: false,
+    summary: "다양한 영역에서 혜택을 꼼꼼하게 담은 카드",
+    condition: "전월 실적 30만원 이상",
+    maxBenefit: "선택 서비스 포함 월 최대 4만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 18 },
@@ -364,6 +404,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["온라인 쇼핑 1.5% 적립", "편의점/카페 2% 적립"],
     categories: ["쇼핑", "편의점", "카페"],
     isOwned: false,
+    summary: "멤버십 리워즈 적립으로 여행과 쇼핑을 동시에",
+    condition: "전월 실적 50만원 이상",
+    maxBenefit: "적립 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 35 },
@@ -385,6 +428,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["공과금/보험료 10% 할인", "학원 10% 할인"],
     categories: ["공과금", "보험", "교육"],
     isOwned: false,
+    summary: "365일 고정 지출 할인을 위한 필수 가계부 카드",
+    condition: "전월 실적 50만원 이상",
+    maxBenefit: "항목별 5천원씩 총 3.5만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 10 },
@@ -406,6 +452,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["전 가맹점 최대 1% 할인"],
     categories: ["기타", "주유"],
     isOwned: false,
+    summary: "나(I)와 너(U)의 일상을 챙기는 무조건 할인 카드",
+    condition: "실적 조건 없음",
+    maxBenefit: "할인 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 15 },
@@ -427,6 +476,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["1,500원당 1.6 마일리지 적립"],
     categories: ["해외", "기타"],
     isOwned: false,
+    summary: "대한항공 마일리지 적립에 최적화된 프리미엄 카드",
+    condition: "전월 실적 50만원 이상",
+    maxBenefit: "적립 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 22 },
@@ -448,6 +500,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["전 가맹점 0.5% 할인"],
     categories: ["기타", "의료"],
     isOwned: false,
+    summary: "언제 어디서나 모두에게 혜택을 주는 카드",
+    condition: "실적 조건 없음",
+    maxBenefit: "할인 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 12 },
@@ -469,6 +524,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["주유소 10% 할인"],
     categories: ["주유", "교통"],
     isOwned: false,
+    summary: "운전자를 위한 주유 할인 집중 카드",
+    condition: "전월 실적 30만원 이상",
+    maxBenefit: "월 최대 1.5만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 10 },
@@ -490,6 +548,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["선택 서비스 10% 할인"],
     categories: ["쇼핑", "식비"],
     isOwned: false,
+    summary: "내 생활 패턴에 맞춰 혜택을 골라 담는 카드",
+    condition: "전월 실적 40만원 이상",
+    maxBenefit: "월 최대 2만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 32 },
@@ -511,6 +572,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["전 가맹점 최대 2.0% 적립"],
     categories: ["쇼핑", "기타"],
     isOwned: false,
+    summary: "많이 쓸수록 더 커지는 적립 혜택",
+    condition: "전월 실적 20만원 이상",
+    maxBenefit: "월 최대 5만 포인트",
     statistics: {
       ageGroup: [
         { label: "20대", value: 12 },
@@ -532,6 +596,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["온라인쇼핑 5.0% 할인"],
     categories: ["쇼핑", "카페"],
     isOwned: false,
+    summary: "주요 온라인 쇼핑몰 이용자를 위한 심플 할인 카드",
+    condition: "전월 실적 30만원 이상",
+    maxBenefit: "월 최대 1만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 20 },
@@ -553,6 +620,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["편의점 10% 적립"],
     categories: ["편의점", "기타"],
     isOwned: false,
+    summary: "편의점과 일상 가맹점 적립에 집중한 협동조합 카드",
+    condition: "전월 실적 30만원 이상",
+    maxBenefit: "월 최대 1.5만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 52 },
@@ -574,6 +644,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["국내 가맹점 최대 1.2% 할인"],
     categories: ["기타", "식비"],
     isOwned: false,
+    summary: "쓴 만큼 바로 돌려받는 진짜 할인 카드",
+    condition: "실적 조건 없음",
+    maxBenefit: "할인 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 15 },
@@ -595,6 +668,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["우체국 이용 10% 적립"],
     categories: ["기타", "쇼핑"],
     isOwned: false,
+    summary: "우체국 쇼핑과 택배 이용자를 위한 생활 밀착 카드",
+    condition: "전월 실적 20만원 이상",
+    maxBenefit: "월 최대 1.2만원",
     statistics: {
       ageGroup: [
         { label: "20대", value: 5 },
@@ -616,6 +692,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["모든 가맹점 0.8% 할인"],
     categories: ["기타", "식비"],
     isOwned: false,
+    summary: "복잡한 조건 없이 모든 결제마다 할인",
+    condition: "실적 조건 없음",
+    maxBenefit: "할인 한도 없음",
     statistics: {
       ageGroup: [
         { label: "20대", value: 28 },
@@ -637,6 +716,9 @@ export const CARD_LIST: Card[] = [
     mainBenefits: ["온라인 쇼핑 1.7% 할인"],
     categories: ["쇼핑", "해외"],
     isOwned: false,
+    summary: "온라인 결제가 많은 사람을 위한 타겟 할인 카드",
+    condition: "실적 조건 없음",
+    maxBenefit: "월 최대 10만원 (온라인 기준)",
     statistics: {
       ageGroup: [
         { label: "20대", value: 38 },

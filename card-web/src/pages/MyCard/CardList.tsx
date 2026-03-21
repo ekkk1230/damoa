@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import RecommendSection from "../../components/card/RecommendSection";
 import { useCardStore } from "../../store/useCardStore"
 import type { MyCardProgress } from "../../type/User";
 
 function CardList() {
-    const { getMyCards, benefit } = useCardStore();
+    const { getMyCards, benefit, recentSpendList, deleteCard } = useCardStore();
 
     return (
         <div>
             <p>내 카드 목록</p>
 
-            <button>카드 등록</button>
+            <Link to="/myCard/add">카드 등록</Link>
 
             <div>
                 {getMyCards.length !== 0 ? (
@@ -18,9 +19,21 @@ function CardList() {
                             <div key={card.cardInfo.id}>
                                 <p>{card.cardInfo.company}</p>
                                 <p>{card.cardInfo.name}</p>
+                                <p>혜택 금액: {benefit[card.cardInfo.id] || 0 }원</p>
+                                <ul>
+                                    {
+                                        recentSpendList.length > 0 && recentSpendList
+                                            .filter(s => s.cardId === card.cardInfo.id)
+                                            .map(s => (
+                                                <li key={s.cardId}>
+                                                    {s.storeName} - {s.amount.toLocaleString()}원
+                                                </li>
+                                            ))
+                                    }
+                                </ul>
                                 
 
-                                <button>카드 삭제</button>
+                                <button onClick={() => deleteCard(card.cardInfo.id)}>카드 삭제</button>
                             </div>
                         ))}
                     </div>

@@ -109,7 +109,8 @@ interface CardState {
     deleteAnalyzedItem: (id: number) => void;
     confirmAllSpendings: (cardId: number) => void;
     updateAnalyzedItem: (id:number, updatedItem: any) => void;
-  
+
+    deleteCard: (cardId: number) => void;
 }
 
 export const useCardStore = create<CardState>((set, get) => {
@@ -210,6 +211,27 @@ export const useCardStore = create<CardState>((set, get) => {
                         : item.amount } 
                     : item)
             }))
+        },
+
+        deleteCard: (cardId: number) => {
+            const { getMyCards } = get();
+            const deleteItem = getMyCards.find(c => c.cardInfo.id === cardId);
+
+            if (!deleteItem)  return;
+
+            const cardAmount = deleteItem ? deleteItem.currentAmount : 0;
+            set ((state) => {
+                const newBenefit = {...state.benefit};
+                delete newBenefit[cardId];
+                return {
+                    totalSpending: state.totalSpending - cardAmount,
+                    getMyCards: state.getMyCards.filter(c => c.cardInfo.id !== cardId),
+                    recentSpendList: state.recentSpendList.filter(s => s.cardId !== cardId),  
+                    benefit: newBenefit,
+                }
+            })
+
+            analyzeSpendings(get().recentSpendList);
         },
     }
 });
