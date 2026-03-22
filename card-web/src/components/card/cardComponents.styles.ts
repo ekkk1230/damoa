@@ -199,3 +199,62 @@ export const BannerFooter = styled.div`
     margin-left: 2px;
   }
 `;
+
+export const SubCardItem = styled.div<{ $brandColor?: string }>`
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #eee;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  height: 100%; // 높이 균일화
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    border-color: ${props => props.$brandColor || '#3498db'};
+  }
+
+  .card-thumb {
+    width: 100%;
+    height: 100px;
+    background-color: ${props => props.$brandColor || '#f5f5f5'};
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+
+    .name {
+      font-size: 0.9rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+  }
+
+  .card-info {
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        font-size: 0.8rem;
+        color: #666;
+        margin-bottom: 4px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; // 넘치는 텍스트 처리
+
+        &:before {
+          content: "•";
+          margin-right: 5px;
+          color: ${props => props.$brandColor || '#3498db'};
+        }
+      }
+    }
+  }
+`;

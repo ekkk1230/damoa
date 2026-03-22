@@ -9,6 +9,16 @@ interface RecommendSectionProps {
     variant?: 'main' | 'sub';
 }
 
+const swiperOptions = {
+    slidesPerView: 1.2, 
+    spaceBetween: 16,
+    autoplay: { delay: 3000, disableOnInteraction: false },
+    breakpoints: {
+        480: { slidesPerView: 2.2 },
+        768: { slidesPerView: 3.2 }
+    }
+};
+
 function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
     const { topSpendingCategory, recommendedCards, openModal } = useCardStore();
 
@@ -58,10 +68,13 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                     {recommendedCards.length < 1 ? (
                         <p className="no-data">현재 추천할 카드가 준비되어 있지 않습니다.</p>
                     ) : (
-                        <SwiperSlide>
-                        {recommendedCards.map(card => {
-                            return (
-                                <div onClick={() => openModal('CARD_DETAIL', card)} key={card.id} >
+                        recommendedCards.map((card) => (
+                            <SwiperSlide key={card.id}>
+                                {/* S.SubCardItem으로 감싸서 스타일 적용 */}
+                                <S.SubCardItem 
+                                    onClick={() => openModal('CARD_DETAIL', card)}
+                                    $brandColor={BRAND_COLORS[card.company]}
+                                >
                                     <div className="card-thumb">
                                         <span className="name">{card.name}</span>
                                     </div>
@@ -72,10 +85,9 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                                             ))}
                                         </ul>
                                     </div>
-                                </div>
-                            )
-                        })}
-                        </SwiperSlide>
+                                </S.SubCardItem>
+                            </SwiperSlide>
+                        ))
                     )}
                 </Swiper>
             )}
