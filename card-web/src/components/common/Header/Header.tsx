@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom"
 import { useState } from "react";
-import * as S from "./Header.styles"
+import * as S from "./Header.styles";
 
 const Header = () => {
     const location = useLocation();
@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <S.HeaderContainer>
             <S.NavInner>
-                <Link to="/"><h1>💳 DAMOA</h1></Link>
+                <Link to="/"><h1><img src="/row-logo.png" alt="다모아" /></h1></Link>
 
                 <S.NavMenu>
                     <Link to="/" className={location.pathname === '/' ? 'active' : ''}>홈</Link>

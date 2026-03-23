@@ -2,7 +2,7 @@ import * as S from "./cardComponents.styles"
 import { useCardStore } from "../../store/useCardStore";
 
 function RecentSection() {
-    const { recentSpendList, userCards } = useCardStore();
+    const { recentSpendList, userCards, cardList } = useCardStore();
 
     console.log(recentSpendList, userCards)
 
@@ -15,14 +15,13 @@ function RecentSection() {
             
             <S.SpendList>
                 {recentSpendList.slice(0, 5).map(item => {
-                    const usedCard = userCards.find(card => item.id === card.cardInfo.id);
-                    console.log('item.id', item.id,)
+                    const recentCard = cardList.find(card => item.id === card.id);
 
                     return (
                         <S.SpendItem key={item.id}>
                             <div className="item-left">
                             <div className="info">
-                                <p className="name">{usedCard?.cardInfo.name}</p>
+                                <p className="name">{recentCard?.name}</p>
                                 <p className="store">{item.storeName}</p>
                                 <p className="date">{item.date} · {item.category}</p>
                             </div>

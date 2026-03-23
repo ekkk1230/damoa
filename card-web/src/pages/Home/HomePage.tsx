@@ -22,7 +22,7 @@ export const HomePage = () => {
 						<p className="label">{new Date().getMonth() + 1}월 예상 지출 내역</p>
 						<h2 className="total-amount">{totalSpending.toLocaleString()}원</h2>
 						{totalBenefit > 0 ? (
-							<span> +{totalBenefit.toLocaleString()}원</span>
+							<span className="benefit-amount"> +{totalBenefit.toLocaleString()}원</span>
 						) : (
 							<span className="zero-text"> 아직 혜택이 없어요</span>
 						)}

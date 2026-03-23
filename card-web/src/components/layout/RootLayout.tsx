@@ -5,7 +5,7 @@ import BottomNav from "./BottomNav/BottomNav";
 
 const MainContent = styled.main`
     min-height: calc(100vh - 7rem);
-    width: 1200px; margin: 0 auto;
+    width: 100%; margin: 0 auto;
     padding-bottom: 5rem;
 `;
 

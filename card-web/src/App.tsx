@@ -5,10 +5,13 @@ import CardList from "./pages/MyCard/CardList";
 import AddCard from "./pages/MyCard/AddCard";
 import RecommendList from "./pages/Recommend/RecommendList";
 import RecommendDetail from "./pages/Recommend/RecommendDetail";
+import { GlobalStyle } from "./App.styles";
+import "./App.css";
 
 function App() {
 	return (
 		<BrowserRouter>
+			<GlobalStyle />
 			<Routes>
 				<Route path="/" element={<RootLayout />}>
 					<Route index element={<HomePage />} />

@@ -11,11 +11,12 @@ export const HomeContainer = styled.div`
 export const SummaryCard = styled.section`
     background: linear-gradient(135deg, #95dccd, #07958c);
     border-radius: 2.4rem; 
-    padding: 3rem; 
+    padding: 8rem 3rem; 
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 60rem; margin: 0 auto 2rem;
     
     box-shadow: 0 1rem 2rem rgba(110, 142, 251, 0.3);
     margin-bottom: 3rem; 
@@ -23,7 +24,7 @@ export const SummaryCard = styled.section`
 
 export const SummaryInfo = styled.div`
     .label {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         opacity: 0.9;
         margin-bottom: 0.8rem;
     }
@@ -34,10 +35,8 @@ export const SummaryInfo = styled.div`
     }
     .benefit-amount {
         font-size: 1.4rem;
-        span {
         font-weight: 600;
         color: #fffb00;
-        }
     }
 `;
 

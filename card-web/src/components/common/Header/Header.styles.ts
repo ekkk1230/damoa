@@ -12,15 +12,17 @@ export const HeaderContainer = styled.header`
   z-index: 1000;
   display: flex;
   justify-content: center;
+  padding: 0 6rem;
 `;
 
 export const NavInner = styled.div`
   width: 100%;
-  max-width: 120rem;
+  max-width: 100%;
   padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem 0;
 
   h1 {
     font-size: 2.2rem;
@@ -28,6 +30,8 @@ export const NavInner = styled.div`
     color: #0F4C5C;
     letter-spacing: -0.05rem;
     cursor: pointer;
+    width: 12rem;
+      img { width: 100%; height: auto; }
   }
 
   a {
