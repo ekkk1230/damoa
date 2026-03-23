@@ -7,6 +7,8 @@ import * as S from "./MyCard.styles";
 function CardList() {
     const { getMyCards, benefit, recentSpendList, deleteCard } = useCardStore();
 
+    console.log(getMyCards)
+
     return (
         <S.ListContainer>
             <S.Header>

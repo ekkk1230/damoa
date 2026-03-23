@@ -6,8 +6,7 @@ function MyCard() {
     const { selectedCard, recentSpendList, getMyCards, recommendedCards } = useCardStore();
 
     const achievementRate = getMyCards.find(card => card.cardInfo.id === selectedCard?.id)?.progress || 0;
-
-    console.log(selectedCard)
+    
     return (
         <>            
             {/* 실적 달성률 섹션 */}

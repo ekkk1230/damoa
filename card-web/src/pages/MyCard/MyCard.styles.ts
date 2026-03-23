@@ -167,6 +167,13 @@ export const Row = styled.div`
   gap: 12px;
 `;
 
+export const FlexRow = styled.div`
+  display: flex;
+  gap: 10px;
+  
+  input { width: 100%;}
+`;
+
 export const SubmitButton = styled.button`
   width: 100%;
   padding: 15px;

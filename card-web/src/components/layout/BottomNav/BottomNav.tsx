@@ -16,9 +16,11 @@ function BottomNav() {
                     <span>소비내역</span>
                 </Link>
             </S.NavItem>
-            <S.NavItem>
-                <span className="icon">💳</span>
-                <span>카드추천</span>
+            <S.NavItem $active={location.pathname === "/recommend"}>
+                <Link to="/recommend">
+                    <span className="icon">💳</span>
+                    <span>카드추천</span>
+                </Link>
             </S.NavItem>
             <S.NavItem>
                 <span className="icon">👤</span>

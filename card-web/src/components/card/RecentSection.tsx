@@ -4,6 +4,8 @@ import { useCardStore } from "../../store/useCardStore";
 function RecentSection() {
     const { recentSpendList, userCards } = useCardStore();
 
+    console.log(recentSpendList, userCards)
+
     return (
         <S.RecentSection>
             <div className="section-header">
@@ -13,7 +15,8 @@ function RecentSection() {
             
             <S.SpendList>
                 {recentSpendList.slice(0, 5).map(item => {
-                    const usedCard = userCards.find(card => card.cardInfo.id === item.cardId);
+                    const usedCard = userCards.find(card => item.id === card.cardInfo.id);
+                    console.log('item.id', item.id,)
 
                     return (
                         <S.SpendItem key={item.id}>

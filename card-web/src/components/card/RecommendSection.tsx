@@ -22,6 +22,8 @@ const swiperOptions = {
 function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
     const { topSpendingCategory, recommendedCards, openModal } = useCardStore();
 
+    console.log(recommendedCards)
+
     return (
         <S.RecommendSection>
             <div className="banner-content">
@@ -70,7 +72,6 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                     ) : (
                         recommendedCards.map((card) => (
                             <SwiperSlide key={card.id}>
-                                {/* S.SubCardItem으로 감싸서 스타일 적용 */}
                                 <S.SubCardItem 
                                     onClick={() => openModal('CARD_DETAIL', card)}
                                     $brandColor={BRAND_COLORS[card.company]}

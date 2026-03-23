@@ -21,7 +21,11 @@ export const HomePage = () => {
 					<S.SummaryInfo>
 						<p className="label">{new Date().getMonth() + 1}월 예상 지출 내역</p>
 						<h2 className="total-amount">{totalSpending.toLocaleString()}원</h2>
-						<p className="benefit-amount">이번 달 혜택 <span>+{totalBenefit.toLocaleString()}</span></p>
+						{totalBenefit > 0 ? (
+							<span> +{totalBenefit.toLocaleString()}원</span>
+						) : (
+							<span className="zero-text"> 아직 혜택이 없어요</span>
+						)}
 					</S.SummaryInfo>
 					<S.QuickAddBtn onClick={() => openModal('SPENDING_ADD')}>
 						<span className="icon">📸</span> 
@@ -43,31 +47,37 @@ export const HomePage = () => {
 							watchOverflow: true,
 						} as any)}
 					>
-						{getMyCards.map(card => {
-							const { cardInfo, targetAmount, currentAmount } = card;
-
-							return (
-								<SwiperSlide key={cardInfo.id} onClick={() => openModal('CARD_DETAIL', cardInfo)}>
-									<S.CreditCardBox $brandColor={BRAND_COLORS[cardInfo.company]}>
-											<div className="card-top">
-												<span className="card-company">{cardInfo.company}</span>
-												<span className="card-name">{cardInfo.name}</span>
-											</div>
-											
-											<S.ProgressWrapper>
-												<div className="amount-info">
-													<span>{currentAmount.toLocaleString()}원</span>
-													<span>목표 {targetAmount.toLocaleString()}원</span>
-												</div>
-												<S.ProgressBar>
-													<S.ProgressFill $width={card.progress} /> 
-												</S.ProgressBar>
-												<p className="percentText">실적 {card.progress}% 달성</p>
-											</S.ProgressWrapper>
-										</S.CreditCardBox>
-								</SwiperSlide>
+						{
+							getMyCards.length >= 1 ? (
+								getMyCards.map(card => {
+									const { cardInfo, targetAmount, currentAmount } = card;
+		
+									return (
+										<SwiperSlide key={cardInfo.id} onClick={() => openModal('CARD_DETAIL', cardInfo)}>
+											<S.CreditCardBox $brandColor={BRAND_COLORS[cardInfo.company]}>
+													<div className="card-top">
+														<span className="card-company">{cardInfo.company}</span>
+														<span className="card-name">{cardInfo.name}</span>
+													</div>
+													
+													<S.ProgressWrapper>
+														<div className="amount-info">
+															<span>{currentAmount.toLocaleString()}원</span>
+															<span>목표 {targetAmount.toLocaleString()}원</span>
+														</div>
+														<S.ProgressBar>
+															<S.ProgressFill $width={card.progress} /> 
+														</S.ProgressBar>
+														<p className="percentText">실적 {card.progress}% 달성</p>
+													</S.ProgressWrapper>
+												</S.CreditCardBox>
+										</SwiperSlide>
+									)
+								})
+							) : (
+								<p>현재 보유중인 카드가 없습니다. 카드를 등록하여 혜택을 관리해보세요.</p>
 							)
-						})}
+						}
 					</Swiper>
 				</S.CardSection>
 
