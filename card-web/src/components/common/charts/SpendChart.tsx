@@ -1,12 +1,16 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { EXPENDITURE_CATEGORIES, CATEGORY_COLORS } from '../../../constance/categories'
 import * as S from '../../Modal/ModalComponents.styles'
-import { useCardStore } from '../../../store/useCardStore';
 
 function SpendChart({data}: { data: any }) {
-    const { categoryTotals } = useCardStore();
 
     if(!data) return null;
+
+    const categoryTotals = data.reduce((acc: any, cur: any) => {
+        const category = cur.category;
+        acc[category] = (acc[category] || 0) + cur.amount;
+        return acc;
+    }, {});
 
     const totalAmount = Object.values(categoryTotals).reduce((sum: any, val: any) => {
         return sum + val;

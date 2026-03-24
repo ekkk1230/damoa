@@ -4,9 +4,17 @@ import BenefitBarChart from '../common/charts/BenefitBarChart';
 
 
 function CardComparison({recommendId, cardId}: {recommendId: number, cardId: number}) {
-	const { categoryTotals, cardList } = useCardStore();
+	const { spendings, cardList } = useCardStore();
 
 	if (!recommendId || !cardId) return;
+
+    const currentCardSpendings = spendings.filter(s => Number(s.cardId) === Number(cardId));
+
+    const categoryTotals = currentCardSpendings.reduce((acc: any, cur: any) => {
+        const category = cur.category;
+        acc[category] = (acc[category] || 0) + cur.amount;
+        return acc;
+    }, {});
 
 	const targetCard = cardList.find(c => c.id === cardId);
 	const recommendCard = cardList.find(c => c.id === recommendId);
