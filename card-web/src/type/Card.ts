@@ -42,7 +42,7 @@ export interface CardStatistics {
 export interface BenefitRule {
     category: string;
     rate: number;         // 0.1 (10%)
-    type: 'DISCOUNT' | 'SAVE' | 'FIXED'; 
+    type: 'DISCOUNT' | 'POINT' | 'FIXED'; 
     limit: number;        // 숫자형 한도 (AI 계산용)
 }
 

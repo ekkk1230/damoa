@@ -7,8 +7,8 @@ import { BRAND_COLORS } from "../../App.styles";
 import { useCardStore } from "../../store/useCardStore";
 import CardModal from "../../components/Modal/CardModal";
 import SpendingAddModal from "../../components/Modal/SpendingAddModal";
-import RecentSection from "../../components/card/RecentSection";
-import RecommendSection from "../../components/card/RecommendSection";
+import RecentSection from "../../components/Card/RecentSection";
+import RecommendSection from "../../components/Card/RecommendSection";
 
 export const HomePage = () => {
 	const { openModal, totalSpending, getMyCards, totalBenefit } = useCardStore();

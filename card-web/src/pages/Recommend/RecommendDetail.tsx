@@ -1,9 +1,11 @@
 import * as S from "./Reccommend.styles"
 import { useParams } from "react-router-dom"
 import { useCardStore } from "../../store/useCardStore";
+import SpendChart from "../../components/common/charts/SpendChart";
+import CardComparison from "../../components/Card/CardComparison";
 
 function RecommendDetail() {
-    const { getMyCards, cardList } = useCardStore();
+    const { getMyCards, cardList, spendings } = useCardStore();
 
     const { id } = useParams();
 
@@ -13,7 +15,29 @@ function RecommendDetail() {
     return (
         <>
             {isMyCard === false && (
-                <p>없는카드지렁ㅇ</p>
+                <>
+                    <ul>
+                        {getMyCards.map(card => (
+                            <li key={card.cardInfo.id}><button>{card.cardInfo.name}</button></li>
+                        ))}
+                    </ul>
+
+                    {getMyCards.map(card => {
+                        const filteresSpendList = spendings.filter(s => Number(s.cardId) === Number(card.cardInfo.id));
+
+                        return (
+                            <div key={card.cardInfo.id}>
+                            <p>{card.cardInfo.name}</p>
+
+                            {filteresSpendList.length >= 1 && (
+                                    <SpendChart data={filteresSpendList} />
+                            )}
+
+                            <CardComparison recommendId={Number(id)} cardId={card.cardInfo.id} />
+                        </div>
+                        )
+                    })}
+                </>
             )}
 
             <S.Container>

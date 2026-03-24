@@ -551,3 +551,69 @@ export const FeeInfo = styled.div`
     span { font-size: 1.4rem; color: #64748b; }
     strong { font-size: 1.6rem; color: #1e293b; font-weight: 700; }
 `;
+
+export const SpendChartWrap = styled.div`
+  position: relative;
+  width: 100%;
+  height: 250px;
+
+  .total-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none; // 마우스 이벤트가 차트에 가도록 설정
+
+    .label {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 2px;
+    }
+    .amount {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+`;
+
+export const TopCategoryMsg = styled.p`
+  margin-top: 20px;
+  padding: 14px 18px;
+  background-color: #f8fafc;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.5;
+  text-align: center;
+  border: 1px solid #f1f5f9;
+
+  /* 강조되는 카테고리 이름 스타일 */
+  span {
+    font-weight: 700;
+    color: #0f172a;
+    position: relative;
+    z-index: 1;
+    margin: 0 4px;
+
+    /* 강조 텍스트 밑줄 효과 (형광펜 느낌) */
+    &::after {
+      content: '';
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      bottom: 2px;
+      height: 8px;
+      background-color: #e2e8f0;
+      z-index: -1;
+      opacity: 0.6;
+    }
+  }
+
+  /* 이모지나 아이콘이 들어갈 경우를 대비한 스타일 */
+  &::before {
+    content: '💡';
+    margin-right: 8px;
+  }
+`;

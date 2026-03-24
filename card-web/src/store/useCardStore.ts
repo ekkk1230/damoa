@@ -5,6 +5,7 @@ import type { AnalyzedReceipt, Spending } from '../type/Spending';
 import { CARD_LIST } from '../data/CARD_LIST';
 import { USER_CARDS } from '../data/USER_CARD_LIST';
 import { fetchReceiptAnalysis } from '../api/receipt';
+import { MOCK_SPENDING } from '../data/MOCK_SPENDING';
 
 type ModalType = 'CARD_DETAIL' | 'SPENDING_ADD' | null;
 
@@ -46,7 +47,6 @@ const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allC
         let benefit = Math.floor(amount * Number(effectiveRate || 0));
 
         // 한도(Limit) 적용
-
         if (rule?.limit) {
             const alreadyUsedBenefit = benefitMap[cardId] || 0;
             // 이번에 받을 혜택이 남은 한도를 넘지 않게 계산
@@ -153,6 +153,8 @@ interface CardState {
 
     deleteCard: (cardId: number) => void;
     addCard: (newCard: MyCardProgress) => void;
+
+    categoryTotals: any | string | number [],
 }
 
 export const useCardStore = create<CardState>((set, get) => {
@@ -272,7 +274,7 @@ export const useCardStore = create<CardState>((set, get) => {
                 const remainingCards = state.getMyCards.filter(c => c.cardInfo.id !== cardId );
                 const remainingSpendins = state.spendings.filter(s => s.cardId);
 
-                const result = analyzeSpendings(remainingSpendins, remainingCards, state.cardList);
+                const result = analyzeSpendings(state.spendings, remainingCards, state.cardList);
 
                 return {
                     spendings: remainingSpendins,
@@ -302,5 +304,7 @@ export const useCardStore = create<CardState>((set, get) => {
                 }
             })
         },
+
+        categoryTotals: initial.categoryMap,
     }
 });

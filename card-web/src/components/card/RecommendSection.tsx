@@ -1,4 +1,4 @@
-import * as S from "./cardComponents.styles"
+import * as S from "./Card.styles"
 import { useCardStore } from "../../store/useCardStore"
 import { BRAND_COLORS } from "../../App.styles";
 import { Swiper, SwiperSlide } from "swiper/react";

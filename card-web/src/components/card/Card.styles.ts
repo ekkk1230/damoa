@@ -258,3 +258,86 @@ export const SubCardItem = styled.div<{ $brandColor?: string }>`
     }
   }
 `;
+
+export const ComparisonWrapper = styled.div`
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #111827;
+    text-align: center;
+  }
+
+  .comparison-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .card-item {
+    flex: 1;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    transition: transform 0.2s;
+
+    p {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    strong {
+      font-size: 1rem;
+      color: #374151;
+      display: block;
+    }
+
+    &.highlight {
+      border: 2px solid #3b82f6; // 추천 카드는 강조색 사용
+      background: #eff6ff;
+
+      strong {
+        color: #2563eb;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .vs-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #9ca3af;
+    background: #f3f4f6;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .result-msg {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #4b5563;
+    padding-top: 16px;
+    border-top: 1px dashed #d1d5db;
+
+    span {
+      font-weight: 700;
+      color: #ef4444; // 아낄 수 있는 금액은 빨간색 계열로 강조
+    }
+  }
+`;

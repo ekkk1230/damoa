@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
-import RecommendSection from "../../components/card/RecommendSection";
+import RecommendSection from "../../components/Card/RecommendSection";
 import { useCardStore } from "../../store/useCardStore"
 import type { MyCardProgress } from "../../type/User";
 import * as S from "./MyCard.styles";
 
 function CardList() {
     const { getMyCards, benefit, recentSpendList, deleteCard } = useCardStore();
-
-    console.log(getMyCards)
 
     return (
         <S.ListContainer>

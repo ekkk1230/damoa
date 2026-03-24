@@ -1,10 +1,8 @@
-import * as S from "./cardComponents.styles"
+import * as S from "./Card.styles"
 import { useCardStore } from "../../store/useCardStore";
 
 function RecentSection() {
-    const { recentSpendList, userCards, cardList } = useCardStore();
-
-    console.log(recentSpendList, userCards)
+    const { recentSpendList, cardList } = useCardStore();
 
     return (
         <S.RecentSection>
