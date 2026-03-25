@@ -89,7 +89,7 @@ export const HomePage = () => {
 			</S.HomeContainer>
 
 			<CardModal />
-			<SpendingAddModal cards={getMyCards} />
+			<SpendingAddModal />
 		</>
     );
 };

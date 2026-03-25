@@ -1,93 +1,58 @@
 import * as S from './Card.styles'
-import { useCardStore } from '../../store/useCardStore'
+import { useCardStore, analyzeSpendings, calculateExpectedBenefit } from '../../store/useCardStore'
 import BenefitBarChart from '../common/charts/BenefitBarChart';
+import type { Card } from '../../type/Card';
+import CategoryTag from './CategoryTag';
 
 
 function CardComparison({recommendId, cardId}: {recommendId: number, cardId: number}) {
-	const { spendings, cardList } = useCardStore();
 
 	if (!recommendId || !cardId) return;
 
+	const { spendings, getMyCards, cardList } = useCardStore();
+
     const currentCardSpendings = spendings.filter(s => Number(s.cardId) === Number(cardId));
 
-    const categoryTotals = currentCardSpendings.reduce((acc: any, cur: any) => {
-        const category = cur.category;
-        acc[category] = (acc[category] || 0) + cur.amount;
-        return acc;
-    }, {});
+	const { categoryMap } = analyzeSpendings(currentCardSpendings, getMyCards, cardList);
+	const safeCategoryMap = categoryMap || {};
 
 	const targetCard = cardList.find(c => c.id === cardId);
 	const recommendCard = cardList.find(c => c.id === recommendId);
 
-	const calculateCardBenefit = (card: any, totals: any) => {
-		if (!card) return 0;
+	const targetRes = calculateExpectedBenefit(categoryMap, targetCard as Card);
+	const recommendRes = calculateExpectedBenefit(categoryMap, recommendCard as Card);
 
-		const totalSpent = Object.values(totals).reduce((sum: number, val: any) => sum + val, 0);
-
-		const minTier = card.performanceTiers?.[0].min || 0;
-		if (totalSpent < minTier) return 0;
-
-		return card.benefitRules?.reduce((acc: number, rule: any) => {
-			const mySpent = totals[rule.category];
-			let estimated = Math.round(mySpent * rule.rate);
-
-			if (estimated > rule.limit) {
-				estimated = rule.limit;
-			}
-
-			return acc + estimated;
-		}, 0) || 0;
-	};
-
-	const targetBenefit = calculateCardBenefit(targetCard, categoryTotals);
-	const recommendBenefit = calculateCardBenefit(recommendCard, categoryTotals);
-
-	const diff = recommendBenefit - targetBenefit;
-
-	const categories = Object.keys(categoryTotals);
-	const comparisonDetails = categories.map((cate) => {
-		// 해당 카테고리에 사용자가 쓴 총 금액
-		const mySpent = categoryTotals[cate];
-
-		// 사용자의 카드 룰 중에 해당 카테고리와 일차하는 룰 찾기
-		const targetRule = targetCard?.benefitRules?.find(rule => rule.category === cate);
-
-		// 추천 카드 룰 중에 해당 카테고리와 일치하는 룰 찾기
-		const recommendRule = recommendCard?.benefitRules?.find(rule => rule.category === cate);
-
-		// 사용자 카드의 실제 혜택 금액
-		const tBenefit = targetRule 
-						? Math.min(Math.round(mySpent * targetRule.rate), targetRule.limit)
-						: 0;
-		
-		// 추천 카드의 실체 혜택 금액
-		const rBeenfit = recommendRule
-						? Math.min(Math.round(mySpent * recommendRule.rate), recommendRule.limit)
-						: 0;
-
-		return {
-			category: cate,
-			spent: mySpent,
-			targetBenefit: tBenefit,
-			recommendBenefit: rBeenfit,
-			diff: rBeenfit - tBenefit
-		}
-	});
-
-	const sortDetails = comparisonDetails.sort((a, b) => b.spent - a.spent);
+	const diff = Number(recommendRes?.totalBenefit) - Number(targetRes?.totalBenefit);
 
 	const chartData = [
 		{
 			name: '현재 카드',
-			...sortDetails.reduce((acc, cur) => ({ ...acc, [cur.category]: cur.targetBenefit }), {}),
-			total: targetBenefit
+			...targetRes?.categoryBenefits,
+			total: targetRes?.totalBenefit
 		},
 		{
 			name: '추천 카드',
-			...sortDetails.reduce((acc, cur) => ({ ...acc, [cur.category]: cur.recommendBenefit }), {}),
-			total: recommendBenefit
+			...recommendRes?.categoryBenefits,
+			total: recommendRes?.totalBenefit
 		}
 	]
+
+	const categories = Object.keys(safeCategoryMap);
+
+	const comparisonDetail = categories.map((cate) => {
+		const spent = safeCategoryMap[cate] || 0;
+		const targetBenefit = targetRes.categoryBenefits[cate] || 0;
+		const recommendBenefit = recommendRes.categoryBenefits[cate] || 0;
+		const diff = Number(recommendBenefit) - Number(targetBenefit);
+		
+		return {
+			category: cate,   
+			spent,
+			targetBenefit,
+			recommendBenefit,
+			diff,
+		};
+	});
 
     return (
 		<S.ComparisonWrapper>
@@ -95,14 +60,14 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 			<div className="comparison-grid">
 				<div className="card-item">
 					<p>현재: {targetCard?.name}</p>
-					<strong>{targetBenefit.toLocaleString()}원 할인</strong>
+					<strong>{targetRes?.totalBenefit.toLocaleString()}원 할인</strong>
 				</div>
 				
 				<div className="vs-badge">VS</div>
 
 				<div className="card-item highlight">
 					<p>추천: {recommendCard?.name}</p>
-					<strong>{recommendBenefit.toLocaleString()}원 할인</strong>
+					<strong>{recommendRes?.totalBenefit.toLocaleString()}원 할인</strong>
 				</div>
 			</div>
 
@@ -115,6 +80,36 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 			)}
 
 			<BenefitBarChart data={chartData} categories={categories} />
+
+			<S.StyledTable>
+				<caption>소비분석 결과</caption>
+				<thead>
+					<tr>
+						<th>카테고리</th>
+						<th>소비금액</th>
+						<th>현재혜택</th>
+						<th>추천혜택</th>
+						<th>차이</th>
+					</tr>
+				</thead>
+				<tbody>
+					{comparisonDetail.length !== 0 &&
+						comparisonDetail.map(item => (
+							<tr key={item.category}>
+								<td><CategoryTag categoryKey={item.category} /></td>
+								<td>{item.spent.toLocaleString()}원</td>
+								<td>{item.targetBenefit.toLocaleString()}원</td>
+								<td>{item.recommendBenefit.toLocaleString()}원</td>
+								<td>
+									<S.DiffText $isPlus={item.diff > 0}>
+										{item.diff.toLocaleString()}원
+									</S.DiffText>
+								</td>
+							</tr>
+						))
+					}
+				</tbody>
+			</S.StyledTable>
 		</S.ComparisonWrapper>
     )
 }

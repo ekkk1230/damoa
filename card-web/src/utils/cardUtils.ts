@@ -1,4 +1,10 @@
 import { BRAND_COLORS } from "../App.styles";
+import { EXPENDITURE_CATEGORIES } from "../constance/categories";
+
+export const getCategoryLabel = (categoryKey: string) => {
+    const category = (EXPENDITURE_CATEGORIES as any)[categoryKey];
+    return category ? category.label : categoryKey;
+}
 
 export const getCardColor = (companyName: string) => {
     const matchedKey = Object.keys(BRAND_COLORS).find(key =>

@@ -341,3 +341,64 @@ export const ComparisonWrapper = styled.div`
     }
   }
 `;
+
+export const StyledTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden; // 테두리 둥글게 유지
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  caption {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: left;
+    color: #333;
+  }
+
+  thead {
+    background-color: #f8f9fa;
+    
+    th {
+      padding: 12px 8px;
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 600;
+      border-bottom: 2px solid #eee;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #f1f1f1;
+      &:last-child { border-bottom: none; }
+      &:hover { background-color: #fafafa; } // 마우스 올리면 강조
+    }
+
+    td {
+      padding: 14px 8px;
+      font-size: 0.9rem;
+      color: #444;
+      vertical-align: middle;
+      text-align: center; // 기본은 중앙
+
+      /* 숫자 데이터는 우측 정렬 */
+      &:nth-child(2), &:nth-child(3), &:nth-child(4), &:nth-child(5) {
+        text-align: right;
+        font-variant-numeric: tabular-nums; // 숫자 폭을 일정하게
+      }
+    }
+  }
+`;
+
+// 차이 금액 강조용 컴포넌트
+export const DiffText = styled.span<{ $isPlus: boolean }>`
+  font-weight: bold;
+  color: ${props => (props.$isPlus ? '#e84393' : '#636e72')};
+  &::before {
+    content: '${props => (props.$isPlus ? '+' : '')}';
+  }
+`;

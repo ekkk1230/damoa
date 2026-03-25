@@ -22,8 +22,6 @@ const swiperOptions = {
 function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
     const { topSpendingCategory, recommendedCards, openModal } = useCardStore();
 
-    console.log(recommendedCards)
-
     return (
         <S.RecommendSection>
             <div className="banner-content">

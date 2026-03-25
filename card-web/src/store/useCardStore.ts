@@ -9,7 +9,7 @@ import { MOCK_SPENDING } from '../data/MOCK_SPENDING';
 
 type ModalType = 'CARD_DETAIL' | 'SPENDING_ADD' | null;
 
-const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allCards: Card[]) => {
+export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allCards: Card[]) => {
     if (spendings.length === 0) {
         return { 
             topCategory: "지출 없음", spendingMap: {}, totalSpending: 0, 
@@ -20,11 +20,11 @@ const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allC
     };
 
     let totalSpending = 0;
+    let totalBenefit = 0;
+
     const categoryMap: Record<string, number> = {}; // 카테고리별 지출 내역
     const spendingMap: Record<number, number> = {}; // 카드별 지출 내역
     const benefitMap: Record<number, number> = {};  // 카드별 혜택
-
-    let totalBenefit = 0;
 
     spendings.forEach(s => {
         const amount = Number(s.amount) || 0;
@@ -106,6 +106,31 @@ const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allC
         totalBenefit: isNaN(totalBenefit) ? 0 : totalBenefit, 
         benefitMap 
     };
+}
+
+export const calculateExpectedBenefit = (categoryMap: Record<string, number> = {}, card: Card) => {
+    if (!card) return { totalBenefit: 0, categoryBenefits: {} as Record<string, number> };
+
+    let totalBenefit = 0;
+    let categoryBenefits: Record<string, number> = {};
+
+    const totalSpent = Object.values(categoryMap).reduce((acc, cur) => { return acc + cur; }, 0);
+
+    const minTier = card.performanceTiers?.[0].min || 0;
+    if (totalSpent < minTier) {
+       return { totalBenefit: 0, categoryBenefits };
+    };
+
+    card.benefitRules?.forEach(rule => {
+        const spentInCategory = categoryMap[rule.category] || 0;
+
+        const estimated = Math.min(Math.round(spentInCategory * rule.rate), rule.limit);
+
+        categoryBenefits[rule.category] = estimated;
+        totalBenefit += estimated;
+    })
+
+    return { totalBenefit, categoryBenefits };
 }
  
 interface CardState {

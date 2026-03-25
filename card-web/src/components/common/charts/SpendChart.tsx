@@ -1,37 +1,30 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { EXPENDITURE_CATEGORIES, CATEGORY_COLORS } from '../../../constance/categories'
 import * as S from '../../Modal/ModalComponents.styles'
+import { analyzeSpendings } from '../../../store/useCardStore';
+import CategoryTag from '../../Card/CategoryTag';
 
 function SpendChart({data}: { data: any }) {
 
     if(!data) return null;
 
-    const categoryTotals = data.reduce((acc: any, cur: any) => {
-        const category = cur.category;
-        acc[category] = (acc[category] || 0) + cur.amount;
-        return acc;
-    }, {});
+    const { categoryMap, totalSpending, topCategory } = analyzeSpendings(data, [], []);
+    const safeCategoryMap = categoryMap || {}
 
-    const totalAmount = Object.values(categoryTotals).reduce((sum: any, val: any) => {
-        return sum + val;
-    }, 0);
-
-    const chartData = Object.keys(categoryTotals).map((key) => {
-        const amount = categoryTotals[key];
+    const chartData = Object.keys(safeCategoryMap).map((key) => {
+        const amount = safeCategoryMap[key];
 
         return { 
             name: (EXPENDITURE_CATEGORIES as any)[key]?.label, 
-            value: Math.round((amount / Number(totalAmount)) * 100), 
-            amount: categoryTotals[key],
+            value: Math.round((amount / Number(totalSpending)) * 100), 
+            amount,
             color: (CATEGORY_COLORS as any)[key] || '#ccc'
         }; 
     }).sort((a, b) => b.amount - a.amount);
 
-    const topCategory = chartData[0];
-
     return (
         <S.SpendChartWrap>
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%">
                 <PieChart>
                     <Pie
                         data={chartData}
@@ -45,8 +38,8 @@ function SpendChart({data}: { data: any }) {
                         animationBegin={0}       // 0초 대기
                         animationDuration={1000} // 1초 동안 실행
                     >
-                        {chartData.map((_, index) => (
-                        <Cell key={`cell-${index}`} fill={(CATEGORY_COLORS as any)[Object.keys(categoryTotals)[index]] || '#ccc'} />
+                        {chartData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                     </Pie>
                     <Tooltip 
@@ -60,11 +53,11 @@ function SpendChart({data}: { data: any }) {
 
             <div className="total-center">
                 <p className="label">총 지출</p>
-                <p className="amount">{Number(totalAmount).toLocaleString()}원</p>
+                <p className="amount">{Number(totalSpending).toLocaleString()}원</p>
             </div>
 
             <S.TopCategoryMsg>
-                이번 달은 <span>{topCategory.name}</span> 항목에서 가장 많은 지출이 발생했어요!
+                이번 달은 <CategoryTag categoryKey={topCategory} /> 항목에서 가장 많은 지출이 발생했어요!
             </S.TopCategoryMsg>
         </S.SpendChartWrap>
     )

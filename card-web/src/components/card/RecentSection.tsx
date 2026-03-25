@@ -1,5 +1,6 @@
 import * as S from "./Card.styles"
 import { useCardStore } from "../../store/useCardStore";
+import CategoryTag from "./CategoryTag";
 
 function RecentSection() {
     const { recentSpendList, cardList } = useCardStore();
@@ -21,7 +22,7 @@ function RecentSection() {
                             <div className="info">
                                 <p className="name">{recentCard?.name}</p>
                                 <p className="store">{item.storeName}</p>
-                                <p className="date">{item.date} · {item.category}</p>
+                                <p className="date">{item.date} · <CategoryTag categoryKey={item.category} /></p>
                             </div>
                             </div>
                             <div className="item-right">

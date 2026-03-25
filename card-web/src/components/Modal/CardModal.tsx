@@ -4,6 +4,7 @@ import { useCardStore } from '../../store/useCardStore';
 import ModalLayout from '../common/ModalLayout/ModalLayout';
 import MyCard from './ModalBody/MyCard';
 import RecommendCard from './ModalBody/RecommendCard';
+import CategoryTag from '../Card/CategoryTag';
 
 const CardModal = () => {
     const { selectedCard, modalType } = useCardStore();
@@ -49,7 +50,7 @@ const CardModal = () => {
                 <p style={{ color: '#64748b', fontSize: '1.4rem', marginBottom: '0.8rem' }}>{selectedCard?.summary}</p>
                 <ul className="category-list">
                     {selectedCard?.categories.map((category, index) => (
-                        <li key={index}>{category}</li>
+                        <li key={index}><CategoryTag categoryKey={category} /></li>
                     ))}
                 </ul>
             </S.DetailItem>

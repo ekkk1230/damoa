@@ -1,4 +1,5 @@
 import { useCardStore } from '../../../store/useCardStore'
+import CategoryTag from '../../Card/CategoryTag';
 import * as S from '../ModalComponents.styles';
 
 
@@ -26,7 +27,7 @@ function MyCard() {
                         <S.ResultItem key={item.id}>
                             <div className="info">
                                 <span className="name">{item.storeName}</span>
-                                <span className="date-cat">{item.date} · {item.category}</span>
+                                <span className="date-cat">{item.date} · <CategoryTag categoryKey={item.category} /></span>
                             </div>
                             <span className="amount">{item.amount.toLocaleString()}원</span>
                         </S.ResultItem>
