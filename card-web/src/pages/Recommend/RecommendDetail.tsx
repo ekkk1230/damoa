@@ -1,45 +1,31 @@
 import * as S from "./Reccommend.styles"
 import { useParams } from "react-router-dom"
 import { useCardStore } from "../../store/useCardStore";
-import SpendChart from "../../components/common/charts/SpendChart";
-import CardComparison from "../../components/Card/CardComparison";
+import { Swiper, SwiperSlide } from "swiper/react";
+import CompairModal from "../../components/Modal/CompairModal";
+import AgeChart from "../../components/common/charts/AgeChart";
+import GenderChart from "../../components/common/charts/GenderChart";
 
 function RecommendDetail() {
-    const { getMyCards, cardList, spendings } = useCardStore();
+    const { getMyCards, cardList, openModal } = useCardStore();
 
     const { id } = useParams();
 
     const card = cardList.find(c => c.id === Number(id));
     const isMyCard = getMyCards.filter(c => c.cardInfo.id === Number(id)).length !== 0;
 
+    const topAge = card?.statistics?.ageGroup.reduce((prev, cur) => {
+        return (prev.value > cur.value) ? prev : cur
+    }, card.statistics.ageGroup[0])
+
+    const genderData = card?.statistics?.gender;
+    const topGender = genderData 
+                    ? (genderData.male > genderData.female ? "남성" : "여성") 
+                    : "사용자";
+
+
     return (
         <>
-            {isMyCard === false && (
-                <>
-                    <ul>
-                        {getMyCards.map(card => (
-                            <li key={card.cardInfo.id}><button>{card.cardInfo.name}</button></li>
-                        ))}
-                    </ul>
-
-                    {getMyCards.map(card => {
-                        const filteresSpendList = spendings.filter(s => Number(s.cardId) === Number(card.cardInfo.id));
-
-                        return (
-                            <div key={card.cardInfo.id}>
-                            <p>{card.cardInfo.name}</p>
-
-                            {filteresSpendList.length >= 1 && (
-                                    <SpendChart data={filteresSpendList} />
-                            )}
-
-                            <CardComparison recommendId={Number(id)} cardId={card.cardInfo.id} />
-                        </div>
-                        )
-                    })}
-                </>
-            )}
-
             <S.Container>
                 {/* 1. 상단 섹션 */}
                 <S.HeroSection>
@@ -60,8 +46,13 @@ function RecommendDetail() {
                 <S.StatsSection>
                     <h3>이 카드의 주요 사용자</h3>
                     <div className="stats-grid">
-                    {/* 연령대별 그래프 로직 */}
-                    <div className="gender-ratio">남성 {card?.statistics?.gender.male}% | 여성 {card?.statistics?.gender.female}%</div>
+                        <AgeChart data={card?.statistics?.ageGroup} />
+
+                        {/* 연령대별 그래프 로직 */}
+                        {/* <div className="gender-ratio">남성 {card?.statistics?.gender.male}% | 여성 {card?.statistics?.gender.female}%</div> */}
+                        <GenderChart data={card?.statistics?.gender} />
+
+                        <p>{topAge?.label}의 {topGender} 사용자가 많습니다!</p>
                     </div>
                 </S.StatsSection>
 
@@ -80,30 +71,49 @@ function RecommendDetail() {
                 </S.BenefitSection>
 
                 {/* 4. 실적별 구간 (Table) */}
-                    <h3>실적별 할인 한도</h3>
-                    <S.TierTable>
-                        <thead>
-                        <tr>
-                            <th>전월 실적</th>
-                            <th>할인 혜택</th>
+                <h3>실적별 할인 한도</h3>
+                <S.TierTable>
+                    <thead>
+                    <tr>
+                        <th>전월 실적</th>
+                        <th>할인 혜택</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {card?.performanceTiers?.map((tier, idx) => (
+                        <tr key={idx}>
+                        <td>{tier.min.toLocaleString()}원 이상</td>
+                        <td>{tier.desc}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {card?.performanceTiers?.map((tier, idx) => (
-                            <tr key={idx}>
-                            <td>{tier.min.toLocaleString()}원 이상</td>
-                            <td>{tier.desc}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </S.TierTable>
+                    ))}
+                    </tbody>
+                </S.TierTable>
+
+                {isMyCard === false && (
+                    <>
+                        <Swiper>
+                            {getMyCards.map(card => {
+                                return (
+                                    <SwiperSlide 
+                                        key={card.cardInfo.id}
+                                        onClick={() => openModal('COMPAIR', card)}
+                                    >
+                                        <p>{card.cardInfo.company}</p>
+                                        <p>{card.cardInfo.name}</p>
+                                    </SwiperSlide>
+                                )
+                            })}
+                        </Swiper>
+                    </>
+                )}
                 
                 {/* 하단 플로팅 버튼 (비교하기 탭으로 이동하거나 공식홈 이동) */}
                 <S.FixedBottomBar>
-                    <button className="compare-btn">내 카드와 비교하기</button>
                     <a href={card?.officialLink} target="_blank" className="apply-btn">카드 신청하기</a>
                 </S.FixedBottomBar>
             </S.Container>
+
+            <CompairModal recommendId={id} />
         </>
     )
 }

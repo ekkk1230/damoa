@@ -1,28 +1,36 @@
 import { useState } from 'react'
 import * as S from '../ModalComponents.styles'
 import { useCardStore } from '../../../store/useCardStore';
+import { EXPENDITURE_CATEGORIES } from '../../../constance/categories';
 
 function ManualInputTab() {
-    const { getMyCards } = useCardStore();
+    const { getMyCards, addSpending } = useCardStore();
 
     const [form, setForm] = useState({
         amount: '',
         cardId: '',
         storeName: '',
         date: new Date().toISOString().split('T')[0],
-        category: '식비'
+        category: ''
     })
+
+    const handleSubmit = () => {
+        if (!form.amount || !form.cardId || !form.storeName || !form.date) {
+            alert('모든 항목을 입력해주세요.');
+            return;
+        }
+
+        addSpending({
+            id: Date.now(),
+            ...form,
+            amount: Number(form.amount),
+            cardId: Number(form.cardId),
+        })
+        setForm({ amount: '', cardId: '', storeName: '', date: new Date().toISOString().split('T')[0], category: '' })
+    }
     
     return (
         <>
-            <S.FormLabel>결제 금액</S.FormLabel>
-            <S.StyledInput 
-                type="number" 
-                value={form.amount} 
-                onChange={e => setForm({ ...form, amount: e.target.value })}
-                placeholder="0원" 
-            />
-
             <S.FormLabel>사용 카드</S.FormLabel>
             <S.StyledSelect 
                 value={form.cardId}
@@ -33,6 +41,25 @@ function ManualInputTab() {
                     <option key={item.cardInfo.id} value={item.cardInfo.id}>{item.cardInfo.name}</option>
                 ))}
             </S.StyledSelect>
+
+            <S.FormLabel>분류</S.FormLabel>
+            <S.StyledSelect 
+                value={form.category}
+                onChange={e => setForm({ ...form, category: e.target.value })}
+            >
+                <option selected hidden>카테고리를 선택해주세요</option>
+                {Object.entries(EXPENDITURE_CATEGORIES).map(([key, value]) => (
+                    <option value={key} key={key}>{value.label}</option>
+                ))}
+            </S.StyledSelect>
+
+            <S.FormLabel>결제 금액</S.FormLabel>
+            <S.StyledInput 
+                type="number" 
+                value={form.amount} 
+                onChange={e => setForm({ ...form, amount: e.target.value })}
+                placeholder="0원" 
+            />
 
             <S.FormLabel>상호명</S.FormLabel>
             <S.StyledInput 

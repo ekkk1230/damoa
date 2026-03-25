@@ -1,8 +1,37 @@
 import * as S from '../ModalComponents.styles'
 import { useCardStore } from '../../../store/useCardStore';
+import { useState } from 'react';
+import { EXPENDITURE_CATEGORIES } from '../../../constance/categories';
+import CategoryTag from '../../Card/CategoryTag';
 
 function ImageInputTab() {
-    const { getMyCards } = useCardStore();
+    const { closeModal, getMyCards, analyzedList, isAnalyzing, uploadAndAnalyze, deleteAnalyzedItem, confirmAllSpendings, updateAnalyzedItem } = useCardStore();
+
+    const [form, setForm] = useState({
+        amount: '',
+        cardId: '',
+        storeName: '',
+        date: new Date().toISOString().split('T')[0],
+        category: '',
+    })
+    const [editingId, setEditingId] = useState<number | null>(null);
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        await uploadAndAnalyze(file);
+    }
+    
+    const handleUpdateItem = (id: number, field: string, value: string|number) => {
+        updateAnalyzedItem(id, { [field]: value });
+    }
+
+    const handleSave = () => setEditingId(null);
+
+    const CATEGORIES = Object.entries(EXPENDITURE_CATEGORIES).map(([key, value]) => (
+        <option key={key} value={key}>{value.label}</option>
+    ))
 
     return (
         <>
@@ -61,9 +90,7 @@ function ImageInputTab() {
                                                     value={item.category}
                                                     onChange={e => handleUpdateItem(item.id, 'category', e.target.value)}
                                                 >
-                                                    {CATEGORIES.map(cate => (
-                                                        <option value={cate}>{cate}</option>
-                                                    ))}
+                                                    {CATEGORIES}
                                                 </S.GhostSelect>
                                             </span>
                                         </div>
@@ -89,7 +116,7 @@ function ImageInputTab() {
                                     <div style={{ display: 'flex', flex: 1, justifyContent: 'space-between', alignItems: 'center' }}>
                                         <div className="info">
                                             <span className="name">{item.storeName}</span>
-                                            <span className="date-cat">{item.date} · {item.category}</span>
+                                            <span className="date-cat">{item.date} · <CategoryTag categoryKey={item.category} /></span>
                                         </div>
                                         
                                         <div style={{ display: 'flex', alignItems: 'center' }}>

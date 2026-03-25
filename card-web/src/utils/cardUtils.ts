@@ -1,6 +1,35 @@
 import { BRAND_COLORS } from "../App.styles";
 import { EXPENDITURE_CATEGORIES } from "../constance/categories";
 
+export const normalizeCompanyName = (name: string): string => {
+    if (!name) return "기타";
+  
+    // 1. 공백 제거 및 소문자 변환 (비교를 위해)
+    const n = name.replace(/\s/g, "").toLowerCase();
+  
+    // 2. 통합 규칙 정의 (우선순위 고려)
+    if (n.includes("국민") || n.includes("kb")) return "국민카드";
+    if (n.includes("신한") || n.includes("shinhan")) return "신한카드";
+    if (n.includes("삼성") || n.includes("samsung")) return "삼성카드";
+    if (n.includes("현대") || n.includes("hyundai")) return "현대카드";
+    if (n.includes("우리") || n.includes("woori")) return "우리카드";
+    if (n.includes("하나") || n.includes("hana")) return "하나카드";
+    if (n.includes("롯데") || n.includes("lotte")) return "롯데카드";
+    if (n.includes("농협") || n.includes("nh")) return "농협카드";
+    if (n.includes("기업") || n.includes("ibk")) return "기업은행";
+    if (n.includes("외환") || n.includes("keb")) return "하나카드"; 
+    if (n.includes("카카오") || n.includes("kakao")) return "카카오뱅크";
+    if (n.includes("토스") || n.includes("toss")) return "토스뱅크";
+    if (n.includes("케이") || n.includes("kbank")) return "케이뱅크";
+    if (n.includes("비씨") || n.includes("bc")) return "BC카드";
+    if (n.includes("kjb") || n.includes("광주")) return "광주은행";
+    if (n.includes("dgb") || n.includes("대구")) return "대구은행";
+    if (n.includes("bnk") || n.includes("부산")) return "부산은행";
+    if (n.includes("jb") || n.includes("전북")) return "전북은행";
+  
+    return name;
+};
+
 export const getCategoryLabel = (categoryKey: string) => {
     const category = (EXPENDITURE_CATEGORIES as any)[categoryKey];
     return category ? category.label : categoryKey;

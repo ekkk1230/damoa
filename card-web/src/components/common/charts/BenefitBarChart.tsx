@@ -23,7 +23,7 @@ function BenefitBarChart({ data, categories }: { data: any, categories: any[] })
                         key={cate}
                         dataKey={cate}
                         stackId="a"
-                        fill={CATEGORY_COLORS[cate as keyof typeof CATEGORY_COLORS]}
+                        fill={CATEGORY_COLORS[cate as keyof typeof CATEGORY_COLORS] || "#ccc"}
                     />
                 ))}
             </BarChart>

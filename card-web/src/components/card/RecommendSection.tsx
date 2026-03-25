@@ -4,6 +4,8 @@ import { BRAND_COLORS } from "../../App.styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import 'swiper/css';
+import CategoryTag from "./CategoryTag";
+import { normalizeCompanyName } from "../../utils/cardUtils";
 
 interface RecommendSectionProps {
     variant?: 'main' | 'sub';
@@ -26,7 +28,7 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
         <S.RecommendSection>
             <div className="banner-content">
                 <div className="text-group">
-                    <p className="description">이번 달은 <strong>{topSpendingCategory}</strong> 지출이 가장 많네요!</p>
+                    <p className="description">이번 달은 <strong><CategoryTag categoryKey={topSpendingCategory} /></strong> 지출이 가장 많네요!</p>
                 </div>
             </div>
 
@@ -68,25 +70,29 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                     {recommendedCards.length < 1 ? (
                         <p className="no-data">현재 추천할 카드가 준비되어 있지 않습니다.</p>
                     ) : (
-                        recommendedCards.map((card) => (
-                            <SwiperSlide key={card.id}>
-                                <S.SubCardItem 
-                                    onClick={() => openModal('CARD_DETAIL', card)}
-                                    $brandColor={BRAND_COLORS[card.company]}
-                                >
-                                    <div className="card-thumb">
-                                        <span className="name">{card.name}</span>
-                                    </div>
-                                    <div className="card-info">
-                                        <ul>
-                                            {card.mainBenefits.map((benefit, idx) => (
-                                                <li key={idx}>{benefit}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </S.SubCardItem>
-                            </SwiperSlide>
-                        ))
+                        recommendedCards.map((card) => {
+                            const companyName = normalizeCompanyName(card.company);
+                            const brandColor = BRAND_COLORS[companyName]
+                            return (
+                                <SwiperSlide key={card.id}>
+                                    <S.SubCardItem 
+                                        onClick={() => openModal('CARD_DETAIL', card)}
+                                        $brandColor={brandColor}
+                                    >
+                                        <div className="card-thumb">
+                                            <span className="name">{card.name}</span>
+                                        </div>
+                                        <div className="card-info">
+                                            <ul>
+                                                {card.mainBenefits.map((benefit, idx) => (
+                                                    <li key={idx}>{benefit}</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </S.SubCardItem>
+                                </SwiperSlide>
+                            )
+                        })
                     )}
                 </Swiper>
             )}

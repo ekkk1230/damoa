@@ -1,5 +1,103 @@
 import styled from 'styled-components';
 
+// 검색 및 필터 영역
+export const FilterSection = styled.div`
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-bottom: 30px;
+
+  input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  ul {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto; // 카드사가 많을 때 밀어서 보기
+    padding-bottom: 10px;
+    list-style: none;
+    
+    button {
+      white-space: nowrap;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid #eee;
+      background: #fff;
+      cursor: pointer;
+      &:hover { background: #333; color: #fff; }
+    }
+  }
+`;
+
+// 카드 그리드 컨테이너
+export const CardGrid = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+`;
+
+// 개별 카드 아이템
+export const CardItem = styled.li<{ $brandColor: string }>`
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  .card-content {
+    padding: 20px;
+    background: ${props => props.$brandColor};
+  }
+
+  .card-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .annual-fee {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 12px;
+  }
+
+  .summary {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    min-height: 40px;
+  }
+
+  .benefits-tag {
+    display: flex; flex-flow: column; align-items: flex-start;
+    gap: 5px;
+
+    span {
+      background: #f0f4ff;
+      color: #3b82f6;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+`;
+
 export const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;

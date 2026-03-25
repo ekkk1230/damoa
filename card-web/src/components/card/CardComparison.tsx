@@ -3,6 +3,7 @@ import { useCardStore, analyzeSpendings, calculateExpectedBenefit } from '../../
 import BenefitBarChart from '../common/charts/BenefitBarChart';
 import type { Card } from '../../type/Card';
 import CategoryTag from './CategoryTag';
+import { EXPENDITURE_CATEGORIES } from '../../constance/categories';
 
 
 function CardComparison({recommendId, cardId}: {recommendId: number, cardId: number}) {
@@ -12,8 +13,8 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 	const { spendings, getMyCards, cardList } = useCardStore();
 
     const currentCardSpendings = spendings.filter(s => Number(s.cardId) === Number(cardId));
-
 	const { categoryMap } = analyzeSpendings(currentCardSpendings, getMyCards, cardList);
+	
 	const safeCategoryMap = categoryMap || {};
 
 	const targetCard = cardList.find(c => c.id === cardId);
@@ -24,20 +25,18 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 
 	const diff = Number(recommendRes?.totalBenefit) - Number(targetRes?.totalBenefit);
 
-	const chartData = [
-		{
-			name: '현재 카드',
-			...targetRes?.categoryBenefits,
-			total: targetRes?.totalBenefit
-		},
-		{
-			name: '추천 카드',
-			...recommendRes?.categoryBenefits,
-			total: recommendRes?.totalBenefit
-		}
-	]
+	const allCategoryKeys = Object.keys(EXPENDITURE_CATEGORIES);
 
-	const categories = Object.keys(safeCategoryMap);
+	const meaningfulCategories = allCategoryKeys.filter(cate => {
+		const isSpent = (safeCategoryMap[cate] || 0) > 0; // 내가 돈을 썼는가?
+		// const hasTargetBenefit = (targetRes.categoryBenefits[cate] || 0) > 0; // 내 카드가 혜택을 주는가?
+		// const hasRecommendBenefit = (recommendRes.categoryBenefits[cate] || 0) > 0; // 추천 카드가 혜택을 주는가?
+		const isRecommendTarget = recommendCard?.categories.some(c => c.includes(cate));
+
+		return isSpent && isRecommendTarget;
+	});
+
+	const categories = meaningfulCategories;
 
 	const comparisonDetail = categories.map((cate) => {
 		const spent = safeCategoryMap[cate] || 0;
@@ -53,6 +52,25 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 			diff,
 		};
 	});
+
+	const filteredComparisonResult = comparisonDetail.filter(d => recommendCard?.categories.some(cate => cate.includes(d.category)));
+
+	const emptyCategories = categories.reduce((acc, cate) => ({ ...acc, [cate]: 0 }), {});
+	
+	const chartData = [
+		{
+			name: '현재 카드',
+			...emptyCategories,
+			...targetRes?.categoryBenefits,
+			total: targetRes?.totalBenefit
+		},
+		{
+			name: '추천 카드',
+			...emptyCategories,
+			...recommendRes?.categoryBenefits,
+			total: recommendRes?.totalBenefit
+		}
+	]
 
     return (
 		<S.ComparisonWrapper>
@@ -93,8 +111,8 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 					</tr>
 				</thead>
 				<tbody>
-					{comparisonDetail.length !== 0 &&
-						comparisonDetail.map(item => (
+					{filteredComparisonResult.length !== 0 &&
+						filteredComparisonResult.map(item => (
 							<tr key={item.category}>
 								<td><CategoryTag categoryKey={item.category} /></td>
 								<td>{item.spent.toLocaleString()}원</td>

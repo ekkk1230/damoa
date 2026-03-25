@@ -3,6 +3,7 @@ import { useCardStore } from "../../store/useCardStore"
 import { BRAND_COLORS } from "../../type/Card";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { normalizeCompanyName } from "../../utils/cardUtils";
 
 function RecommendList() {
     const { searchTerm, setSearchTerm, 
@@ -53,54 +54,60 @@ function RecommendList() {
 
     return (
         <>
-            <div>
-                <input 
-                    type="text" 
-                    placeholder="cardName" 
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                />
-
-                <ul>
-                    <li><button onClick={() => setSelectedCompany('전체')}>전체</button></li>
-                    {Object.keys(BRAND_COLORS)
-                        .filter(c => c !== "기타")
-                        .map((c, idx) => (
-                            <li key={idx}><button onClick={() => setSelectedCompany(c)}>{c}</button></li>
-                        ))    
-                    }
-                </ul>
-
-                <select value={sortType} onChange={e => setSortType(e.target.value)}>
-                    <option value="20대 인기순">20</option>
-                    <option value="30대 인기순">30</option>
-                    <option value="40대 인기순">40</option>
-                    <option value="50대 인기순">50</option>
-                    <option value="남성 선호순">남</option>
-                    <option value="여성 선호순">여</option>
-                </select>
-            </div>
-        
-            <ul>
-                {
-                    recommendFilterCards.length >= 1 ? (
-                        sortedCards.map(card => (
-                            <li key={card.id}>
-                                <Link key={card.id} to={`/recommend/${card.id}`}>
-                                    <div>
-                                        <p>{card.name}</p>
-                                        <p>{card.annualFee}</p>
-                                        <p>{card.summary}</p>
-                                        <p>{card.mainBenefits}</p>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))
+            <S.Container>
+                <S.FilterSection>
+                    <input 
+                        type="text" 
+                        placeholder="cardName" 
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.target.value)}
+                    />
+                    <ul>
+                        <li><button onClick={() => setSelectedCompany('전체')}>전체</button></li>
+                        {Object.keys(BRAND_COLORS)
+                            .filter(c => c !== "기타")
+                            .map((c, idx) => (
+                                <li key={idx}><button onClick={() => setSelectedCompany(c)}>{c}</button></li>
+                            ))    
+                        }
+                    </ul>
+                    <select value={sortType} onChange={e => setSortType(e.target.value)}>
+                        <option value="20대 인기순">20</option>
+                        <option value="30대 인기순">30</option>
+                        <option value="40대 인기순">40</option>
+                        <option value="50대 인기순">50</option>
+                        <option value="남성 선호순">남</option>
+                        <option value="여성 선호순">여</option>
+                    </select>
+                </S.FilterSection>
+            
+                <S.CardGrid>
+                    {recommendFilterCards.length >= 1 ? (
+                        sortedCards.map(card => {
+                            const companyName = normalizeCompanyName(card.company);
+                            const brandColor = BRAND_COLORS[companyName];
+                            return (
+                                <S.CardItem key={card.id} $brandColor={brandColor}>
+                                    <Link to={`/recommend/${card.id}`}>
+                                        <div className="card-content">
+                                            <p className="card-name">{card.name}</p>
+                                            <p className="annual-fee">연회비 {card.annualFee.toLocaleString()}원</p>
+                                            <p className="summary">{card.summary}</p>
+                                            <div className="benefits-tag">
+                                                {card.mainBenefits.map(benefit => (
+                                                    <p>{benefit}</p>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </S.CardItem>
+                            )
+                        })
                     ) : (
-                        <p>해당 카드사의 추천 카드가 준비되어있지 않습니다.</p>
-                    )
-                }
-            </ul>
+                        <p>결과가 없습니다.</p>
+                    )}
+                </S.CardGrid>
+            </S.Container>
         </>
     )
 }

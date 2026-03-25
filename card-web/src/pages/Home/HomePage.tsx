@@ -9,6 +9,7 @@ import CardModal from "../../components/Modal/CardModal";
 import SpendingAddModal from "../../components/Modal/SpendingAddModal";
 import RecentSection from "../../components/Card/RecentSection";
 import RecommendSection from "../../components/Card/RecommendSection";
+import { normalizeCompanyName } from "../../utils/cardUtils";
 
 export const HomePage = () => {
 	const { openModal, totalSpending, getMyCards, totalBenefit } = useCardStore();
@@ -51,10 +52,12 @@ export const HomePage = () => {
 							getMyCards.length >= 1 ? (
 								getMyCards.map(card => {
 									const { cardInfo, targetAmount, currentAmount } = card;
+									const companyName = normalizeCompanyName(cardInfo.company);
+									const brandColor = BRAND_COLORS[companyName];
 		
 									return (
 										<SwiperSlide key={cardInfo.id} onClick={() => openModal('CARD_DETAIL', cardInfo)}>
-											<S.CreditCardBox $brandColor={BRAND_COLORS[cardInfo.company]}>
+											<S.CreditCardBox $brandColor={brandColor}>
 													<div className="card-top">
 														<span className="card-company">{cardInfo.company}</span>
 														<span className="card-name">{cardInfo.name}</span>

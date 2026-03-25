@@ -7,7 +7,8 @@ import { USER_CARDS } from '../data/USER_CARD_LIST';
 import { fetchReceiptAnalysis } from '../api/receipt';
 import { MOCK_SPENDING } from '../data/MOCK_SPENDING';
 
-type ModalType = 'CARD_DETAIL' | 'SPENDING_ADD' | null;
+type ModalType = 'CARD_DETAIL' | 'SPENDING_ADD' | 'COMPAIR' | null;
+type ModalData = Card | MyCardProgress | any;
 
 export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allCards: Card[]) => {
     if (spendings.length === 0) {
@@ -137,7 +138,7 @@ interface CardState {
     // 모달 및 선택 상태
     selectedCard: Card | null;
     modalType: ModalType;
-    openModal: (type: ModalType, data?: Card) => void;
+    openModal: (type: ModalType, data?: ModalData) => void;
     closeModal: () => void;
     setSearchTerm: (term: string) => void;
     setSelectedCompany: (company: string) => void;
