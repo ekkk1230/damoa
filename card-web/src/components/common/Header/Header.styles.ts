@@ -1,213 +1,151 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+/* ==========================================================================
+   Header Styles
+   ========================================================================== */
+
+export const HeaderWrapper = styled.div`
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f1f1;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+`;
 
 export const HeaderContainer = styled.header`
-  position: sticky;
+  max-width: 600px; /* 💡 PC에서도 앱처럼 보이게 너비 제한 */
+  margin: 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+`;
+
+export const LeftSection = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    color: #333;
+  }
+`;
+
+export const CenterSection = styled.div`
+  flex: 2;
+  display: flex;
+  justify-content: center;
+`;
+
+export const SideSection = styled.div<{ $isRight?: boolean }>`
+  flex: 1;
+  display: flex;
+  justify-content: ${(props) => (props.$isRight ? "flex-end" : "flex-start")};
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    color: #333;
+  }
+`;
+
+export const Logo = styled(Link)`
+  font-size: 22px;
+  font-weight: 900;
+  color: #3b82f6; /* 포인트 컬러 */
+  text-decoration: none;
+  letter-spacing: -0.5px;
+`;
+
+/* ==========================================================================
+   Sidebar Styles
+   ========================================================================== */
+
+// 어두운 배경 처리
+export const Overlay = styled.div`
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 7rem;
-  background-color: rgba(248, 250, 250, 0.9); 
-  backdrop-filter: blur(10px);
-  border-bottom: 0.1rem solid #D1E2E0; 
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  padding: 0 6rem;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px); /* 💡 트렌디한 블러 효과 */
+  z-index: 1500;
 `;
 
-export const NavInner = styled.div`
-  width: 100%;
-  max-width: 100%;
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 0;
-
-  h1 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #0F4C5C;
-    letter-spacing: -0.05rem;
-    cursor: pointer;
-    width: 12rem;
-      img { width: 100%; height: auto; }
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-`;
-
-export const Badge = styled.span<{ dot?: boolean; count?: number }>`
-  position: absolute;
-  background-color: #FF7E67; 
-  color: white;
-  border-radius: 50%;
+export const SidebarContainer = styled.div<{ $isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: #ffffff;
+  z-index: 2000;
+  padding: 20px;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
   
-  ${props => props.dot ? `
-    width: 0.6rem;
-    height: 0.6rem;
-    top: 0;
-    right: -0.8rem;
-  ` : `
-    width: 1.6rem;
-    height: 1.6rem;
-    font-size: 1rem;
+  /* 💡 오른쪽에서 슥 나타나는 애니메이션 */
+  transition: transform 0.3s ease-in-out;
+  transform: ${(props) => (props.$isOpen ? "translateX(0)" : "translateX(100%)")};
+`;
+
+export const SidebarHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
     display: flex;
     align-items: center;
-    justify-content: center;
-    top: -0.5rem;
-    right: -0.5rem;
-    font-weight: 700;
-  `}
-`;
-
-export const NotificationWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-right: 0.5rem;
-
-  .bell-icon {
-    font-size: 2rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-
-    &:hover {
-      transform: rotate(15deg);
-    }
   }
 `;
 
-export const NavMenu = styled.nav`
-  display: flex;
-  gap: 3.5rem;
-
-  a {
-    position: relative;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: #556B69;
-    transition: all 0.2s ease;
-
-    &:hover {
-      color: #0F4C5C; 
-    }
-
-
-    &.active {
-      color: #0F4C5C;
-      position: relative;
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -0.5rem;
-        left: 0;
-        width: 100%;
-        height: 0.2rem;
-        background-color: #9DBEB9;
-      }
-    }
-  }
-`;
-
-export const AuthGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-
-  a {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #667A78;
-
-    &.signup-btn {
-      background-color: #9DBEB9;
-      color: #2F3E3D;
-      padding: 0.9rem 1.8rem;
-      border-radius: 0.8rem;
-      font-weight: 700;
-      transition: all 0.2s ease-in-out;
-
-      &:hover {
-        background-color: #89ADAA;
-        transform: translateY(-1px);
-        box-shadow: 0 0.4rem 1.2rem rgba(157, 190, 185, 0.3);
-      }
-    }
-
-    &:hover:not(.signup-btn) {
-      color: #2F3E3D;
-    }
-  }
-`;
-
-export const CardSection = styled.section`
-  margin-top: 2rem;
-  
-  h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    padding-left: 0.5rem;
-  }
-
-  .swiper-pagination-bullet-active {
-    background: var(--primary-color);
-  }
-`;
-
-export const CreditCardBox = styled.div`
-  background: #2c3e50; 
-  border-radius: 2rem;
-  padding: 2.5rem;
-  color: white;
-  min-height: 18rem;
+export const MenuList = styled.ul`
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.1);
-
-  .card-top {
-    display: flex;
-    flex-direction: column;
-    .nickname { font-size: 1.4rem; opacity: 0.8; }
-    .card-name { font-size: 1.8rem; font-weight: 600; margin-top: 0.5rem; }
-  }
+  gap: 10px;
 `;
 
-export const ProgressWrapper = styled.div`
-  margin-top: 2rem;
-  
-  .amount-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+export const MenuLink = styled(Link)`
+  display: block;
+  padding: 15px 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #f5f9ff;
+    color: #3b82f6;
   }
-
-  .percentText {
-    text-align: right;
-    font-size: 1.2rem;
-    margin-top: 0.8rem;
-    color: var(--point-mint);
-  }
-`;
-
-export const ProgressBar = styled.div`
-  width: 100%;
-  height: 1.2rem;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 1rem;
-  overflow: hidden;
-`;
-
-export const ProgressFill = styled.div<{ width: number }>`
-  width: ${props => props.width}%;
-  height: 100%;
-  background: linear-gradient(90deg, var(--point-mint), #80ffea);
-  border-radius: 1rem;
-  transition: width 0.5s ease-in-out;
 `;

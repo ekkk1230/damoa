@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { getTextColorByBackground } from "../../utils/cardUtils";
 
 export const HomeContainer = styled.div`
     padding: 2rem;
@@ -99,6 +100,7 @@ export const CreditCardBox = styled.div<{ $brandColor: string }>`
   max-width: 100%; 
   
   background: ${props => props.$brandColor};
+  color: ${props => getTextColorByBackground(props.$brandColor || "#888888")};
   border-radius: 2rem;
   padding: 2.5rem;
   color: white;

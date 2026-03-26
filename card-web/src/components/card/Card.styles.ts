@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { getTextColorByBackground } from "../../utils/cardUtils";
 
 export const RecentSection = styled.section`
   padding: 0 20px 100px; // 하단 탭바 높이를 고려해 아래 여백을 넉넉히 줌
@@ -221,6 +222,7 @@ export const SubCardItem = styled.div<{ $brandColor?: string }>`
     width: 100%;
     height: 100px;
     background-color: ${props => props.$brandColor || '#f5f5f5'};
+    color: ${props => getTextColorByBackground(props.$brandColor || "#888888")};
     border-radius: 10px;
     display: flex;
     align-items: center;

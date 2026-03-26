@@ -1,39 +1,41 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import * as S from "./Header.styles";
+import { IoChevronBack, IoMenu } from "react-icons/io5";
+import Sidebar from "./Sidebar";
 
 const Header = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const location = useLocation();
-    const [hasNotification, setHasNotification] = useState(true);
+    const navigate = useNavigate();
+
+    const isMain = location.pathname === "/";
 
     return (
-        <S.HeaderContainer>
-            <S.NavInner>
-                <Link to="/"><h1><img src="/row-logo.png" alt="다모아" /></h1></Link>
+        <S.HeaderWrapper>
+            <S.HeaderContainer>
+                <S.LeftSection>
+                    {/* 메인이 아닐 때만 백버튼 노출 */}
+                    {!isMain && (
+                        <button onClick={() => navigate(-1)} aria-label="뒤로가기">
+                            <IoChevronBack size={24} />
+                        </button>
+                    )}
+                </S.LeftSection>
 
-                <S.NavMenu>
-                    <Link to="/" className={location.pathname === '/' ? 'active' : ''}>홈</Link>
-                    <Link to="//my-cards/add" className={location.pathname === '/my-cards' ? '/my-cards' : ''}>내 카드</Link>
-                    <Link to="/popular" className={location.pathname === '/popular' ? '/popular' : ''}>인기카드</Link>
-                    <Link to="/board" className={location.pathname === '/board' ? '/board' : ''}>
-                        커뮤니티
-                        {hasNotification && <S.Badge dot />}
-                    </Link>
-                </S.NavMenu>
+                <S.CenterSection>
+                    <S.Logo to="/">ddd</S.Logo>
+                </S.CenterSection>
 
-                <S.AuthGroup>
-                    <S.NotificationWrapper>
-                        <Link to="/notifications">
-                            <span className="bell-icon">🔔</span>
-                            {hasNotification && <S.Badge count={1} />}
-                        </Link>
-                    </S.NotificationWrapper>
-
-                    <Link to="/login">로그인</Link>
-                    <Link to="/signup" className="signup-btn">회원가입</Link>
-                </S.AuthGroup>
-            </S.NavInner>
-        </S.HeaderContainer>    
+                <S.SideSection $isRight>
+                    <button onClick={() => setIsMenuOpen(true)}>
+                        <IoMenu size={24} />
+                    </button>
+                </S.SideSection>
+            </S.HeaderContainer>
+            <Sidebar isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+        </S.HeaderWrapper>
     )
 }
 

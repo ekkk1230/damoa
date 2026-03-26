@@ -24,21 +24,25 @@ function RecommendList() {
         let valueA = 0;
         let valueB = 0;
 
+        const getAgeValue = (card: any, targetLabel: string) => {
+            return card.statistics?.ageGroup.find((age: any) => age.label.includes(targetLabel))?.value || 0;
+        }
+
         if (sortType === '20대 인기순') {
-            valueA = a.statistics?.ageGroup[0].value || 0;
-            valueB = b.statistics?.ageGroup[0].value || 0;
+            valueA = getAgeValue(a, '20');
+            valueB = getAgeValue(b, '20');
         }
         else if (sortType === '30대 인기순') {
-            valueA = a.statistics?.ageGroup[1].value || 0;
-            valueB = b.statistics?.ageGroup[1].value || 0;
+            valueA = getAgeValue(a, '30');
+            valueB = getAgeValue(b, '30');
         }
         else if (sortType === '40대 인기순') {
-            valueA = a.statistics?.ageGroup[2].value || 0;
-            valueB = b.statistics?.ageGroup[2].value || 0;
+            valueA = getAgeValue(a, '40');
+            valueB = getAgeValue(b, '40');
         }
         else if (sortType === '50대 인기순') {
-            valueA = a.statistics?.ageGroup[3].value || 0;
-            valueB = b.statistics?.ageGroup[3].value || 0;
+            valueA = getAgeValue(a, '50');
+            valueB = getAgeValue(b, '50');
         }
         else if (sortType === '여성 선호순') {
             valueA = a.statistics?.gender.female || 0;

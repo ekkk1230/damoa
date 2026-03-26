@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getTextColorByBackground } from '../../utils/cardUtils';
 
 // 검색 및 필터 영역
 export const FilterSection = styled.div`
@@ -56,11 +57,12 @@ export const CardItem = styled.li<{ $brandColor: string }>`
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
   }
 
-  a { text-decoration: none; color: inherit; }
+  a { text-decoration: none; color: inherit; display: block; width: 100%; height: 100%; }
 
   .card-content {
-    padding: 20px;
+    padding: 20px; height: 100%;
     background: ${props => props.$brandColor};
+    color: ${props => getTextColorByBackground(props.$brandColor || "#888888")};
   }
 
   .card-name {
@@ -71,13 +73,12 @@ export const CardItem = styled.li<{ $brandColor: string }>`
 
   .annual-fee {
     font-size: 13px;
-    color: #888;
     margin-bottom: 12px;
   }
 
   .summary {
     font-size: 14px;
-    color: #555;
+    font-weight: 500;
     line-height: 1.4;
     margin-bottom: 15px;
     min-height: 40px;
