@@ -25,7 +25,7 @@ const Header = () => {
                 </S.LeftSection>
 
                 <S.CenterSection>
-                    <S.Logo to="/">ddd</S.Logo>
+                    <S.Logo to="/"><img src="/row-logo.png" alt="다모아" /></S.Logo>
                 </S.CenterSection>
 
                 <S.SideSection $isRight>

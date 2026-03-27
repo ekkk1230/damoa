@@ -2,10 +2,9 @@ import styled from "styled-components";
 import { getTextColorByBackground } from "../../utils/cardUtils";
 
 export const HomeContainer = styled.div`
-    padding: 2rem;
     background-color: #f8f9fa;
     min-height: 100vh;
-    width: 100%;
+    width: 60rem; margin: 0 auto;
     display: block;
 `;
 

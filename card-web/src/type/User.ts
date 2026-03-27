@@ -16,3 +16,16 @@ export interface UserCard {
 export interface MyCardProgress extends UserCard {
     progress: number;
 };
+
+export interface User {
+    id: string;
+    name: string;
+    joinDate: string;
+}
+
+export interface AuthFormData {
+    id: string;
+    password: string;
+    confirmPassword?: string;
+    name?: string;
+}

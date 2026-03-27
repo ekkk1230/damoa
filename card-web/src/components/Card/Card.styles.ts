@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { getTextColorByBackground } from "../../utils/cardUtils";
 
 export const RecentSection = styled.section`
-  padding: 0 20px 100px; // 하단 탭바 높이를 고려해 아래 여백을 넉넉히 줌
+  padding: 0 20px; // 하단 탭바 높이를 고려해 아래 여백을 넉넉히 줌
   margin-top: 40px;      // 카드 슬라이더와의 간격
 
   .section-header {

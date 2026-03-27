@@ -15,13 +15,12 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const HeaderContainer = styled.header`
-  max-width: 600px; /* 💡 PC에서도 앱처럼 보이게 너비 제한 */
+  max-width: 600px;
   margin: 0 auto;
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
 `;
 
 export const LeftSection = styled.div`
@@ -68,6 +67,8 @@ export const Logo = styled(Link)`
   color: #3b82f6; /* 포인트 컬러 */
   text-decoration: none;
   letter-spacing: -0.5px;
+
+  img { width: 12rem; height: auto; }
 `;
 
 /* ==========================================================================
