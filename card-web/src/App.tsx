@@ -7,12 +7,17 @@ import RecommendList from "./pages/Recommend/RecommendList";
 import RecommendDetail from "./pages/Recommend/RecommendDetail";
 import { GlobalStyle } from "./App.styles";
 import "./App.css";
+import Login from "./pages/Auth/Login";
+import SignUp from "./pages/Auth/SignUp";
 
 function App() {
 	return (
 		<BrowserRouter>
-			<GlobalStyle />
+			<GlobalStyle />  
 			<Routes>
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
+
 				<Route path="/" element={<RootLayout />}>
 					<Route index element={<HomePage />} />
 					<Route path="myCard" element={<CardList />} />
