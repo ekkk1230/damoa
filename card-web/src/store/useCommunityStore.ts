@@ -10,6 +10,7 @@ interface CommunityState {
     changCount: (post: Post | null) => void;
     addPost: (post: Post) => void;
     deletePost: (post: Post) => void;
+    updatePost: (id: string, formData: any) => void;
 }
 
 export const useCommunityStore = create<CommunityState>((set) => ({
@@ -37,5 +38,13 @@ export const useCommunityStore = create<CommunityState>((set) => ({
 
             return { posts: filteredPosts };
         })
-    }
+    },
+    updatePost: (id, formData) => {
+        set((state) => {
+            const updatedPosts = state.posts.map(p => p.id === id ? { ...p, ...formData, updatedAt: new Date().toISOString().split('T')[0]} : p);
+            const updatedSelected = state.selectedPost?.id === id ? { ...state.selectedPost, ...formData } : state.selectedPost;
+
+            return { posts: updatedPosts, selectedPost: updatedSelected };
+        })
+    },
 }));

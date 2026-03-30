@@ -6,6 +6,7 @@ export interface Post {
     title: string;
     content: string;
     createdAt: string;
+    updatedAt?: string;
     author: string;
     viewCount: number;
     category: PostCategory;

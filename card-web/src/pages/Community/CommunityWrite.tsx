@@ -5,7 +5,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { useNavigate, useParams } from "react-router-dom";
 
 function CommunityWrite() {
-    const { addPost, selectedPost } = useCommunityStore();
+    const { addPost, selectedPost, updatePost } = useCommunityStore();
     const { user } = useAuthStore();
     const navigate = useNavigate();
      
@@ -23,20 +23,26 @@ function CommunityWrite() {
             return;
         }
 
-        const newPost = {
-            id: String(Date.now()),
-            title: formData.title,
-            content: formData.content,
-            createdAt: new Date().toISOString().split('T')[0],
-            author: author,
-            viewCount: 0,
-            category: 'INQUIRY' as const,
-            status: 'WAIT' as const,
-            isPublic: formData.isPublic
+        if (id) {
+            updatePost(id, formData);
+            alert('수정되었습니다.');
+        } else {
+            const newPost = {
+                id: String(Date.now()),
+                title: formData.title,
+                content: formData.content,
+                createdAt: new Date().toISOString().split('T')[0],
+                author: author,
+                viewCount: 0,
+                category: 'INQUIRY' as const,
+                status: 'WAIT' as const,
+                isPublic: formData.isPublic
+            }
+    
+            addPost(newPost);
+            alert('등록되었습니다.');
         }
 
-        addPost(newPost);
-        alert('등록되었습니다.');
         navigate('/community');
     }
 
