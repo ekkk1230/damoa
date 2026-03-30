@@ -13,7 +13,7 @@ function BottomNav() {
             <S.NavItem $active={location.pathname === "/myCard"}>
                 <Link to="/myCard">
                     <span className="icon">📊</span>
-                    <span>소비내역</span>
+                    <span>내 카드</span>
                 </Link>
             </S.NavItem>
             <S.NavItem $active={location.pathname === "/recommend"}>
@@ -22,9 +22,11 @@ function BottomNav() {
                     <span>카드추천</span>
                 </Link>
             </S.NavItem>
-            <S.NavItem>
-                <span className="icon">👤</span>
-                <span>마이</span>
+            <S.NavItem $active={location.pathname === "/community"}>
+                <Link to="/community">
+                    <span className="icon">👤</span>
+                    <span>커뮤니티</span>
+                </Link>
             </S.NavItem>
         </S.NavContainer>
     )

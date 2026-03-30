@@ -11,15 +11,18 @@ interface AuthState {
     user: User | null;
     isLoggedIn: boolean;
     isLoading: boolean; 
-
+    
     login: (id: string, password: string) => Promise<boolean>;
     logout: () => void;
     signup: (id: string, password: string, name: string) => Promise<boolean>;
+
+    isInitialized: boolean;
+    setInitialized: (value: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
     persist(
-        (set, get) => ({
+        (set) => ({
             user: null,
             isLoggedIn: false,
             isLoading: false,
@@ -54,10 +57,25 @@ export const useAuthStore = create<AuthState>()(
 
             signup: async (id, password, name) => {
                 set({ isLoading: true });
-                // 가입 로직 구현...
-                set({ isLoading: false });
+                
+                const newUser: User = {
+                    id,
+                    name,
+                    joinDate: new Date().toISOString().split('T')[0],
+                }
+
+                set({ 
+                    user: newUser,
+                    isLoggedIn: true,
+                    isLoading: false 
+                });
                 return true;
-            }
+            },
+
+            isInitialized: false,
+            setInitialized: (value) => set({ isInitialized: value }),
+
+
         }),
         { name: "auth-storage" }
     )

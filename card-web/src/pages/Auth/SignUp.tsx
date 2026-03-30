@@ -29,7 +29,7 @@ function SignUp() {
         const success = await signup(formData.id, formData.password, formData.name);
 
         if (success) {
-            alert('회원가입이 완료되었습니다. 로그인 해주세요.');
+            alert('회원가입이 완료되었습니다.');
             navigate('/login');
         } else {
             alert('회원가입에 실패했습니다.');
@@ -50,7 +50,7 @@ function SignUp() {
                 />
                 <S.Input 
                 name="id" 
-                placeholder="아이디(이메일)를 입력하세요" 
+                placeholder="아이디를 입력하세요" 
                 onChange={handleChange} 
                 required 
                 />
