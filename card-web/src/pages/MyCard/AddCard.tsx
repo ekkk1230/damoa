@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 function AddCard() {
   const navigate = useNavigate();
-  const { addCard } = useCardStore();
+  const { addCard, cardList } = useCardStore();
   const { openModal } = useUIStore();
 
   const [selectedCompany, setSelectedCompany] = useState('');
@@ -25,7 +25,7 @@ function AddCard() {
 
   // 선택한 카드사에 해당하는 카드목록 필터링
   const matchedCard = useMemo(() => {
-    return CARD_LIST.filter(c => c.company === selectedCompany);
+    return cardList.filter(c => c.company === selectedCompany);
   }, [selectedCompany]);
 
   // 카드사가 바뀌면 카드 이름과 폼 초기화
@@ -40,19 +40,21 @@ function AddCard() {
   useEffect(() => {
     if (!selectedCardName) return;
 
-    const cardData = CARD_LIST.find(c => c.name === selectedCardName);
+    const cardData = cardList.find(c => c.name === selectedCardName);
     if (cardData) {
-      setCardType(cardData.type);
       setAnnualFee(cardData.annualFee || 0);
+      setCardType(cardData.cardType || '신용');
       
+      console.log('cardData: ', cardData)
+
       if (cardData.performanceTiers && cardData.performanceTiers.length > 0) {
         const topTier = cardData.performanceTiers[cardData.performanceTiers.length - 1];
-        setPerformanceGoal(topTier.min);
+        setPerformanceGoal(topTier.minAmount);
       } else {
         setPerformanceGoal(cardData.bestPerformance || 0);
       }
     }
-  }, [selectedCardName]);
+  }, [selectedCardName, cardList]);
 
   // 결제일이나 직접 수정 여부가 바뀔 때 기간 자동 계산
   useEffect(() => {
@@ -67,7 +69,7 @@ function AddCard() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const fullCardData = CARD_LIST.find(c => c.name === selectedCardName);
+    const fullCardData = cardList.find(c => c.name === selectedCardName);
 
     if (!fullCardData) {
       openModal('CONFIRM', {
@@ -120,8 +122,8 @@ function AddCard() {
           >
             <option value="">카드사를 선택하세요</option>
             
-            {Object.keys(BRAND_COLORS).map((company) => (
-              <option key={company} value={company}>{company}</option>
+            {Object.keys(BRAND_COLORS).map((company, index) => (
+              <option key={index} value={company}>{company}</option>
             ))}
           </S.Select>
         </S.FormGroup>
@@ -130,12 +132,13 @@ function AddCard() {
         <S.FormGroup>
           <S.Label>카드 명칭</S.Label>
           <S.Select
+            value={selectedCardName}
             onChange={e => setSelectedCardName(e.target.value)}
           >
             <option value="">카드를 선택하세요</option>
 
             {matchedCard.map(c => (
-              <option value={c.name}>{c.name}</option>
+              <option key={`${c.name}-${c.company}`} value={c.name}>{c.name}</option>
             ))}
           </S.Select>
         </S.FormGroup>
@@ -146,7 +149,7 @@ function AddCard() {
           <S.Input 
             type="number" 
             placeholder="예: 300000" 
-            value={performanceGoal}
+            value={performanceGoal ?? 0}
             onChange={(e) => setPerformanceGoal(Number(e.target.value))}
           />
           <S.HintText>* 혜택을 받기 위한 최소 기준 금액입니다.</S.HintText>
@@ -167,14 +170,14 @@ function AddCard() {
           <S.FlexRow>
             <S.Input 
               type="date" 
-              value={startDate} 
+              value={startDate || ''} 
               onChange={(e) => setStartDate(e.target.value)}
               disabled={!isCustomPeriod} 
             />
             <span style={{ alignSelf: 'center' }}>~</span>
             <S.Input 
               type="date" 
-              value={endDate} 
+              value={endDate || ''} 
               onChange={(e) => setEndDate(e.target.value)}
               disabled={!isCustomPeriod}
             />

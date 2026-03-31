@@ -13,7 +13,7 @@ function RecommendCard() {
             <S.ChartTitle>사용자 통계</S.ChartTitle>
             <S.ChartContainer>
                 <GenderChart data={selectedCard?.statistics?.gender} />
-                <AgeChart data={selectedCard?.statistics?.ageGroup} />
+                <AgeChart data={selectedCard?.statistics?.ageGroups} />
             </S.ChartContainer>
             <S.DetailItem>
                 <h4>주요 혜택</h4>

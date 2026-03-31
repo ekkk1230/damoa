@@ -35,7 +35,7 @@ export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[
         const currentPerformance = myCard?.currentAmount || 0;
 
         // 실적 구간(Tier) 찾기
-        const activeTier = cardInfo?.performanceTiers?.find(tier => currentPerformance >= tier.min && currentPerformance < (tier.max) || Infinity);
+        const activeTier = cardInfo?.performanceTiers?.find(tier => currentPerformance >= tier.minAmount && currentPerformance < (tier.maxAmount) || Infinity);
 
         // 혜택 룰 적용
         const rule = cardInfo?.benefitRules?.find(r => r.category === s.category);
@@ -45,11 +45,11 @@ export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[
         let benefit = Math.floor(amount * Number(effectiveRate || 0));
 
         // 한도(Limit) 적용
-        if (rule?.limit) {
+        if (rule?.benefitLimit) {
             const alreadyUsedBenefit = benefitMap[cardId] || 0;
             // 이번에 받을 혜택이 남은 한도를 넘지 않게 계산
-            const remainingLimit = rule.limit - (alreadyUsedBenefit % rule.limit); // 간이 로직
-            benefit = Math.min(benefit, rule.limit); 
+            const remainingbenefitLimit = rule.benefitLimit - (alreadyUsedBenefit % rule.benefitLimit); // 간이 로직
+            benefit = Math.min(benefit, rule.benefitLimit); 
         }
     
         spendingMap[cardId] = (spendingMap[cardId] || 0) + amount;
@@ -68,9 +68,9 @@ export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[
             const current = spendingMap[card.cardInfo.id] || 0;
             const tiers = card.cardInfo.performanceTiers || [];
 
-            const nextTier = tiers.find(tier => tier.min > current);
+            const nextTier = tiers.find(tier => tier.minAmount > current);
 
-            const dynamicTarget = nextTier ? nextTier.min : (tiers[tiers.length - 1]?.min || card.targetAmount || 300000);
+            const dynamicTarget = nextTier ? nextTier.minAmount : (tiers[tiers.length - 1]?.minAmount || card.targetAmount || 300000);
 
             const progress = Math.min(Math.round((current / dynamicTarget) * 100), 100);
 
@@ -114,7 +114,7 @@ export const calculateExpectedBenefit = (categoryMap: Record<string, number> = {
 
     const totalSpent = Object.values(categoryMap).reduce((acc, cur) => { return acc + cur; }, 0);
 
-    const minTier = card.performanceTiers?.[0].min || 0;
+    const minTier = card.performanceTiers?.[0].minAmount || 0;
     if (totalSpent < minTier) {
        return { totalBenefit: 0, categoryBenefits };
     };
@@ -122,7 +122,7 @@ export const calculateExpectedBenefit = (categoryMap: Record<string, number> = {
     card.benefitRules?.forEach(rule => {
         const spentInCategory = categoryMap[rule.category] || 0;
 
-        const estimated = Math.min(Math.round(spentInCategory * rule.rate), rule.limit);
+        const estimated = Math.min(Math.round(spentInCategory * rule.rate), rule.benefitLimit);
 
         categoryBenefits[rule.category] = estimated;
         totalBenefit += estimated;
@@ -140,6 +140,7 @@ interface CardState {
     setIsExpanded: (expanded: boolean) => void;
 
     cardList: Card[];
+    fetchCards: () => Promise<void>;
 
     // 필터 상태
     searchTerm: string;
@@ -190,7 +191,7 @@ export const useCardStore = create<CardState>((set, get) => {
         ...card
     }))
 
-    const initial = analyzeSpendings([], initialMyCards, initialCards);
+    const initial = analyzeSpendings([], initialMyCards, []);
 
     return {
         selectedCard: null,
@@ -199,7 +200,30 @@ export const useCardStore = create<CardState>((set, get) => {
         setSelectedCompany: company => set({ selectedCompany: company }),
         setIsExpanded: expanded => set({ isExpanded: expanded }),
 
-        cardList: initialCards,
+        cardList: [],
+        fetchCards: async() => {
+            try {
+                const res = await fetch("http://localhost:8080/api/cards");
+                const serverCards: Card[] = await res.json();
+
+                const { spendings, getMyCards } = get();
+                const result = analyzeSpendings(spendings, getMyCards, serverCards);
+
+                set({
+                    cardList: serverCards,
+                    topSpendingCategory: result.topCategory,
+                    getMyCards: result.myCards,
+                    recommendedCards: result.recommendedCards,
+                    totalBenefit: result.totalBenefit,
+                    benefit: result.benefitMap,
+                    categoryTotals: result.categoryMap
+                })
+
+                // console.log("DB 카드 데이터 로드 및 분석 완료");
+            } catch (err) {
+                console.error("카드 로드 실패: ", err);
+            }
+        },
 
         searchTerm: '',
         selectedCompany: '전체',

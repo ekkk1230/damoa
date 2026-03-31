@@ -15,10 +15,16 @@ import Splash from "./components/common/Splash/Splash";
 import CommunityList from "./pages/Community/CommunityList";
 import CommunityDetail from "./pages/Community/CommunityDetail";
 import CommunityWrite from "./pages/Community/CommunityWrite";
+import { useCardStore } from "./store/useCardStore";
 
 function App() {
-	const { isLoggedIn, isInitialized, setInitialized } = useAuthStore();
+	const { fetchCards } = useCardStore();
+	const { isLoggedIn, setInitialized } = useAuthStore();
 	const [showSplash, setShowSplash] = useState(true);
+
+	useEffect(() => {
+		fetchCards()
+	}, [])
 
 	useEffect(() => {
 		const timer = setTimeout(() => {

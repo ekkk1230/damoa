@@ -14,8 +14,8 @@ const GenderChart = ({ data }: { data: any }) => {
   const chartData: GenderData[] = Array.isArray(data) 
     ? data 
     : [
-        { name: '남성', value: data.male || 0 },
-        { name: '여성', value: data.female || 0 }
+        { name: '남성', value: data.maleRate || 0 },
+        { name: '여성', value: data.femaleRate || 0 }
       ];
 
   if (chartData.every(item => item.value === 0)) return null;

@@ -102,7 +102,6 @@ export const CreditCardBox = styled.div<{ $brandColor: string }>`
   color: ${props => getTextColorByBackground(props.$brandColor || "#888888")};
   border-radius: 2rem;
   padding: 2.5rem;
-  color: white;
   min-height: 18rem;
   display: flex;
   flex-direction: column;
@@ -132,7 +131,6 @@ export const ProgressWrapper = styled.div`
     text-align: right;
     font-size: 1.2rem;
     margin-top: 0.8rem;
-    color: var(--point-mint);
   }
 `;
 

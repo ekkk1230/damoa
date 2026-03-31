@@ -27,28 +27,29 @@ export const BRAND_COLORS: { [key: string]: string } = {
 
 // 실적 구간에 따른 혜택을 정의하는 타입 추가
 export interface PerformanceTier {
-    min: number;        // 구간 시작 금액 (예: 0, 1000000)
-    max: number;        // 구간 끝 금액 (예: 1000000, 999999999)
+    id?: number;
+    minAmount: number;        // 구간 시작 금액 (예: 0, 1000000)
+    maxAmount: number;        // 구간 끝 금액 (예: 1000000, 999999999)
     rate: number;       // 해당 구간의 기본 적립/할인율 (예: 0.01, 0.015)
-    desc?: string;      // 사용자 노출용 설명
+    description: string;      // 사용자 노출용 설명
 }
 
 export interface CardStatistics {
-    ageGroup: { label: string; value: number }[]; // 연령대 비율 (20대: 40%)
-    gender: { male: number, female: number }; // 성비 남 45 : 여 : 55
+    ageGroups: { label: string; value: number }[]; // 연령대 비율 (20대: 40%)
+    gender: { maleRate: number, femaleRate: number }; // 성비 남 45 : 여 : 55
 }
 
 export interface BenefitRule {
     category: string;
     rate: number;         // 0.1 (10%)
-    type: 'DISCOUNT' | 'POINT' | 'FIXED'; 
-    limit: number;        // 숫자형 한도 (AI 계산용)
+    benefitType: 'DISCOUNT' | 'POINT' | 'FIXED'; 
+    benefitLimit: number;        // 숫자형 한도 (AI 계산용)
 }
 
 export interface DetailBenefit {
     title: string;
     content: string;
-    limit?: string;        // 텍스트형 설명 ("월 최대 1만원")
+    detailLimit?: string;        // 텍스트형 설명 ("월 최대 1만원")
 }
 
 export interface Card {
@@ -60,7 +61,7 @@ export interface Card {
     mainBenefits: string[];
     categories: string[];
     isOwned: boolean;
-    type: "신용" | "체크" | "하이브리드";
+    cardType: "신용" | "체크" | "하이브리드";
     summary?: string;
     statistics?: CardStatistics;
     detailBenefits?: DetailBenefit[]; 

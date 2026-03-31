@@ -13,15 +13,20 @@ function RecommendDetail() {
     const { id } = useParams();
 
     const card = cardList.find(c => c.id === Number(id));
-    const isMyCard = getMyCards.filter(c => c.cardInfo.id === Number(id)).length !== 0;
 
-    const topAge = card?.statistics?.ageGroup.reduce((prev, cur) => {
+    if (!card) {
+        return <div>카드 정보를 불러오는 중입니다... 💳</div>
+    }
+
+    const isMyCard = getMyCards.some(c => c.cardInfo.id === Number(id));
+
+    const topAge = card?.statistics?.ageGroups.reduce((prev, cur) => {
         return (prev.value > cur.value) ? prev : cur
-    }, card.statistics.ageGroup[0])
+    }, card.statistics.ageGroups[0])
 
     const genderData = card?.statistics?.gender;
     const topGender = genderData 
-                    ? (genderData.male > genderData.female ? "남성" : "여성") 
+                    ? (genderData.maleRate > genderData.femaleRate ? "남성" : "여성") 
                     : "사용자";
 
     const handleCardClick = (clickedCard: any) => {
@@ -36,7 +41,7 @@ function RecommendDetail() {
                 <S.HeroSection>
                     {/* <S.CardImage src={card?.image} alt={card?.name} /> */}
                     <S.HeroText>
-                    <span className="type-badge">{card?.type}카드</span>
+                    <span className="type-badge">{card?.cardType}카드</span>
                     <h1>{card?.name}</h1>
                     <p className="summary">{card?.summary}</p>
                     <div className="quick-info">
@@ -51,7 +56,7 @@ function RecommendDetail() {
                 <S.StatsSection>
                     <h3>이 카드의 주요 사용자</h3>
                     <div className="stats-grid">
-                        <AgeChart data={card?.statistics?.ageGroup} />
+                        <AgeChart data={card?.statistics?.ageGroups} />
 
                         {/* 연령대별 그래프 로직 */}
                         {/* <div className="gender-ratio">남성 {card?.statistics?.gender.male}% | 여성 {card?.statistics?.gender.female}%</div> */}
@@ -68,7 +73,7 @@ function RecommendDetail() {
                     <S.BenefitCard key={idx}>
                         <div className="benefit-title">
                         <h4>{benefit.title}</h4>
-                        <span className="limit-badge">{benefit.limit}</span>
+                        <span className="limit-badge">{benefit.detailLimit}</span>
                         </div>
                         <p className="benefit-content">{benefit.content}</p>
                     </S.BenefitCard>
@@ -87,8 +92,8 @@ function RecommendDetail() {
                     <tbody>
                     {card?.performanceTiers?.map((tier, idx) => (
                         <tr key={idx}>
-                        <td>{tier.min.toLocaleString()}원 이상</td>
-                        <td>{tier.desc}</td>
+                        <td>{Number(tier.minAmount).toLocaleString()}원 이상</td>
+                        <td>{tier.description}</td>
                         </tr>
                     ))}
                     </tbody>
