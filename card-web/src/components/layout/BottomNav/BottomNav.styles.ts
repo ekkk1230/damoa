@@ -6,7 +6,6 @@ export const NavContainer = styled.nav`
   left: 50%;
   transform: translateX(-50%); 
   width: 100%;
-  max-width: 500px; 
   
   height: 7rem;
   background: white;

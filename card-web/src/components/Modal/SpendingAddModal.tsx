@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import * as S from './ModalComponents.styles'
-import { useCardStore } from '../../store/useCardStore';
 import ModalLayout from '../common/ModalLayout/ModalLayout';
 import ManualInputTab from './ModalBody/ManualInputTab';
 import ImageInputTab from './ModalBody/ImageInputTab';
+import { useUIStore } from '../../store/useUIStore';
 
 const SpendingAddModal = () => {
-    const { modalType } = useCardStore();
+    const { modalType } = useUIStore();
 
     const [activeTab, setActiveTab] = useState<'manual' | 'upload'>('manual');
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/useAuthStore'
 import * as S from './Auth.styles'
+import { useUIStore } from '../../store/useUIStore';
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ function SignUp() {
     });
     const navigate = useNavigate();
     const { signup, isLoading } = useAuthStore();
+    const { openModal } = useUIStore();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -22,17 +24,29 @@ function SignUp() {
         e.preventDefault();
 
         if (formData.password !== formData.confirmPassword) {
-            alert('비밀번호가 일치하지 않습니다.');
+            openModal('CONFIRM', {
+                title: '회원가입',
+                content: '비밀번호가 일치하지 않습니다.',
+                onConfirm: () => {},
+            })
             return;
         }
 
         const success = await signup(formData.id, formData.password, formData.name);
 
         if (success) {
-            alert('회원가입이 완료되었습니다.');
+            openModal('CONFIRM', {
+                title: '회원가입',
+                content: '회원가입을 완료했습니다.',
+                onConfirm: () => {},
+            })
             navigate('/login');
         } else {
-            alert('회원가입에 실패했습니다.');
+            openModal('CONFIRM', {
+                title: '회원가입',
+                content: '회원가입에 실패했습니다.',
+                onConfirm: () => {},
+            })
         }
     };
 

@@ -2,12 +2,13 @@ import * as S from "./Reccommend.styles"
 import { useParams } from "react-router-dom"
 import { useCardStore } from "../../store/useCardStore";
 import { Swiper, SwiperSlide } from "swiper/react";
-import CompairModal from "../../components/Modal/CompairModal";
 import AgeChart from "../../components/common/charts/AgeChart";
 import GenderChart from "../../components/common/charts/GenderChart";
+import { useUIStore } from "../../store/useUIStore";
 
 function RecommendDetail() {
-    const { getMyCards, cardList, openModal } = useCardStore();
+    const { getMyCards, cardList, setSelectedCard } = useCardStore();
+    const { openModal } = useUIStore();
 
     const { id } = useParams();
 
@@ -23,6 +24,10 @@ function RecommendDetail() {
                     ? (genderData.male > genderData.female ? "남성" : "여성") 
                     : "사용자";
 
+    const handleCardClick = (clickedCard: any) => {
+        setSelectedCard(clickedCard);
+        openModal('COMPAIR', id);
+    }
 
     return (
         <>
@@ -96,7 +101,7 @@ function RecommendDetail() {
                                 return (
                                     <SwiperSlide 
                                         key={card.cardInfo.id}
-                                        onClick={() => openModal('COMPAIR', card)}
+                                        onClick={() => handleCardClick(card)}
                                     >
                                         <p>{card.cardInfo.company}</p>
                                         <p>{card.cardInfo.name}</p>
@@ -112,8 +117,6 @@ function RecommendDetail() {
                     <a href={card?.officialLink} target="_blank" className="apply-btn">카드 신청하기</a>
                 </S.FixedBottomBar>
             </S.Container>
-
-            <CompairModal recommendId={id} />
         </>
     )
 }

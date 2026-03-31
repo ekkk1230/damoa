@@ -6,6 +6,9 @@ import { Autoplay } from "swiper/modules";
 import 'swiper/css';
 import CategoryTag from "./CategoryTag";
 import { normalizeCompanyName } from "../../utils/cardUtils";
+import { useUIStore } from "../../store/useUIStore";
+import type { Card } from "../../type/Card";
+import { useNavigate } from "react-router-dom";
 
 interface RecommendSectionProps {
     variant?: 'main' | 'sub';
@@ -22,7 +25,14 @@ const swiperOptions = {
 };
 
 function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
-    const { topSpendingCategory, recommendedCards, openModal } = useCardStore();
+    const navigate = useNavigate();
+    const { topSpendingCategory, recommendedCards, setSelectedCard } = useCardStore();
+    const { openModal } = useUIStore();
+
+    const handleClickCard = (card: Card) => {
+        setSelectedCard(card);
+        openModal('CARD_DETAIL'); 
+    }
 
     return (
         <S.RecommendSection>
@@ -38,9 +48,9 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                     {recommendedCards.length < 1 ? (
                         <p className="no-data">현재 추천할 카드가 준비되어 있지 않습니다.</p>
                     ) : (
-                        recommendedCards.map(card => {
+                        recommendedCards.map((card, index) => {
                             return (
-                                <S.MiniCardItem onClick={() => openModal('CARD_DETAIL', card)} key={card.id} $brandColor={BRAND_COLORS[card.company]}>
+                                <S.MiniCardItem onClick={() => handleClickCard(card)} key={`${card.id}-${index}`} $brandColor={BRAND_COLORS[card.company]}>
                                     <div className="card-thumb">
                                         <span className="name">{card.name}</span>
                                     </div>
@@ -58,7 +68,7 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                 </S.CardListMini>
                 
                 {recommendedCards.length >= 1 && (
-                    <S.BannerFooter>
+                    <S.BannerFooter onClick={() => navigate('/recommend?filter=recommend')}>
                         총 {recommendedCards.length}개의 맞춤 카드 보러가기 <span>&gt;</span>
                     </S.BannerFooter>
                 )}
@@ -76,7 +86,7 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                             return (
                                 <SwiperSlide key={card.id}>
                                     <S.SubCardItem 
-                                        onClick={() => openModal('CARD_DETAIL', card)}
+                                        onClick={() => handleClickCard(card)}
                                         $brandColor={brandColor}
                                     >
                                         <div className="card-thumb">

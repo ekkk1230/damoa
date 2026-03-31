@@ -13,11 +13,11 @@ function RecentSection() {
             </div>
             
             <S.SpendList>
-                {recentSpendList.slice(0, 5).map(item => {
+                {recentSpendList.slice(0, 5).map((item, index) => {
                     const recentCard = cardList.find(card => item.id === card.id);
 
                     return (
-                        <S.SpendItem key={item.id}>
+                        <S.SpendItem key={`${index}-${item.id}`}>
                             <div className="item-left">
                             <div className="info">
                                 <p className="name">{recentCard?.name}</p>

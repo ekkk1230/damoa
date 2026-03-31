@@ -12,11 +12,11 @@ export const HeaderWrapper = styled.div`
   position: sticky;
   top: 0;
   z-index: 1000;
+  padding: 1rem 0;
 `;
 
 export const HeaderContainer = styled.header`
-  max-width: 600px;
-  margin: 0 auto;
+  margin: 0 2rem;
   height: 56px;
   display: flex;
   align-items: center;

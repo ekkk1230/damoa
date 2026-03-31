@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/useAuthStore'
 import * as S from './Auth.styles'
+import { useUIStore } from '../../store/useUIStore';
 
 function Login() {
     const [id, setId] = useState('');
@@ -9,6 +10,7 @@ function Login() {
     const navigate = useNavigate();
 
     const { login, isLoading } = useAuthStore();
+    const { openModal } = useUIStore();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -18,7 +20,11 @@ function Login() {
         if (success) {
             navigate('/');
         } else {
-            alert('아이디 또는 비밀번호를 확인해주세요.');
+            openModal('CONFIRM', {
+                title: '로그인',
+                content: '아이디 또는 비밀번호를 확인해주세요.',
+                onConfirm: () => {},
+            })
         }
     }
 

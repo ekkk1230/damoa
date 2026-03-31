@@ -5,9 +5,11 @@ import ModalLayout from '../common/ModalLayout/ModalLayout';
 import MyCard from './ModalBody/MyCard';
 import RecommendCard from './ModalBody/RecommendCard';
 import CategoryTag from '../Card/CategoryTag';
+import { useUIStore } from '../../store/useUIStore';
 
 const CardModal = () => {
-    const { selectedCard, modalType } = useCardStore();
+    const { selectedCard } = useCardStore();
+    const { modalType } = useUIStore();
 
     if (modalType != 'CARD_DETAIL' || !selectedCard) return null;
 
@@ -37,9 +39,9 @@ const CardModal = () => {
                 <S.DetailItem>
                     <h4>Detailed Benefits</h4>
                     {selectedCard?.detailBenefits.map((benefit, index) => (
-                        <p key={index} style={{ fontSize: '1.4rem', marginBottom: '0.4rem' }}>
+                        <p key={index}>
                             <strong>{benefit.title}</strong>: {benefit.content} 
-                            <span style={{ color: '#94a3b8', fontSize: '1.2rem', marginLeft: '0.5rem' }}>({benefit.limit})</span>
+                            <span>({benefit.limit})</span>
                         </p>
                     ))}
                 </S.DetailItem>
@@ -47,7 +49,7 @@ const CardModal = () => {
 
 
             <S.DetailItem>
-                <p style={{ color: '#64748b', fontSize: '1.4rem', marginBottom: '0.8rem' }}>{selectedCard?.summary}</p>
+                <p>{selectedCard?.summary}</p>
                 <ul className="category-list">
                     {selectedCard?.categories.map((category, index) => (
                         <li key={index}><CategoryTag categoryKey={category} /></li>

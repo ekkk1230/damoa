@@ -3,9 +3,11 @@ import { useCardStore } from '../../../store/useCardStore';
 import { useState } from 'react';
 import { EXPENDITURE_CATEGORIES } from '../../../constance/categories';
 import CategoryTag from '../../Card/CategoryTag';
+import { useUIStore } from '../../../store/useUIStore';
 
 function ImageInputTab() {
-    const { closeModal, getMyCards, analyzedList, isAnalyzing, uploadAndAnalyze, deleteAnalyzedItem, confirmAllSpendings, updateAnalyzedItem } = useCardStore();
+    const { getMyCards, analyzedList, isAnalyzing, uploadAndAnalyze, deleteAnalyzedItem, confirmAllSpendings, updateAnalyzedItem } = useCardStore();
+    const { closeModal } = useUIStore();
 
     const [form, setForm] = useState({
         amount: '',

@@ -1,8 +1,8 @@
 import * as S from "./ModalLayout.styles"
-import { useCardStore } from "../../../store/useCardStore"
+import { useUIStore } from "../../../store/useUIStore";
 
 function ModalLayout({ children, title }: { children: React.ReactNode, title?: string }) {
-    const { closeModal } = useCardStore();
+    const { closeModal } = useUIStore();
     
     return (
         <S.ModalOverlay onClick={closeModal}>

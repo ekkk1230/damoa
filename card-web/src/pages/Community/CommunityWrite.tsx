@@ -3,10 +3,12 @@ import { useCommunityStore } from "../../store/useCommunityStore"
 import * as S from "./Community.styles"
 import { useAuthStore } from "../../store/useAuthStore";
 import { useNavigate, useParams } from "react-router-dom";
+import { useUIStore } from "../../store/useUIStore";
 
 function CommunityWrite() {
     const { addPost, selectedPost, updatePost } = useCommunityStore();
     const { user } = useAuthStore();
+    const { openModal } = useUIStore();
     const navigate = useNavigate();
      
     const [formData, setFormData] = useState({
@@ -19,13 +21,21 @@ function CommunityWrite() {
     const handleSubmit = () => {
 
         if (!formData.title.trim() || !formData.content.trim()) {
-            alert('내용을 입력해주세요');
+            openModal('CONFIRM', {
+                title: '',
+                content: '내용을 입력해주세요.',
+                onConfirm: () => {},
+            })
             return;
         }
 
         if (id) {
             updatePost(id, formData);
-            alert('수정되었습니다.');
+            openModal('CONFIRM', {
+                title: '',
+                content: '수정되었습니다.',
+                onConfirm: () => {},
+            })
         } else {
             const newPost = {
                 id: String(Date.now()),
@@ -40,7 +50,11 @@ function CommunityWrite() {
             }
     
             addPost(newPost);
-            alert('등록되었습니다.');
+            openModal('CONFIRM', {
+                title: '',
+                content: '등록되었습니다.',
+                onConfirm: () => {},
+            })
         }
 
         navigate('/community');

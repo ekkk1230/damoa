@@ -5,9 +5,13 @@ import { CARD_LIST } from '../../data/CARD_LIST';
 import { BRAND_COLORS } from '../../type/Card';
 import type { MyCardProgress } from '../../type/User';
 import { getPerformancePeriod } from '../../utils/cardUtils';
+import { useUIStore } from '../../store/useUIStore';
+import { useNavigate } from 'react-router-dom';
 
 function AddCard() {
+  const navigate = useNavigate();
   const { addCard } = useCardStore();
+  const { openModal } = useUIStore();
 
   const [selectedCompany, setSelectedCompany] = useState('');
   const [selectedCardName, setSelectedCardName] = useState('');
@@ -66,7 +70,11 @@ function AddCard() {
     const fullCardData = CARD_LIST.find(c => c.name === selectedCardName);
 
     if (!fullCardData) {
-      alert('카드를 선택해주세요.');
+      openModal('CONFIRM', {
+        title: '',
+        content: '카드를 선택해주세요.',
+        onConfirm: () => {},
+    })
       return;
     }
 
@@ -91,7 +99,11 @@ function AddCard() {
     };
 
     addCard(newCard);
-    alert('카드가 성공적으로 등록되었습니다!');
+    openModal('CONFIRM', {
+      title: '',
+      content: '카드가 성공적으로 등록되었습니다.',
+      onConfirm: () => navigate('/myCard'),
+  })
   }
 
   return (

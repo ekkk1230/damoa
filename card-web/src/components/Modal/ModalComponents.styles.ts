@@ -38,7 +38,8 @@ export const DetailItem = styled.div`
     margin-bottom: 2rem;
     
     h4 {
-        font-size: 1.3rem; letter-spacing: 0.5px;
+        font-size: 1.6rem; letter-spacing: 0.5px;
+        margin-top: 1rem;
         text-transform: uppercase;
         color: #94a3b8;
         margin-bottom: .8rem;
@@ -616,4 +617,11 @@ export const TopCategoryMsg = styled.p`
     content: '💡';
     margin-right: 8px;
   }
+`;
+
+export const ActionButtonGroup = styled.div`
+  display: flex; gap: 8px; margin-top: 20px;
+  button { flex: 1; padding: 12px; border-radius: 8px; cursor: pointer; }
+  .cancel { background: #f1f5f9; color: #64748b; border: none; }
+  .confirm { background: #3b82f6; color: #fff; border: none; font-weight: bold; }
 `;

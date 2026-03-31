@@ -2,9 +2,11 @@ import { useState } from 'react'
 import * as S from '../ModalComponents.styles'
 import { useCardStore } from '../../../store/useCardStore';
 import { EXPENDITURE_CATEGORIES } from '../../../constance/categories';
+import { useUIStore } from '../../../store/useUIStore';
 
 function ManualInputTab() {
     const { getMyCards, addSpending } = useCardStore();
+    const { openModal } = useUIStore();
 
     const [form, setForm] = useState({
         amount: '',
@@ -16,7 +18,11 @@ function ManualInputTab() {
 
     const handleSubmit = () => {
         if (!form.amount || !form.cardId || !form.storeName || !form.date) {
-            alert('모든 항목을 입력해주세요.');
+            openModal('CONFIRM', {
+                title: '',
+                content: '모든 항목을 입력해주세요.',
+                onConfirm: () => {},
+            })
             return;
         }
 

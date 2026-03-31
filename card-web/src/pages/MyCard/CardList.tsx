@@ -1,11 +1,23 @@
 import { Link } from "react-router-dom";
 import RecommendSection from "../../components/Card/RecommendSection";
 import { useCardStore } from "../../store/useCardStore"
-import type { MyCardProgress } from "../../type/User";
+import type { MyCardProgress, UserCard } from "../../type/User";
 import * as S from "./MyCard.styles";
+import { useUIStore } from "../../store/useUIStore";
 
 function CardList() {
     const { getMyCards, benefit, recentSpendList, deleteCard } = useCardStore();
+    const { openModal } = useUIStore();
+
+    const handleDeleteCard = (card: UserCard) => {
+        openModal('CONFIRM', {
+            title: '',
+            content: '카드를 삭제하시겠습니까?',
+            onConfirm: () => deleteCard(card.cardInfo.id),
+            onCancel: () => {},
+        })
+        
+    };
 
     return (
         <S.ListContainer>
@@ -42,7 +54,7 @@ function CardList() {
                                     )}
                                 </S.SpendList>
 
-                                <S.DeleteButton onClick={() => deleteCard(card.cardInfo.id)}>
+                                <S.DeleteButton onClick={() => handleDeleteCard(card)}>
                                     카드 삭제
                                 </S.DeleteButton>
                             </S.CardItem>

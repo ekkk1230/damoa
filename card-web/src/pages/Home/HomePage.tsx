@@ -5,14 +5,19 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { BRAND_COLORS } from "../../App.styles";
 import { useCardStore } from "../../store/useCardStore";
-import CardModal from "../../components/Modal/CardModal";
-import SpendingAddModal from "../../components/Modal/SpendingAddModal";
 import RecentSection from "../../components/Card/RecentSection";
 import RecommendSection from "../../components/Card/RecommendSection";
 import { normalizeCompanyName } from "../../utils/cardUtils";
+import { useUIStore } from "../../store/useUIStore";
 
 export const HomePage = () => {
-	const { openModal, totalSpending, getMyCards, totalBenefit } = useCardStore();
+	const { totalSpending, getMyCards, totalBenefit, setSelectedCard } = useCardStore();
+	const { openModal } = useUIStore();
+
+	const handleCardClick = (cardInfo: any) => {
+		setSelectedCard(cardInfo);
+		openModal('CARD_DETAIL');
+	}
 
     return (
         <>
@@ -56,7 +61,7 @@ export const HomePage = () => {
 									const brandColor = BRAND_COLORS[companyName];
 		
 									return (
-										<SwiperSlide key={cardInfo.id} onClick={() => openModal('CARD_DETAIL', cardInfo)}>
+										<SwiperSlide key={cardInfo.id} onClick={() => handleCardClick(cardInfo)}>
 											<S.CreditCardBox $brandColor={brandColor}>
 													<div className="card-top">
 														<span className="card-company">{cardInfo.company}</span>
@@ -90,9 +95,6 @@ export const HomePage = () => {
 				{/* 4. 추천 카드 섹션 */}
 				<RecommendSection variant="main" />
 			</S.HomeContainer>
-
-			<CardModal />
-			<SpendingAddModal />
 		</>
     );
 };

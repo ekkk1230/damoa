@@ -98,11 +98,13 @@ export const SpendItem = styled.div`
 
 
 export const RecommendSection = styled.section`
-  background-color: #ffffff; /* 이모지가 없으니 배경을 흰색으로 하고 테두리를 살짝 주는 게 깔끔해요 */
+  background-color: #ffffff;
   border: 1px solid #f0f0f0;
   border-radius: 16px;
   padding: 24px 20px;
   margin: 24px 0;
+
+  .text-group { font-size: 1.6rem; margin-bottom: 2rem; }
 `;
 
 export const BannerHeader = styled.div`

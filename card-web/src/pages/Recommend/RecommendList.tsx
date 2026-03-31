@@ -1,18 +1,26 @@
 import * as S from "./Reccommend.styles"
 import { useCardStore } from "../../store/useCardStore"
 import { BRAND_COLORS } from "../../type/Card";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { normalizeCompanyName } from "../../utils/cardUtils";
 
 function RecommendList() {
+    const navigate = useNavigate();
     const { searchTerm, setSearchTerm, 
             selectedCompany, setSelectedCompany,
-            cardList } = useCardStore();
+            cardList, recommendedCards } = useCardStore();
 
     const [sortType, setSortType] = useState('기본');
 
-    const recommendFilterCards = cardList.filter(card => {
+
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const isRecommendOnly = queryParams.get('filter');
+
+    const bashCards = isRecommendOnly ? recommendedCards : cardList;
+
+    const recommendFilterCards = bashCards.filter(card => {
         const isSearchMath = card.categories.some(cate => cate.trim().includes(searchTerm)) ||
                              card.name.trim().includes(searchTerm);
 
@@ -59,6 +67,13 @@ function RecommendList() {
     return (
         <>
             <S.Container>
+                {isRecommendOnly && (
+                    <div style={{ padding: '10px', background: '#f0f7ff', borderRadius: '8px', marginBottom: '15px' }}>
+                        ✨ 사용자님 지출 패턴에 딱 맞는 카드들만 모아봤어요!
+                        <button onClick={() => navigate('/recommend')} style={{ marginLeft: '10px', fontSize: '12px', textDecoration: 'underline' }}>전체 보기</button>
+                    </div>
+                )}
+
                 <S.FilterSection>
                     <input 
                         type="text" 

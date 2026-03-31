@@ -7,9 +7,6 @@ import { USER_CARDS } from '../data/USER_CARD_LIST';
 import { fetchReceiptAnalysis } from '../api/receipt';
 import { MOCK_SPENDING } from '../data/MOCK_SPENDING';
 
-type ModalType = 'CARD_DETAIL' | 'SPENDING_ADD' | 'COMPAIR' | null;
-type ModalData = Card | MyCardProgress | any;
-
 export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allCards: Card[]) => {
     if (spendings.length === 0) {
         return { 
@@ -137,9 +134,7 @@ export const calculateExpectedBenefit = (categoryMap: Record<string, number> = {
 interface CardState {
     // 모달 및 선택 상태
     selectedCard: Card | null;
-    modalType: ModalType;
-    openModal: (type: ModalType, data?: ModalData) => void;
-    closeModal: () => void;
+    setSelectedCard: (card: Card) => void;
     setSearchTerm: (term: string) => void;
     setSelectedCompany: (company: string) => void;
     setIsExpanded: (expanded: boolean) => void;
@@ -199,9 +194,7 @@ export const useCardStore = create<CardState>((set, get) => {
 
     return {
         selectedCard: null,
-        modalType: null,
-        openModal: (type, data) => set({ modalType: type, selectedCard: data || null }),
-        closeModal: () => set({ modalType: null, selectedCard: null }),
+        setSelectedCard: (card) => set({ selectedCard: card }),
         setSearchTerm: term => set({ searchTerm: term }),
         setSelectedCompany: company => set({ selectedCompany: company }),
         setIsExpanded: expanded => set({ isExpanded: expanded }),
