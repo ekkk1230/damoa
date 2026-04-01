@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="admin-wrapper">
+    <div th:replace="~{fragments/sidebar :: menu}"></div>
+
+    <main class="content">
+        <div class="summary-container">
+            <div class="summary-card">
+                <span class="summary-label">전체 사용자 수</span>
+                <div class="summary-value">
+                    <span th:text="${totalUserCount}">0 명</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-row chart-row">
+            <section class="chart-box card-container">
+                <div class="card-header"><h3>사용자 성별 분포</h3></div>
+                <div id="genderChart" class="chart-view"></div>
+            </section>
+
+            <section class="chart-box card-container">
+                <div class="card-header"><h3>사용자 연령 분포</h3></div>
+                <div id="ageChart" class="chart-view"></div>
+            </section>
+        </div>
+
+        <div class="dashboard-row list-row">
+            <section class="card-container recent-cards">
+                <div class="card-header"><h3>최근 등록 카드</h3></div>
+                <ul class="data-list">
+                    <li th:each="card: ${recentCards}">
+                        <div class="list-info">
+                            <strong th:text="${card.name}">카드 이름</strong>
+                            <p th:text="${card.summary}">카드 요약</p>
+                        </div>
+                        <span class="date-badge">New</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="card-container popular-cards">
+                <div class="card-header"><h3>실시간 인기 조회 TOP 5</h3></div>
+                <ul class="data-list rank-list">
+                    <li th:each="popularCard, status: ${popularCards}">
+                        <span class="rank-num" th:text="${status.count}">1</span>
+                        <div class="list-info">
+                            <strong th:text="${popularCard.name}">카드 이름</strong>
+                        </div>
+                        <div class="view-count">
+                            <span class="icon">👁️</span>
+                            <span th:text="${popularCard.viewCount}">0</span>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+</div>
+
+<script src="https://fastly.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+
+<script th:inline="javascript">
+    const maleCount = [[${genderStats.male}]];
+    const femaleCount = [[${genderStats.female}]];
+
+    const genderChartDom = document.getElementById('genderChart');
+    const chart1 = echarts.init(genderChartDom);
+
+    const genderChartOption = {
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            bottom: '5%',
+            left: 'center'
+        },
+        series: [
+            {
+                name: '사용자 성별',
+                type: 'pie',
+                radius: ['40%', '70%'],
+                avoidLabelOverlap: false,
+                itemStyle: {
+                    borderRadius: 10,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: 20,
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    { value: maleCount, name: '남성', itemStyle: { color: '#5470c6' } },
+                    { value: femaleCount, name: '여성', itemStyle: { color: '#ee6666' } }
+                ]
+            }
+        ]
+    };
+
+    chart1.setOption(genderChartOption);
+
+    const age20Value = [[${ageStats.age20}]];
+    const age30Value = [[${ageStats.age30}]];
+    const age40Value = [[${ageStats.age40}]];
+    const age50Value = [[${ageStats.age50Plus}]];
+
+    const ageChartDom = document.getElementById('ageChart');
+    const chart2 = echarts.init(ageChartDom);
+
+    const ageChartOption = {
+        tooltip: {
+            trigger: 'axis', // 막대 차트는 axis(축) 기준 툴팁이 더 편해요
+            axisPointer: {
+                type: 'shadow' // 마우스 올렸을 때 그림자 효과
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '10%', // 하단 범례 공간 확보
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: ['20대', '30대', '40대', '50대+'], // X축 레이블
+            axisTick: {
+                alignWithLabel: true
+            }
+        },
+        yAxis: {
+            type: 'value', // Y축은 숫자 값
+            name: '인원수(명)'
+        },
+        series: [
+            {
+                name: '사용자 수',
+                type: 'bar', // 파이(pie)에서 막대(bar)로 변경!
+                barWidth: '40%', // 막대 두께 조절 (퍼블리싱 디테일 🦾)
+                itemStyle: {
+                    // 막대 상단만 둥글게 깎아서 세련되게! (Top-Left, Top-Right, Bottom-Right, Bottom-Left)
+                    borderRadius: [5, 5, 0, 0],
+                    color: '#5470c6' // 포인트 컬러
+                },
+                // 백엔드에서 받아온 변수들을 순서대로 넣어줍니다.
+                data: [age20Value, age30Value, age40Value, age50Value]
+            }
+        ]
+    };
+
+    chart2.setOption(ageChartOption);
+
+    window.addEventListener('resize', function() {
+        chart1.resize();
+        chart2.resize();
+    });
+</script>
+</body>
+</html>

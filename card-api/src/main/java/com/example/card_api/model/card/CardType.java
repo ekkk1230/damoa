@@ -1,4 +1,4 @@
-package com.example.card_api.model;
+package com.example.card_api.model.card;
 
 public enum CardType {
     CREDIT("신용"),

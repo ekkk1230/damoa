@@ -1,20 +1,20 @@
-package com.example.card_api.model;
+package com.example.card_api.model.card;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @Getter @Setter
-public class BenefitRule {
+public class DetailBenefit {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String category;
-    private double rate;
+    private String title;
 
-    private String benefitType;
-
-    private Integer benefitLimit;
+    @Column(columnDefinition = "TEXT")
+    private String content;
+    @Column(name = "benefit_limit")
+    private String detailLimit;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")

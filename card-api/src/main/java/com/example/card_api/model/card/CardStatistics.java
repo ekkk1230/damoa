@@ -1,4 +1,4 @@
-package com.example.card_api.model;
+package com.example.card_api.model.card;
 
 import jakarta.persistence.*;
 import lombok.*;

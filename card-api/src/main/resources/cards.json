@@ -1,882 +1,2295 @@
-[
-  {
-    "name": "삼성 iD SELECT ALL 카드",
-    "company": "삼성카드",
-    "annualFee": 20000,
-    "image": "Hex:#0a4da2",
-    "mainBenefits": ["온라인쇼핑 10% 할인", "관리비/통신 10% 할인", "해외 전가맹점 2% 할인"],
-    "categories": ["SHOPPING", "LIVING", "ETC"],
-    "cardType": "신용",
-    "summary": "1분기 통합 1위, 라이프스타일에 따른 선택형 혜택 최강자",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 45, "femaleRate": 55},
-      "ageGroups": [{"label": "20대", "value": 30}, {"label": "30대", "value": 45}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 10}]
+[ {
+  "id" : null,
+  "name" : "삼성 iD SELECT ALL 카드",
+  "company" : "삼성카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#0a4da2",
+  "mainBenefits" : [ "온라인쇼핑 10% 할인", "관리비/통신 10% 할인", "해외 가맹점 2% 할인" ],
+  "categories" : [ "SHOPPING", "LIVING", "ETC" ],
+  "summary" : "1분기 통합 1위, 라이프스타일 맞춤형 혜택의 정수",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.samsungcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 45,
+      "femaleRate" : 55
     },
-    "detailBenefits": [{"title": "선택형 할인", "content": "온라인쇼핑, 의료, 배달앱 중 선택 할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.1, "description": "1구간"}],
-    "benefitRules": [{"category": "SHOPPING", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 400000,
-    "maxBenefit": "40,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.samsungcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 30
+    }, {
+      "label" : "30대",
+      "value" : 45
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "신한카드 Mr.Life",
-    "company": "신한카드",
-    "annualFee": 15000,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["공과금 10% 할인", "편의점 10% 할인", "마트/주유 주말 할인"],
-    "categories": ["LIVING", "SHOPPING", "TRANSPORT"],
-    "cardType": "신용",
-    "summary": "1인 가구 필수템, 공과금부터 생활 밀착형 혜택까지",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 52, "femaleRate": 48},
-      "ageGroups": [{"label": "20대", "value": 40}, {"label": "30대", "value": 35}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "온라인쇼핑",
+    "content" : "국내 온라인 가맹점 10% 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "기본 할인 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "SHOPPING",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "40,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "우리카드 카드의정석 SHOPPING+",
+  "company" : "우리카드",
+  "annualFee" : 12000,
+  "image" : "Hex:#007bc8",
+  "mainBenefits" : [ "온라인쇼핑 10% 할인", "백화점/마트 10% 할인", "주유 리터당 60원 할인" ],
+  "categories" : [ "SHOPPING", "TRANSPORT", "FOOD" ],
+  "summary" : "쇼핑에 진심인 분들을 위한 온/오프라인 통합 쇼핑 강자",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.wooricard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 35,
+      "femaleRate" : 65
     },
-    "detailBenefits": [{"title": "월납요금", "content": "전기, 도시가스 10% 할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 500000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "LIVING", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.1,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 25
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 25
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "우리카드 카드의정석 SHOPPING+",
-    "company": "우리카드",
-    "annualFee": 12000,
-    "image": "Hex:#007bc8",
-    "mainBenefits": ["온라인쇼핑 10% 할인", "오프라인쇼핑 10% 할인", "간편결제 5% 추가할인"],
-    "categories": ["SHOPPING", "FOOD", "CULTURE"],
-    "cardType": "신용",
-    "summary": "온/오프라인 쇼핑 혜택을 극대화한 쇼퍼들의 원픽",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 35, "femaleRate": 65},
-      "ageGroups": [{"label": "20대", "value": 20}, {"label": "30대", "value": 45}, {"label": "40대", "value": 25}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "쇼핑특화",
+    "content" : "모든 쇼핑 업종 10% 청구 할인",
+    "detailLimit" : "월 2만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 700000,
+    "rate" : 0.1,
+    "description" : "1단계"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "SHOPPING",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 20000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "35,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "KB국민 My WE:SH 카드",
+  "company" : "국민카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#ffbc00",
+  "mainBenefits" : [ "음식점/커피 10% 할인", "편의점 10% 할인", "생일 달 할인 한도 2배" ],
+  "categories" : [ "FOOD", "CULTURE", "SUBSCRIPTION" ],
+  "summary" : "나를 위한 맞춤 혜택과 생일 축하 서비스까지 챙겨주는 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.kbcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 42,
+      "femaleRate" : 58
     },
-    "detailBenefits": [{"title": "온라인쇼핑", "content": "모든 온라인 가맹점 10% 할인", "detailLimit": "월 2만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 700000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "SHOPPING", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 20000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "35,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.wooricard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 55
+    }, {
+      "label" : "30대",
+      "value" : 30
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "삼성카드 & MILEAGE PLATINUM",
-    "company": "삼성카드",
-    "annualFee": 49000,
-    "image": "Hex:#0a4da2",
-    "mainBenefits": ["1천원당 1마일리지 적립", "백화점/커피 2마일 적립", "인천공항 라운지 무료"],
-    "categories": ["ETC", "CULTURE", "FOOD"],
-    "cardType": "신용",
-    "summary": "가성비 스카이패스 마일리지 카드의 대명사",
-    "condition": "전월 실적 무관 (적립)",
-    "statistics": {
-      "gender": {"maleRate": 48, "femaleRate": 52},
-      "ageGroups": [{"label": "20대", "value": 25}, {"label": "30대", "value": 40}, {"label": "40대", "value": 20}, {"label": "50대+", "value": 15}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "나한테 진심",
+    "content" : "음식점, 카페, 편의점 통합 10% 할인",
+    "detailLimit" : "월 5,000원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "기본 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "FOOD",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 5000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "25,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "삼성카드 taptap O",
+  "company" : "삼성카드",
+  "annualFee" : 10000,
+  "image" : "Hex:#0a4da2",
+  "mainBenefits" : [ "스타벅스 50% 할인", "교통/통신 10% 할인", "영화 5,000원 할인" ],
+  "categories" : [ "FOOD", "TRANSPORT", "CULTURE" ],
+  "summary" : "사회초년생들을 위한 카페와 대중교통 혜택 집중 카드",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.samsungcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 30,
+      "femaleRate" : 70
     },
-    "detailBenefits": [{"title": "기본적립", "content": "모든 가맹점 1,000원당 1마일 적립", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 0, "maxAmount": 9999999, "rate": 0.01, "description": "전 구간 적립"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.01, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 0,
-    "maxBenefit": "제한없음",
-    "baseRate": 0.01,
-    "officialLink": "https://www.samsungcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 60
+    }, {
+      "label" : "30대",
+      "value" : 30
+    }, {
+      "label" : "40대",
+      "value" : 7
+    }, {
+      "label" : "50대+",
+      "value" : 3
+    } ]
   },
-  {
-    "name": "KB국민 My WE:SH 카드",
-    "company": "국민카드",
-    "annualFee": 15000,
-    "image": "Hex:#ffbc00",
-    "mainBenefits": ["나한테 진심 서비스", "생일 월 할인한도 2배", "전월실적 채워주는 서비스"],
-    "categories": ["FOOD", "CULTURE", "SUBSCRIPTION"],
-    "cardType": "신용",
-    "summary": "MZ세대를 정조준한 개인 맞춤형 심리 케어 카드",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 42, "femaleRate": 58},
-      "ageGroups": [{"label": "20대", "value": 55}, {"label": "30대", "value": 30}, {"label": "40대", "value": 10}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "커피옵션",
+    "content" : "스타벅스 50% 할인 또는 10대 커피 30% 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 500000,
+    "rate" : 0.5,
+    "description" : "커피 한정 우대"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "FOOD",
+    "rate" : 0.5,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.07,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "롯데 LOCA 365 카드",
+  "company" : "롯데카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#ed1c24",
+  "mainBenefits" : [ "관리비 10% 할인", "학원비 10% 할인", "배달앱 10% 할인" ],
+  "categories" : [ "LIVING", "EDUCATION", "FOOD" ],
+  "summary" : "매달 나가는 고정 지출을 365일 빈틈없이 아껴주는 생활 밀착형",
+  "condition" : "전월 실적 50만원 이상",
+  "officialLink" : "https://www.lottecard.co.kr",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 38,
+      "femaleRate" : 62
     },
-    "detailBenefits": [{"title": "음식점", "content": "일반음식점, 커피 10% 할인", "detailLimit": "월 5,000원"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.1, "description": "1구간"}],
-    "benefitRules": [{"category": "FOOD", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 5000}],
-    "bestPerformance": 400000,
-    "maxBenefit": "25,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.card.kbcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 10
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 40
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "삼성카드 taptap O",
-    "company": "삼성카드",
-    "annualFee": 10000,
-    "image": "Hex:#0a4da2",
-    "mainBenefits": ["커피 50% 할인", "교통/통신 10% 할인", "온라인쇼핑 7% 할인"],
-    "categories": ["FOOD", "TRANSPORT", "SHOPPING"],
-    "cardType": "신용",
-    "summary": "사회초년생들의 영원한 스테디셀러 옵션 카드",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 30, "femaleRate": 70},
-      "ageGroups": [{"label": "20대", "value": 60}, {"label": "30대", "value": 30}, {"label": "40대", "value": 7}, {"label": "50대+", "value": 3}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "생활비방어",
+    "content" : "관리비, 공과금, 보험료 각각 5,000원 할인",
+    "detailLimit" : "월 1.5만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 500000,
+    "maxAmount" : 1000000,
+    "rate" : 0.1,
+    "description" : "전 가계비 혜택"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "LIVING",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 15000
+  } ],
+  "bestPerformance" : 500000,
+  "baseRate" : 0.1,
+  "maxBenefit" : "35,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "KB국민 쿠팡 와우 카드",
+  "company" : "국민카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#ffbc00",
+  "mainBenefits" : [ "쿠팡 4% 적립", "쿠팡이츠 4% 적립", "국내외 가맹점 1.2% 적립" ],
+  "categories" : [ "SHOPPING", "FOOD", "ETC" ],
+  "summary" : "쿠팡 헤비 유저라면 고민할 필요 없는 역대급 적립형 PLCC",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.kbcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 40,
+      "femaleRate" : 60
     },
-    "detailBenefits": [{"title": "커피", "content": "스타벅스 50% 할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 500000, "rate": 0.1, "description": "단일구간"}],
-    "benefitRules": [{"category": "FOOD", "rate": 0.5, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.07,
-    "officialLink": "https://www.samsungcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 20
+    }, {
+      "label" : "30대",
+      "value" : 50
+    }, {
+      "label" : "40대",
+      "value" : 20
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "삼성 THE 1 (스카이패스)",
-    "company": "삼성카드",
-    "annualFee": 200000,
-    "image": "Hex:#0a4da2",
-    "mainBenefits": ["15만원 바우처 제공", "1천원당 1마일 적립", "호텔 발렛파킹 무료"],
-    "categories": ["ETC", "CULTURE", "FOOD"],
-    "cardType": "신용",
-    "summary": "프리미엄 입문자를 위한 실속형 매스티지 카드",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 55, "femaleRate": 45},
-      "ageGroups": [{"label": "20대", "value": 15}, {"label": "30대", "value": 45}, {"label": "40대", "value": 30}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "쿠팡적립",
+    "content" : "쿠팡 결제 시 최대 4% 쿠팡캐시 적립",
+    "detailLimit" : "월 4만점"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 1000000,
+    "rate" : 0.04,
+    "description" : "쿠팡 전용 적립"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "SHOPPING",
+    "rate" : 0.04,
+    "benefitType" : "POINT",
+    "benefitLimit" : 40000
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.012,
+  "maxBenefit" : "52,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "현대 American Express Gold Edition2",
+  "company" : "현대카드",
+  "annualFee" : 300000,
+  "image" : "Hex:#000000",
+  "mainBenefits" : [ "전 가맹점 MR 적립", "호텔/공항 발렛파킹 무료", "바우처 서비스" ],
+  "categories" : [ "ETC", "CULTURE", "FOOD" ],
+  "summary" : "프리미엄의 상징, 강력한 마일리지 적립과 글로벌 멤버십 혜택",
+  "condition" : "전월 실적 50만원 이상",
+  "officialLink" : "https://www.hyundaicard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 60,
+      "femaleRate" : 40
     },
-    "detailBenefits": [{"title": "기프트", "content": "신세계상품권 15만원 등 매년 1회", "detailLimit": "연 1회"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.01, "description": "마일리지 구간"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.01, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 500000,
-    "maxBenefit": "바우처포함 50만원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.samsungcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 15
+    }, {
+      "label" : "30대",
+      "value" : 50
+    }, {
+      "label" : "40대",
+      "value" : 25
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "롯데 LOCA 365 카드",
-    "company": "롯데카드",
-    "annualFee": 20000,
-    "image": "Hex:#ed1c24",
-    "mainBenefits": ["아파트관리비 10% 할인", "학원비 10% 할인", "배달앱 10% 할인"],
-    "categories": ["LIVING", "EDUCATION", "FOOD"],
-    "cardType": "신용",
-    "summary": "365일 고정비 걱정 덜어주는 가계 경제 필수템",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 38, "femaleRate": 62},
-      "ageGroups": [{"label": "20대", "value": 10}, {"label": "30대", "value": 40}, {"label": "40대", "value": 40}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "MR적립",
+    "content" : "해외 및 항공 3MR 적립",
+    "detailLimit" : "제한없음"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 500000,
+    "maxAmount" : 1000000,
+    "rate" : 0.01,
+    "description" : "기본 적립 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.01,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 500000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "무제한",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "신한카드 SOL트래블 체크",
+  "company" : "신한카드",
+  "annualFee" : 0,
+  "image" : "Hex:#0046ff",
+  "mainBenefits" : [ "해외 수수료 면제", "공항 라운지 무료", "해외 대중교통 1% 할인" ],
+  "categories" : [ "ETC", "TRANSPORT", "CULTURE" ],
+  "summary" : "해외 여행 필수품, 전 세계 어디서든 수수료 걱정 없는 결제",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.shinhancard.com",
+  "cardType" : "체크",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 48,
+      "femaleRate" : 52
     },
-    "detailBenefits": [{"title": "고정비", "content": "관리비, 통신, 가스요금 할인", "detailLimit": "각 5,000원"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "LIVING", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 20000}],
-    "bestPerformance": 500000,
-    "maxBenefit": "35,000원",
-    "baseRate": 0.1,
-    "officialLink": "https://www.lottecard.co.kr"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 50
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "KB국민 쿠팡 와우 카드",
-    "company": "국민카드",
-    "annualFee": 15000,
-    "image": "Hex:#ffbc00",
-    "mainBenefits": ["쿠팡 4% 적립", "기타 가맹점 1.2% 적립", "쿠팡이츠/플레이 포함"],
-    "categories": ["SHOPPING", "CULTURE", "FOOD"],
-    "cardType": "신용",
-    "summary": "쿠팡 생태계 유저라면 필수로 가져야 할 PLCC",
-    "condition": "전월 실적 무관",
-    "statistics": {
-      "gender": {"maleRate": 40, "femaleRate": 60},
-      "ageGroups": [{"label": "20대", "value": 20}, {"label": "30대", "value": 50}, {"label": "40대", "value": 20}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "해외혜택",
+    "content" : "해외 결제 시 1.2% 수수료 면제",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.01,
+    "description" : "대중교통 할인 적용"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 1.0,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 50000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.0,
+  "maxBenefit" : "100,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "하나 트래블로그 신용카드",
+  "company" : "하나카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#009490",
+  "mainBenefits" : [ "환전 100% 우대", "해외 3% 적립", "국내 1% 적립" ],
+  "categories" : [ "ETC", "TRANSPORT", "SHOPPING" ],
+  "summary" : "체크카드의 성공을 신용으로, 해외 어디서든 환테크와 적립을 동시에",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.hanacard.co.kr",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 47,
+      "femaleRate" : 53
     },
-    "detailBenefits": [{"title": "쿠팡", "content": "쿠팡 결제액 4% 쿠팡캐시 적립", "detailLimit": "월 4만점"}],
-    "performanceTiers": [{"minAmount": 0, "maxAmount": 1000000, "rate": 0.04, "description": "전 구간 적립"}],
-    "benefitRules": [{"category": "SHOPPING", "rate": 0.04, "benefitType": "POINT", "benefitLimit": 40000}],
-    "bestPerformance": 0,
-    "maxBenefit": "52,000원",
-    "baseRate": 0.012,
-    "officialLink": "https://www.card.kbcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 40
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "현대 American Express Gold Edition2",
-    "company": "현대카드",
-    "annualFee": 300000,
-    "image": "Hex:#000000",
-    "mainBenefits": ["무제한 MR 적립", "특급호텔 발렛파킹", "FHR 이용 가능"],
-    "categories": ["ETC", "CULTURE", "FOOD"],
-    "cardType": "신용",
-    "summary": "아멕스 골드의 상징성과 프리미엄 멤버십 혜택의 정수",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 60, "femaleRate": 40},
-      "ageGroups": [{"label": "20대", "value": 10}, {"label": "30대", "value": 50}, {"label": "40대", "value": 30}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "해외적립",
+    "content" : "해외 모든 가맹점 3% 하나머니 적립",
+    "detailLimit" : "월 5만점"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.03,
+    "description" : "해외 우대 적립"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.03,
+    "benefitType" : "POINT",
+    "benefitLimit" : 50000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "무제한",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "NH농협카드 zgm.고향으로",
+  "company" : "농협카드",
+  "annualFee" : 12000,
+  "image" : "Hex:#20744a",
+  "mainBenefits" : [ "고향사랑기부 시 우대", "주말 1.7% 적립", "기본 0.7% 적립" ],
+  "categories" : [ "ETC", "SHOPPING", "LIVING" ],
+  "summary" : "지역 경제를 살리고 주말 외식 혜택까지 챙기는 효자 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://card.nonghyup.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 55,
+      "femaleRate" : 45
     },
-    "detailBenefits": [{"title": "멤버십 리워즈", "content": "해외 가맹점 3 MR 적립", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.015, "description": "기본적립"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.01, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 500000,
-    "maxBenefit": "무제한",
-    "baseRate": 0.01,
-    "officialLink": "https://www.hyundaicard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 10
+    }, {
+      "label" : "30대",
+      "value" : 25
+    }, {
+      "label" : "40대",
+      "value" : 35
+    }, {
+      "label" : "50대+",
+      "value" : 30
+    } ]
   },
-  {
-    "name": "신한카드 SOL트래블 체크",
-    "company": "신한카드",
-    "annualFee": 0,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["해외 수수료 면제", "해외 대중교통 1% 할인", "공항 라운지 연 2회"],
-    "categories": ["ETC", "TRANSPORT", "CULTURE"],
-    "cardType": "체크",
-    "summary": "해외 여행객들의 압도적인 선택을 받는 여행 특화 체크",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 45, "femaleRate": 55},
-      "ageGroups": [{"label": "20대", "value": 50}, {"label": "30대", "value": 35}, {"label": "40대", "value": 10}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "주말특화",
+    "content" : "토/일 모든 오프라인 가맹점 1.7% 적립",
+    "detailLimit" : "월 1만점"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.017,
+    "description" : "주말 우대 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.017,
+    "benefitType" : "POINT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.007,
+  "maxBenefit" : "25,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "현대카드 M (Edition2)",
+  "company" : "현대카드",
+  "annualFee" : 30000,
+  "image" : "Hex:#000000",
+  "mainBenefits" : [ "업종별 최대 3% 적립", "M포인트 사용처 무제한", "주유 리터당 60원 적립" ],
+  "categories" : [ "ETC", "TRANSPORT", "SHOPPING" ],
+  "summary" : "포인트 적립과 사용의 정석, 쓰면 쓸수록 쌓이는 M포인트의 마법",
+  "condition" : "전월 실적 50만원 이상",
+  "officialLink" : "https://www.hyundaicard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 58,
+      "femaleRate" : 42
     },
-    "detailBenefits": [{"title": "해외수수료", "content": "해외 결제 및 ATM 출금 수수료 면제", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 500000, "rate": 0.01, "description": "기본혜택"}],
-    "benefitRules": [{"category": "ETC", "rate": 1.0, "benefitType": "DISCOUNT", "benefitLimit": 50000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "70,000원",
-    "baseRate": 0.0,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 15
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 30
+    }, {
+      "label" : "50대+",
+      "value" : 15
+    } ]
   },
-  {
-    "name": "하나 트래블로그 신용카드",
-    "company": "하나카드",
-    "annualFee": 20000,
-    "image": "Hex:#009490",
-    "mainBenefits": ["환전 수수료 100% 우대", "국내 1% 적립", "해외 3% 적립"],
-    "categories": ["ETC", "TRANSPORT", "CULTURE"],
-    "cardType": "신용",
-    "summary": "트래블로그의 명성을 신용카드로 이어가는 여행 필수템",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 48, "femaleRate": 52},
-      "ageGroups": [{"label": "20대", "value": 45}, {"label": "30대", "value": 35}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "특별적립",
+    "content" : "현대차/기아 신차 구매 시 적립",
+    "detailLimit" : "제한없음"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 500000,
+    "maxAmount" : 1000000,
+    "rate" : 0.01,
+    "description" : "기본 적립 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.01,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 500000,
+  "baseRate" : 0.005,
+  "maxBenefit" : "무제한",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "신한카드 처음(ANNIVERSE)",
+  "company" : "신한카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#0046ff",
+  "mainBenefits" : [ "대중교통 10% 적립", "음식점 5% 적립", "생일 축하 포인트" ],
+  "categories" : [ "TRANSPORT", "FOOD", "CULTURE" ],
+  "summary" : "사회 초년생의 첫 카드로 추천하는 이동 및 외식 특화 적립 카드",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.shinhancard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 45,
+      "femaleRate" : 55
     },
-    "detailBenefits": [{"title": "해외적립", "content": "해외 모든 가맹점 3% 하나머니 적립", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 600000, "rate": 0.03, "description": "해외구간"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.03, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 300000,
-    "maxBenefit": "무제한",
-    "baseRate": 0.01,
-    "officialLink": "https://www.hanacard.co.kr"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 70
+    }, {
+      "label" : "30대",
+      "value" : 20
+    }, {
+      "label" : "40대",
+      "value" : 7
+    }, {
+      "label" : "50대+",
+      "value" : 3
+    } ]
   },
-  {
-    "name": "NH농협카드 zgm.고향으로",
-    "company": "농협카드",
-    "annualFee": 12000,
-    "image": "Hex:#20744a",
-    "mainBenefits": ["고향사랑기부 시 우대", "주말 1.7% 적립", "오프라인 0.7% 적립"],
-    "categories": ["ETC", "SHOPPING", "FOOD"],
-    "cardType": "신용",
-    "summary": "주말 외식 및 지역 경제 활성화에 기여하는 효자 카드",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 55, "femaleRate": 45},
-      "ageGroups": [{"label": "20대", "value": 10}, {"label": "30대", "value": 20}, {"label": "40대", "value": 40}, {"label": "50대+", "value": 30}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "출퇴근케어",
+    "content" : "버스, 지하철 이용 시 10% 적립",
+    "detailLimit" : "월 1만점"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.1,
+    "description" : "1구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "TRANSPORT",
+    "rate" : 0.1,
+    "benefitType" : "POINT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "20,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "KB국민 노리2 체크카드",
+  "company" : "국민카드",
+  "annualFee" : 0,
+  "image" : "Hex:#ffbc00",
+  "mainBenefits" : [ "스타벅스 10% 할인", "편의점 5% 할인", "영화 20% 할인" ],
+  "categories" : [ "FOOD", "SHOPPING", "CULTURE" ],
+  "summary" : "대학생부터 직장인까지 아우르는 혜택 밸런스 1위 체크카드",
+  "condition" : "전월 실적 20만원 이상",
+  "officialLink" : "https://www.kbcard.com",
+  "cardType" : "체크",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 48,
+      "femaleRate" : 52
     },
-    "detailBenefits": [{"title": "주말적립", "content": "전국 오프라인 가맹점 1.7% 적립", "detailLimit": "월 1만점"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.017, "description": "주말혜택"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.017, "benefitType": "POINT", "benefitLimit": 10000}],
-    "bestPerformance": 400000,
-    "maxBenefit": "20,000원",
-    "baseRate": 0.007,
-    "officialLink": "https://card.nonghyup.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 65
+    }, {
+      "label" : "30대",
+      "value" : 20
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "현대카드 M (Edition2)",
-    "company": "현대카드",
-    "annualFee": 30000,
-    "image": "Hex:#000000",
-    "mainBenefits": ["업종별 0.5~3% 적립", "M포인트 사용처 무제한", "주유 리터당 60원 적립"],
-    "categories": ["ETC", "TRANSPORT", "SHOPPING"],
-    "cardType": "신용",
-    "summary": "대한민국 포인트 시스템의 기준이 된 포인트 끝판왕",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 58, "femaleRate": 42},
-      "ageGroups": [{"label": "20대", "value": 15}, {"label": "30대", "value": 40}, {"label": "40대", "value": 30}, {"label": "50대+", "value": 15}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "카페/문화",
+    "content" : "영화 20% 및 카페 10% 환급 할인",
+    "detailLimit" : "월 2만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 200000,
+    "maxAmount" : 500000,
+    "rate" : 0.05,
+    "description" : "통합한도구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "CULTURE",
+    "rate" : 0.2,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 200000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "20,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "토스뱅크 체크카드",
+  "company" : "토스뱅크",
+  "annualFee" : 0,
+  "image" : "Hex:#0059ff",
+  "mainBenefits" : [ "집중 카테고리 캐시백", "ATM 수수료 면제", "해외 결제 2% 캐시백" ],
+  "categories" : [ "FOOD", "TRANSPORT", "ETC" ],
+  "summary" : "결제하는 순간 통장으로 꽂히는 실시간 캐시백의 재미",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.tossbank.com",
+  "cardType" : "체크",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 51,
+      "femaleRate" : 49
     },
-    "detailBenefits": [{"title": "특별적립", "content": "현대자동차 구매 시 포인트 선지급", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.01, "description": "기본적립"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.01, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 500000,
-    "maxBenefit": "무제한",
-    "baseRate": 0.005,
-    "officialLink": "https://www.hyundaicard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 50
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "신한카드 처음(ANNIVERSE)",
-    "company": "신한카드",
-    "annualFee": 15000,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["대중교통 10% 적립", "생일 축하 포인트", "편의점 5% 할인"],
-    "categories": ["TRANSPORT", "FOOD", "CULTURE"],
-    "cardType": "신용",
-    "summary": "사회에 첫발을 내딛는 청년들을 위한 성장형 카드",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 45, "femaleRate": 55},
-      "ageGroups": [{"label": "20대", "value": 70}, {"label": "30대", "value": 20}, {"label": "40대", "value": 7}, {"label": "50대+", "value": 3}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "즉시캐시백",
+    "content" : "편의점, 대중교통 등 매일 1회 캐시백",
+    "detailLimit" : "항목당 500원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 999999,
+    "rate" : 0.02,
+    "description" : "실적 무관 캐시백"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.02,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.005,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "카카오뱅크 프렌즈 체크카드",
+  "company" : "카카오뱅크",
+  "annualFee" : 0,
+  "image" : "Hex:#ffeb00",
+  "mainBenefits" : [ "전 가맹점 0.2% 적립", "주말/공휴일 0.2% 추가", "시즌제 캐시백 프로모션" ],
+  "categories" : [ "ETC", "SHOPPING", "FOOD" ],
+  "summary" : "귀여운 디자인에 실속 있는 기본 적립을 더한 전국민 체크카드",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.kakaobank.com",
+  "cardType" : "체크",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 44,
+      "femaleRate" : 56
     },
-    "detailBenefits": [{"title": "출퇴근", "content": "대중교통 이용 시 포인트 10% 적립", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 600000, "rate": 0.1, "description": "1구간"}],
-    "benefitRules": [{"category": "TRANSPORT", "rate": 0.1, "benefitType": "POINT", "benefitLimit": 10000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "20,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 45
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "KB국민 노리2 체크카드",
-    "company": "국민카드",
-    "annualFee": 0,
-    "image": "Hex:#ffbc00",
-    "mainBenefits": ["스타벅스 10% 할인", "영화 20% 할인", "편의점 5% 할인"],
-    "categories": ["FOOD", "CULTURE", "SHOPPING"],
-    "cardType": "체크",
-    "summary": "대학생부터 직장인까지 아우르는 혜택의 밸런스",
-    "condition": "전월 실적 20만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 46, "femaleRate": 54},
-      "ageGroups": [{"label": "20대", "value": 65}, {"label": "30대", "value": 20}, {"label": "40대", "value": 10}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "기본혜택",
+    "content" : "실적 상관 없이 국내외 0.2% 적립",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 300000,
+    "rate" : 0.002,
+    "description" : "기본 적립 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.002,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.002,
+  "maxBenefit" : "15,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "신한카드 Deep Oil",
+  "company" : "신한카드",
+  "annualFee" : 10000,
+  "image" : "Hex:#0046ff",
+  "mainBenefits" : [ "주유 10% 할인", "정비/주차 10% 할인", "편의점 5% 할인" ],
+  "categories" : [ "TRANSPORT", "LIVING", "ETC" ],
+  "summary" : "운전자라면 필수, 내가 선택한 정유사에서 10% 파격 할인",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.shinhancard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 75,
+      "femaleRate" : 25
     },
-    "detailBenefits": [{"title": "여가", "content": "CGV 영화 20% 환급할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 200000, "maxAmount": 500000, "rate": 0.05, "description": "통합한도구간"}],
-    "benefitRules": [{"category": "CULTURE", "rate": 0.2, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 200000,
-    "maxBenefit": "20,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.card.kbcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 15
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 40
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "토스뱅크 체크카드",
-    "company": "토스뱅크",
-    "annualFee": 0,
-    "image": "Hex:#0059ff",
-    "mainBenefits": ["전 영역 즉시 캐시백", "ATM 수수료 면제", "해외 결제 2% 캐시백"],
-    "categories": ["FOOD", "TRANSPORT", "ETC"],
-    "cardType": "체크",
-    "summary": "결제하자마자 돈이 돌아오는 직관적인 즐거움",
-    "condition": "전월 실적 무관",
-    "statistics": {
-      "gender": {"maleRate": 51, "femaleRate": 49},
-      "ageGroups": [{"label": "20대", "value": 50}, {"label": "30대", "value": 35}, {"label": "40대", "value": 10}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "주유특화",
+    "content" : "4대 주유소 중 1곳 10% 할인",
+    "detailLimit" : "월 1.5만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 700000,
+    "rate" : 0.1,
+    "description" : "운전자 혜택 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "TRANSPORT",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 15000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "현대카드 ZERO Edition3 (할인형)",
+  "company" : "현대카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#000000",
+  "mainBenefits" : [ "모든 가맹점 0.8% 할인", "생활 영역 1.5% 할인", "애플페이 바로 사용" ],
+  "categories" : [ "ETC", "FOOD", "SHOPPING" ],
+  "summary" : "조건 없이 심플하게 할인받는 대한민국 무조건 카드의 대명사",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.hyundaicard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 48,
+      "femaleRate" : 52
     },
-    "detailBenefits": [{"title": "즉시캐시백", "content": "편의점, 대중교통 등 7개 영역 캐시백", "detailLimit": "일 1회"}],
-    "performanceTiers": [{"minAmount": 0, "maxAmount": 999999, "rate": 0.02, "description": "전구간혜택"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.02, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 0,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.005,
-    "officialLink": "https://www.tossbank.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 40
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "카카오뱅크 프렌즈 체크카드",
-    "company": "카카오뱅크",
-    "annualFee": 0,
-    "image": "Hex:#ffeb00",
-    "mainBenefits": ["실적 무관 0.2% 적립", "주말/공휴일 0.2% 추가", "시즌별 프로모션 혜택"],
-    "categories": ["ETC", "SHOPPING", "FOOD"],
-    "cardType": "체크",
-    "summary": "디자인으로 소유욕을, 기본 적립으로 실속을 챙기는 카드",
-    "condition": "전월 실적 무관",
-    "statistics": {
-      "gender": {"maleRate": 44, "femaleRate": 56},
-      "ageGroups": [{"label": "20대", "value": 45}, {"label": "30대", "value": 35}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "기본할인",
+    "content" : "국내외 모든 가맹점 0.8% 청구 할인",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 999999,
+    "rate" : 0.008,
+    "description" : "무조건 할인"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.008,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.008,
+  "maxBenefit" : "제한없음",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "하나 원더카드 FREE+",
+  "company" : "하나카드",
+  "annualFee" : 12000,
+  "image" : "Hex:#009490",
+  "mainBenefits" : [ "전 가맹점 0.8% 할인", "간편결제 1.2% 할인", "마트/베이커리 할인" ],
+  "categories" : [ "ETC", "SHOPPING", "FOOD" ],
+  "summary" : "무실적 카드의 강점과 간편결제 우대 혜택을 결합한 멀티 카드",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.hanacard.co.kr",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 45,
+      "femaleRate" : 55
     },
-    "detailBenefits": [{"title": "기본적립", "content": "국내외 모든 가맹점 0.2% 적립", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 0, "maxAmount": 300000, "rate": 0.002, "description": "기본구간"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.002, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 0,
-    "maxBenefit": "15,000원",
-    "baseRate": 0.002,
-    "officialLink": "https://www.kakaobank.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 35
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 20
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "롯데카드 디지로카 Paris",
-    "company": "롯데카드",
-    "annualFee": 20000,
-    "image": "Hex:#ed1c24",
-    "mainBenefits": ["온라인쇼핑 10% 할인", "마트/슈퍼 10% 할인", "쇼핑 멤버십 50% 할인"],
-    "categories": ["SHOPPING", "FOOD", "SUBSCRIPTION"],
-    "cardType": "신용",
-    "summary": "유럽 감성의 디자인과 압도적인 쇼핑 혜택의 조화",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 30, "femaleRate": 70},
-      "ageGroups": [{"label": "20대", "value": 25}, {"label": "30대", "value": 45}, {"label": "40대", "value": 25}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "온라인우대",
+    "content" : "네이버/카카오페이 결제 시 1.2% 할인",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 999999,
+    "rate" : 0.008,
+    "description" : "무실적 혜택"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.008,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.008,
+  "maxBenefit" : "제한없음",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "삼성카드 iD ON",
+  "company" : "삼성카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#0a4da2",
+  "mainBenefits" : [ "많이 쓰는 영역 30% 할인", "온라인쇼핑 3% 할인", "교통/통신 10% 할인" ],
+  "categories" : [ "FOOD", "SHOPPING", "TRANSPORT" ],
+  "summary" : "자동 맞춤 할인 시스템으로 알아서 가장 많이 쓴 곳을 할인",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.samsungcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 40,
+      "femaleRate" : 60
     },
-    "detailBenefits": [{"title": "쇼핑", "content": "모든 쇼핑 영역 통합 10% 할인", "detailLimit": "월 2만원"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "SHOPPING", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 20000}],
-    "bestPerformance": 500000,
-    "maxBenefit": "40,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.lottecard.co.kr"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 30
+    }, {
+      "label" : "30대",
+      "value" : 50
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "신한카드 Deep Oil",
-    "company": "신한카드",
-    "annualFee": 10000,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["주유 10% 할인", "정비/주차 10% 할인", "커피 20% 할인"],
-    "categories": ["TRANSPORT", "FOOD", "ETC"],
-    "cardType": "신용",
-    "summary": "직접 선택한 주유소에서 압도적인 할인을 제공하는 드라이버 카드",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 75, "femaleRate": 25},
-      "ageGroups": [{"label": "20대", "value": 15}, {"label": "30대", "value": 35}, {"label": "40대", "value": 40}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "자동할인",
+    "content" : "카페, 배달, 델리 중 가장 많이 쓴 영역 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.3,
+    "description" : "특화 할인 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "FOOD",
+    "rate" : 0.3,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.03,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "롯데카드 디지로카 Paris",
+  "company" : "롯데카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#ed1c24",
+  "mainBenefits" : [ "온라인쇼핑 10% 할인", "마트/슈퍼 10% 할인", "반려동물/교육 할인" ],
+  "categories" : [ "SHOPPING", "EDUCATION", "MEDICAL" ],
+  "summary" : "쇼핑과 라이프스타일을 세련되게 담아낸 프리미엄급 일반 카드",
+  "condition" : "전월 실적 50만원 이상",
+  "officialLink" : "https://www.lottecard.co.kr",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 30,
+      "femaleRate" : 70
     },
-    "detailBenefits": [{"title": "주유", "content": "선택한 정유사 10% 결제일 할인", "detailLimit": "월 15,000원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 700000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "TRANSPORT", "rate": 0.1, "type": "DISCOUNT", "benefitLimit": 15000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 25
+    }, {
+      "label" : "30대",
+      "value" : 45
+    }, {
+      "label" : "40대",
+      "value" : 25
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "하나 원더카드 FREE+",
-    "company": "하나카드",
-    "annualFee": 12000,
-    "image": "Hex:#009490",
-    "mainBenefits": ["모든 가맹점 무실적 0.8% 할인", "간편결제 1.2% 할인", "배달앱 5% 할인"],
-    "categories": ["ETC", "SHOPPING", "FOOD"],
-    "cardType": "신용",
-    "summary": "고민하기 싫은 분들을 위한 무조건 할인 최강자",
-    "condition": "전월 실적 무관",
-    "statistics": {
-      "gender": {"maleRate": 48, "femaleRate": 52},
-      "ageGroups": [{"label": "20대", "value": 30}, {"label": "30대", "value": 40}, {"label": "40대", "value": 20}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "쇼핑혜택",
+    "content" : "모든 온라인 쇼핑몰 10% 결제일 할인",
+    "detailLimit" : "월 2만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 500000,
+    "maxAmount" : 1000000,
+    "rate" : 0.1,
+    "description" : "기본구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "SHOPPING",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 20000
+  } ],
+  "bestPerformance" : 500000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "40,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "우리카드 Every 1",
+  "company" : "우리카드",
+  "annualFee" : 12000,
+  "image" : "Hex:#007bc8",
+  "mainBenefits" : [ "모든 가맹점 1% 할인", "온라인쇼핑 2% 할인", "추가 할인 혜택" ],
+  "categories" : [ "ETC", "SHOPPING", "FOOD" ],
+  "summary" : "어디서나 쓰기 편한 1% 기본 할인에 집중한 가성비 신용카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.wooricard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 48,
+      "femaleRate" : 52
     },
-    "detailBenefits": [{"title": "무실적", "content": "실적 조건 없이 모든 가맹점 0.8% 할인", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 0, "maxAmount": 999999, "rate": 0.008, "description": "기본할인"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.008, "benefitType": "DISCOUNT", "benefitLimit": 999999}],
-    "bestPerformance": 0,
-    "maxBenefit": "제한없음",
-    "baseRate": 0.008,
-    "officialLink": "https://www.hanacard.co.kr"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 35
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 20
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "현대카드 ZERO Edition3 (할인형)",
-    "company": "현대카드",
-    "annualFee": 15000,
-    "image": "Hex:#000000",
-    "mainBenefits": ["모든 가맹점 0.8% 할인", "생활 필수 영역 1.5% 할인", "애플페이 바로 사용"],
-    "categories": ["ETC", "FOOD", "SHOPPING"],
-    "cardType": "신용",
-    "summary": "무조건 카드의 정석, 심플함의 끝을 보여주는 스테디셀러",
-    "condition": "전월 실적 무관",
-    "statistics": {
-      "gender": {"maleRate": 45, "femaleRate": 55},
-      "ageGroups": [{"label": "20대", "value": 40}, {"label": "30대", "value": 40}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "데일리할인",
+    "content" : "국내외 모든 가맹점 기본 1% 할인",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.01,
+    "description" : "기본 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.01,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "삼성 iD PET 카드",
+  "company" : "삼성카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#0a4da2",
+  "mainBenefits" : [ "동물병원 30% 할인", "반려동물 쇼핑몰 30% 할인", "스트리밍 10% 할인" ],
+  "categories" : [ "MEDICAL", "SHOPPING", "SUBSCRIPTION" ],
+  "summary" : "반려동물 양육 가구를 위한 의료비와 용품 쇼핑 특화 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.samsungcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 25,
+      "femaleRate" : 75
     },
-    "detailBenefits": [{"title": "생활영역", "content": "음식점, 편의점, 커피 1.5% 할인", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 0, "maxAmount": 999999, "rate": 0.008, "description": "기본할인"}],
-    "benefitRules": [{"category": "FOOD", "rate": 0.015, "benefitType": "DISCOUNT", "benefitLimit": 999999}],
-    "bestPerformance": 0,
-    "maxBenefit": "제한없음",
-    "baseRate": 0.008,
-    "officialLink": "https://www.hyundaicard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 30
+    }, {
+      "label" : "30대",
+      "value" : 50
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "삼성카드 iD ON",
-    "company": "삼성카드",
-    "annualFee": 20000,
-    "image": "Hex:#0a4da2",
-    "mainBenefits": ["많이 쓰는 영역 30% 할인", "온라인쇼핑 3% 할인", "교통/통신 10% 할인"],
-    "categories": ["FOOD", "SHOPPING", "TRANSPORT"],
-    "cardType": "신용",
-    "summary": "내가 굳이 고르지 않아도 가장 많이 쓴 영역을 알아서 할인",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 40, "femaleRate": 60},
-      "ageGroups": [{"label": "20대", "value": 35}, {"label": "30대", "value": 45}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "펫케어",
+    "content" : "동물병원 및 애견샵 이용 시 30% 할인",
+    "detailLimit" : "월 3만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.3,
+    "description" : "반려동물 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "MEDICAL",
+    "rate" : 0.3,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 30000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "50,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "KB국민 굿데이카드",
+  "company" : "국민카드",
+  "annualFee" : 10000,
+  "image" : "Hex:#ffbc00",
+  "mainBenefits" : [ "주유 리터당 60원 할인", "음식점/커피 10% 할인", "학원비 10% 할인" ],
+  "categories" : [ "TRANSPORT", "FOOD", "EDUCATION" ],
+  "summary" : "직장인과 학부모 모두 만족하는 생활 업종 통합 할인",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.kbcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 40,
+      "femaleRate" : 60
     },
-    "detailBenefits": [{"title": "자동맞춤", "content": "카페, 배달, 델리 중 가장 많이 쓴 영역 30%", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 600000, "rate": 0.3, "description": "자동할인구간"}],
-    "benefitRules": [{"category": "FOOD", "rate": 0.3, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.samsungcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 10
+    }, {
+      "label" : "30대",
+      "value" : 45
+    }, {
+      "label" : "40대",
+      "value" : 35
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "BC goody 카드",
-    "company": "기타",
-    "annualFee": 10000,
-    "image": "Hex:#ed1c24",
-    "mainBenefits": ["점심시간 10% 할인", "넷플릭스 20% 할인", "편의점 5% 할인"],
-    "categories": ["FOOD", "SUBSCRIPTION", "SHOPPING"],
-    "cardType": "신용",
-    "summary": "직장인의 점심 식사비와 여가를 책임지는 실속형 카드",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 55, "femaleRate": 45},
-      "ageGroups": [{"label": "20대", "value": 25}, {"label": "30대", "value": 50}, {"label": "40대", "value": 20}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "생활할인",
+    "content" : "음식점 및 약국 10% 청구 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.1,
+    "description" : "1단계 할인"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "TRANSPORT",
+    "rate" : 0.05,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "신한카드 Deep Dream 체크",
+  "company" : "신한카드",
+  "annualFee" : 0,
+  "image" : "Hex:#0046ff",
+  "mainBenefits" : [ "무실적 0.2% 적립", "드림 영역 0.6% 적립", "주말 주유소 적립" ],
+  "categories" : [ "ETC", "SHOPPING", "FOOD" ],
+  "summary" : "실적 조건 없는 기본 적립과 자동 우대 적립의 조화",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.shinhancard.com",
+  "cardType" : "체크",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 49,
+      "femaleRate" : 51
     },
-    "detailBenefits": [{"title": "점심시간", "content": "전국 음식점 12시~14시 10% 할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 700000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "FOOD", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "25,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.bccard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 40
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "신한카드 Deep Dream",
-    "company": "신한카드",
-    "annualFee": 8000,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["무실적 0.7% 적립", "가장 많이 쓴 곳 2.1% 적립", "주말 주유 리터당 80원"],
-    "categories": ["ETC", "SHOPPING", "FOOD"],
-    "cardType": "신용",
-    "summary": "따지지 말고 쓰세요, 적립은 신한이 알아서 챙겨줍니다",
-    "condition": "전월 실적 무관",
-    "statistics": {
-      "gender": {"maleRate": 48, "femaleRate": 52},
-      "ageGroups": [{"label": "20대", "value": 20}, {"label": "30대", "value": 35}, {"label": "40대", "value": 30}, {"label": "50대+", "value": 15}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "모두드림",
+    "content" : "전 가맹점 기본 0.2% 포인트 적립",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 300000,
+    "rate" : 0.002,
+    "description" : "기본적립"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.002,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.002,
+  "maxBenefit" : "15,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "현대카드 Z work",
+  "company" : "현대카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#000000",
+  "mainBenefits" : [ "커피 50% 할인", "점심식사 10% 할인", "온라인쇼핑 10% 할인" ],
+  "categories" : [ "FOOD", "SHOPPING", "TRANSPORT" ],
+  "summary" : "직장인들의 업무 시간을 할인으로 채워주는 오피스 라이프 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.hyundaicard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 55,
+      "femaleRate" : 45
     },
-    "detailBenefits": [{"title": "모두드림", "content": "전국 가맹점 0.7% 기본 포인트 적립", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 0, "maxAmount": 300000, "rate": 0.007, "description": "기본적립"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.007, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 0,
-    "maxBenefit": "50,000원",
-    "baseRate": 0.007,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 30
+    }, {
+      "label" : "30대",
+      "value" : 55
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "삼성카드 iD ENERGY",
-    "company": "삼성카드",
-    "annualFee": 20000,
-    "image": "Hex:#0a4da2",
-    "mainBenefits": ["주유 1만원 할인", "주차/세차 할인", "전기차 충전 10% 할인"],
-    "categories": ["TRANSPORT", "LIVING", "ETC"],
-    "cardType": "신용",
-    "summary": "내연기관부터 전기차까지 모든 드라이버를 위한 에너지 카드",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 72, "femaleRate": 28},
-      "ageGroups": [{"label": "20대", "value": 10}, {"label": "30대", "value": 40}, {"label": "40대", "value": 40}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "런치할인",
+    "content" : "오전 11시~오후 2시 음식점 10% 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "직장인 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "FOOD",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "농협카드 zgm.rounding",
+  "company" : "농협카드",
+  "annualFee" : 25000,
+  "image" : "Hex:#20744a",
+  "mainBenefits" : [ "골프장 10% 적립", "골프연습장 10% 적립", "의료 5% 적립" ],
+  "categories" : [ "CULTURE", "MEDICAL", "ETC" ],
+  "summary" : "주말 골프 라운딩을 즐기는 액티브한 소비자를 위한 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://card.nonghyup.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 70,
+      "femaleRate" : 30
     },
-    "detailBenefits": [{"title": "주유할인", "content": "정유사 1만원 이상 결제 시 1만원 할인", "detailLimit": "월 2회"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.1, "description": "주유 특화"}],
-    "benefitRules": [{"category": "TRANSPORT", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 20000}],
-    "bestPerformance": 500000,
-    "maxBenefit": "35,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.samsungcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 5
+    }, {
+      "label" : "30대",
+      "value" : 30
+    }, {
+      "label" : "40대",
+      "value" : 45
+    }, {
+      "label" : "50대+",
+      "value" : 20
+    } ]
   },
-  {
-    "name": "KB국민 굿데이카드",
-    "company": "국민카드",
-    "annualFee": 10000,
-    "image": "Hex:#ffbc00",
-    "mainBenefits": ["학원비/휘트니스 할인", "주유 리터당 60원", "커피/편의점 10% 할인"],
-    "categories": ["EDUCATION", "TRANSPORT", "FOOD"],
-    "cardType": "신용",
-    "summary": "매일매일 기분 좋은 혜택, 실적에 따라 커지는 할인폭",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 35, "femaleRate": 65},
-      "ageGroups": [{"label": "20대", "value": 15}, {"label": "30대", "value": 40}, {"label": "40대", "value": 35}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "필드케어",
+    "content" : "전국 골프장 및 스크린골프 10% 적립",
+    "detailLimit" : "월 2만점"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "골프 특화 적립"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "CULTURE",
+    "rate" : 0.1,
+    "benefitType" : "POINT",
+    "benefitLimit" : 20000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "40,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "하나카드 K-패스",
+  "company" : "하나카드",
+  "annualFee" : 12000,
+  "image" : "Hex:#009490",
+  "mainBenefits" : [ "교통비 최대 53% 환급", "커피 10% 할인", "편의점 10% 할인" ],
+  "categories" : [ "TRANSPORT", "FOOD", "SHOPPING" ],
+  "summary" : "국가 정책 환급금에 카드사 추가 할인을 더한 알뜰 교통 종결자",
+  "condition" : "전월 실적 20만원 이상",
+  "officialLink" : "https://www.hanacard.co.kr",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 44,
+      "femaleRate" : 56
     },
-    "detailBenefits": [{"title": "교육", "content": "학원, 독서실 이용 시 10% 할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 600000, "rate": 0.1, "description": "1구간"}],
-    "benefitRules": [{"category": "EDUCATION", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.card.kbcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 55
+    }, {
+      "label" : "30대",
+      "value" : 30
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "신한카드 Discount Plan+",
-    "company": "신한카드",
-    "annualFee": 30000,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["전 가맹점 최대 1% 할인", "선택 업종 5% 할인", "공항 라운지 무료"],
-    "categories": ["ETC", "SHOPPING", "FOOD"],
-    "cardType": "신용",
-    "summary": "프리미엄 혜택과 무조건 할인을 동시에 누리는 스마트한 선택",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 50, "femaleRate": 50},
-      "ageGroups": [{"label": "20대", "value": 20}, {"label": "30대", "value": 40}, {"label": "40대", "value": 30}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "교통환급",
+    "content" : "K-패스 앱 연동 대중교통 환급",
+    "detailLimit" : "월 60회"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 200000,
+    "maxAmount" : 500000,
+    "rate" : 0.2,
+    "description" : "추가 할인 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "TRANSPORT",
+    "rate" : 0.2,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 15000
+  } ],
+  "bestPerformance" : 200000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "50,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "신한카드 Air One",
+  "company" : "신한카드",
+  "annualFee" : 49000,
+  "image" : "Hex:#0046ff",
+  "mainBenefits" : [ "1천원당 1마일 적립", "항공/면세점 2마일 적립", "무실적 적립" ],
+  "categories" : [ "ETC", "SHOPPING", "CULTURE" ],
+  "summary" : "가성비 대한항공 마일리지 적립의 끝판왕",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.shinhancard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 53,
+      "femaleRate" : 47
     },
-    "detailBenefits": [{"title": "선택할인", "content": "쇼핑, 교육 등 원하는 영역 5% 할인", "detailLimit": "월 2만원"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.01, "description": "기본할인"}],
-    "benefitRules": [{"category": "SHOPPING", "rate": 0.05, "benefitType": "DISCOUNT", "benefitLimit": 20000}],
-    "bestPerformance": 500000,
-    "maxBenefit": "50,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 20
+    }, {
+      "label" : "30대",
+      "value" : 45
+    }, {
+      "label" : "40대",
+      "value" : 25
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "농협카드 zgm.rounding",
-    "company": "농협카드",
-    "annualFee": 25000,
-    "image": "Hex:#20744a",
-    "mainBenefits": ["골프장 10% 적립", "골프연습장 10% 적립", "보험/의료 5% 적립"],
-    "categories": ["CULTURE", "MEDICAL", "ETC"],
-    "cardType": "신용",
-    "summary": "주말 필드 나가는 골퍼들의 필수 동반자",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 70, "femaleRate": 30},
-      "ageGroups": [{"label": "20대", "value": 5}, {"label": "30대", "value": 25}, {"label": "40대", "value": 45}, {"label": "50대+", "value": 25}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "기본적립",
+    "content" : "국내외 모든 가맹점 1마일리지 적립",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 1000000,
+    "rate" : 0.01,
+    "description" : "마일리지 전용"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.01,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.01,
+  "maxBenefit" : "제한없음",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "삼성 iD ALL 카드",
+  "company" : "삼성카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#0a4da2",
+  "mainBenefits" : [ "마트/슈퍼 2.5% 할인", "주유 리터당 90원 할인", "관리비/통신 2.5% 할인" ],
+  "categories" : [ "SHOPPING", "TRANSPORT", "LIVING" ],
+  "summary" : "가족 단위 생활비 지출이 많은 가구를 위한 올라운더 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.samsungcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 42,
+      "femaleRate" : 58
     },
-    "detailBenefits": [{"title": "골프특화", "content": "전국 골프장 및 연습장 10% 적립", "detailLimit": "월 2만점"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "CULTURE", "rate": 0.1, "benefitType": "POINT", "benefitLimit": 20000}],
-    "bestPerformance": 400000,
-    "maxBenefit": "40,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://card.nonghyup.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 15
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 35
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "하나카드 K-패스 카드",
-    "company": "하나카드",
-    "annualFee": 12000,
-    "image": "Hex:#009490",
-    "mainBenefits": ["대중교통 최대 53% 환급", "커피 10% 할인", "온라인쇼핑 1% 할인"],
-    "categories": ["TRANSPORT", "FOOD", "SHOPPING"],
-    "cardType": "신용",
-    "summary": "국가 지원 환급과 카드사 할인을 동시에 받는 교통 특화 카드",
-    "condition": "전월 실적 20만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 45, "femaleRate": 55},
-      "ageGroups": [{"label": "20대", "value": 50}, {"label": "30대", "value": 30}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "집중할인",
+    "content" : "이마트, 홈플러스 2.5% 결제일 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.025,
+    "description" : "생활비 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "SHOPPING",
+    "rate" : 0.025,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.005,
+  "maxBenefit" : "35,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "KB국민 위시 투게더",
+  "company" : "국민카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#ffbc00",
+  "mainBenefits" : [ "음식점 10% 할인", "여가/커피 5% 할인", "모임 실적 합산 혜택" ],
+  "categories" : [ "FOOD", "CULTURE", "LIVING" ],
+  "summary" : "가족이나 지인과 함께 실적을 공유하고 혜택을 나누는 신개념 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.kbcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 40,
+      "femaleRate" : 60
     },
-    "detailBenefits": [{"title": "K-패스", "content": "정부 대중교통 환급 지원 연동", "detailLimit": "월 60회"}],
-    "performanceTiers": [{"minAmount": 200000, "maxAmount": 500000, "rate": 0.2, "description": "정부지원 별도"}],
-    "benefitRules": [{"category": "TRANSPORT", "rate": 0.2, "benefitType": "DISCOUNT", "benefitLimit": 15000}],
-    "bestPerformance": 200000,
-    "maxBenefit": "50,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.hanacard.co.kr"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 20
+    }, {
+      "label" : "30대",
+      "value" : 45
+    }, {
+      "label" : "40대",
+      "value" : 25
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "KB국민 반려愛 카드",
-    "company": "국민카드",
-    "annualFee": 15000,
-    "image": "Hex:#ffbc00",
-    "mainBenefits": ["동물병원 10% 할인", "반려동물샵 10% 할인", "대형마트 5% 할인"],
-    "categories": ["MEDICAL", "SHOPPING", "FOOD"],
-    "cardType": "신용",
-    "summary": "반려동물과 함께하는 가족을 위한 건강한 혜택",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 30, "femaleRate": 70},
-      "ageGroups": [{"label": "20대", "value": 20}, {"label": "30대", "value": 40}, {"label": "40대", "value": 30}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "외식모임",
+    "content" : "일반음식점 10% 청구 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "투게더 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "FOOD",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "현대카드 ZERO Edition3 (포인트형)",
+  "company" : "현대카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#000000",
+  "mainBenefits" : [ "모든 가맹점 1% 적립", "생활 영역 2% 적립", "M포인트 바우처 교환" ],
+  "categories" : [ "ETC", "FOOD", "SHOPPING" ],
+  "summary" : "포인트로 차곡차곡 쌓는 즐거움, 무실적 적립의 대명사",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.hyundaicard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 46,
+      "femaleRate" : 54
     },
-    "detailBenefits": [{"title": "펫케어", "content": "동물병원 및 애견샵 10% 할인", "detailLimit": "월 2만원"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 600000, "rate": 0.1, "description": "1구간"}],
-    "benefitRules": [{"category": "MEDICAL", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 20000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.card.kbcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 35
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 20
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "우리카드 어디로든 그린카드 V3",
-    "company": "우리카드",
-    "annualFee": 15000,
-    "image": "Hex:#007bc8",
-    "mainBenefits": ["친환경 포인트 최대 20%", "전기차 충전 할인", "공공시설 무료 입장"],
-    "categories": ["ETC", "TRANSPORT", "LIVING"],
-    "cardType": "신용",
-    "summary": "지구를 지키는 가치 소비, 포인트로 돌려받는 친환경 라이프",
-    "condition": "전월 실적 30만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 48, "femaleRate": 52},
-      "ageGroups": [{"label": "20대", "value": 30}, {"label": "30대", "value": 30}, {"label": "40대", "value": 25}, {"label": "50대+", "value": 15}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "기본적립",
+    "content" : "국내외 모든 가맹점 1% M포인트 적립",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 999999,
+    "rate" : 0.01,
+    "description" : "무조건 적립"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.01,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.01,
+  "maxBenefit" : "무제한",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "우리카드 카드의정석 Every Check",
+  "company" : "우리카드",
+  "annualFee" : 0,
+  "image" : "Hex:#007bc8",
+  "mainBenefits" : [ "전 가맹점 0.2% 적립", "추가 0.2% 적립", "연간 보너스 적립" ],
+  "categories" : [ "ETC", "FOOD", "SHOPPING" ],
+  "summary" : "매일 쓰는 체크카드, 실적 없이도 쌓이는 정석적인 혜택",
+  "condition" : "전월 실적 무관",
+  "officialLink" : "https://www.wooricard.com",
+  "cardType" : "체크",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 48,
+      "femaleRate" : 52
     },
-    "detailBenefits": [{"title": "에코머니", "content": "친환경 제품 구매 시 최대 20% 적립", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 300000, "maxAmount": 600000, "rate": 0.05, "description": "기본구간"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.2, "benefitType": "POINT", "benefitLimit": 30000}],
-    "bestPerformance": 300000,
-    "maxBenefit": "40,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.wooricard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 45
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 15
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "신한카드 LABE (라베)",
-    "company": "신한카드",
-    "annualFee": 200000,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["골프장 10% 할인", "공항 라운지 무료", "프리미엄 호텔 서비스"],
-    "categories": ["CULTURE", "ETC", "FOOD"],
-    "cardType": "신용",
-    "summary": "골프와 여행을 즐기는 하이엔드 유저를 위한 프리미엄 카드",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 65, "femaleRate": 35},
-      "ageGroups": [{"label": "20대", "value": 10}, {"label": "30대", "value": 40}, {"label": "40대", "value": 40}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "데일리적립",
+    "content" : "국내 가맹점 이용 시 0.2% 적립",
+    "detailLimit" : "무제한"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 0,
+    "maxAmount" : 300000,
+    "rate" : 0.002,
+    "description" : "기본적립구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.002,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 0,
+  "baseRate" : 0.002,
+  "maxBenefit" : "15,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "롯데카드 LOCA LIKIT Eat",
+  "company" : "롯데카드",
+  "annualFee" : 10000,
+  "image" : "Hex:#ed1c24",
+  "mainBenefits" : [ "음식점 60% 할인", "커피 60% 할인", "배달앱 60% 할인" ],
+  "categories" : [ "FOOD", "ETC", "CULTURE" ],
+  "summary" : "점심값 걱정을 덜어주는 파격적인 60% 할인율의 외식 특화 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.lottecard.co.kr",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 55,
+      "femaleRate" : 45
     },
-    "detailBenefits": [{"title": "골프바우처", "content": "골프장 이용료 10만원 할인권 제공", "detailLimit": "연 1회"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "CULTURE", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 50000}],
-    "bestPerformance": 500000,
-    "maxBenefit": "200,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 40
+    }, {
+      "label" : "30대",
+      "value" : 45
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "현대카드 대한항공카드 Edition2",
-    "company": "현대카드",
-    "annualFee": 30000,
-    "image": "Hex:#000000",
-    "mainBenefits": ["1천원당 1마일 적립", "직판 항공권 할인", "기내 면세점 할인"],
-    "categories": ["ETC", "SHOPPING", "CULTURE"],
-    "cardType": "신용",
-    "summary": "대한항공 이용객을 위한 가장 직관적인 마일리지 적립기",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 52, "femaleRate": 48},
-      "ageGroups": [{"label": "20대", "value": 20}, {"label": "30대", "value": 45}, {"label": "40대", "value": 25}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "식비할인",
+    "content" : "음식점, 카페 결제 시 60% 할인",
+    "detailLimit" : "월 1.3만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.6,
+    "description" : "파격 할인 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "FOOD",
+    "rate" : 0.6,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 13000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.1,
+  "maxBenefit" : "20,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "신한카드 Deep Store",
+  "company" : "신한카드",
+  "annualFee" : 13000,
+  "image" : "Hex:#0046ff",
+  "mainBenefits" : [ "쇼핑 업종 10% 할인", "생활 서비스 10% 할인", "커피 10% 할인" ],
+  "categories" : [ "SHOPPING", "FOOD", "LIVING" ],
+  "summary" : "집 앞 마트부터 백화점까지 쇼핑의 모든 것을 할인",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.shinhancard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 30,
+      "femaleRate" : 70
     },
-    "detailBenefits": [{"title": "마일리지", "content": "해외/백화점 이용 시 2마일 특별 적립", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.01, "description": "기본적립"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.01, "benefitType": "POINT", "benefitLimit": 999999}],
-    "bestPerformance": 500000,
-    "maxBenefit": "제한없음",
-    "baseRate": 0.01,
-    "officialLink": "https://www.hyundaicard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 20
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 30
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "롯데카드 디지로카 Pet",
-    "company": "롯데카드",
-    "annualFee": 20000,
-    "image": "Hex:#ed1c24",
-    "mainBenefits": ["동물병원 20% 할인", "온라인 펫샵 20% 할인", "쇼핑 5% 할인"],
-    "categories": ["MEDICAL", "SHOPPING", "FOOD"],
-    "cardType": "신용",
-    "summary": "펫 부모님들의 병원비 부담을 획기적으로 줄여주는 특화 카드",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 25, "femaleRate": 75},
-      "ageGroups": [{"label": "20대", "value": 25}, {"label": "30대", "value": 45}, {"label": "40대", "value": 20}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "오프라인쇼핑",
+    "content" : "백화점, 대형마트 10% 할인",
+    "detailLimit" : "월 1.5만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.1,
+    "description" : "쇼핑 우대 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "SHOPPING",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 15000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "KB국민 My WE:SH 플러스",
+  "company" : "국민카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#ffbc00",
+  "mainBenefits" : [ "온라인쇼핑 10% 할인", "구독 30% 할인", "의료/세탁 할인" ],
+  "categories" : [ "SHOPPING", "SUBSCRIPTION", "MEDICAL" ],
+  "summary" : "기존 위시 카드의 혜택을 쇼핑과 구독 중심으로 업그레이드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.kbcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 35,
+      "femaleRate" : 65
     },
-    "detailBenefits": [{"title": "병원비", "content": "전국 모든 동물병원 20% 결제일 할인", "detailLimit": "월 3만원"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.2, "description": "반려동물 구간"}],
-    "benefitRules": [{"category": "MEDICAL", "rate": 0.2, "benefitType": "DISCOUNT", "benefitLimit": 30000}],
-    "bestPerformance": 500000,
-    "maxBenefit": "50,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.lottecard.co.kr"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 45
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "우리카드 카드의정석 Every 1",
-    "company": "우리카드",
-    "annualFee": 12000,
-    "image": "Hex:#007bc8",
-    "mainBenefits": ["전 가맹점 1% 할인", "온라인 2% 할인", "구독 서비스 5% 할인"],
-    "categories": ["ETC", "SHOPPING", "SUBSCRIPTION"],
-    "cardType": "신용",
-    "summary": "모든 가맹점에서 고민 없이 긁어도 혜택이 따라오는 카드",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 48, "femaleRate": 52},
-      "ageGroups": [{"label": "20대", "value": 35}, {"label": "30대", "value": 35}, {"label": "40대", "value": 20}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "디지털구독",
+    "content" : "넷플릭스, 유튜브 30% 할인",
+    "detailLimit" : "월 5,000원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "확장 할인 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "SUBSCRIPTION",
+    "rate" : 0.3,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 5000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "35,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "하나카드 원더카드 LIVING",
+  "company" : "하나카드",
+  "annualFee" : 12000,
+  "image" : "Hex:#009490",
+  "mainBenefits" : [ "아파트관리비 10% 할인", "병원/약국 10% 할인", "주유 10% 할인" ],
+  "categories" : [ "LIVING", "MEDICAL", "TRANSPORT" ],
+  "summary" : "가계 경제를 책임지는 알뜰한 주부와 직장인을 위한 고정비 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.hanacard.co.kr",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 38,
+      "femaleRate" : 62
     },
-    "detailBenefits": [{"title": "기본할인", "content": "실적 상관 없이 국내외 1% 할인", "detailLimit": "제한없음"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.01, "description": "기본할인"}],
-    "benefitRules": [{"category": "ETC", "rate": 0.01, "benefitType": "DISCOUNT", "benefitLimit": 999999}],
-    "bestPerformance": 400000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.wooricard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 10
+    }, {
+      "label" : "30대",
+      "value" : 35
+    }, {
+      "label" : "40대",
+      "value" : 45
+    }, {
+      "label" : "50대+",
+      "value" : 10
+    } ]
   },
-  {
-    "name": "삼성카드 iD MOVE",
-    "company": "삼성카드",
-    "annualFee": 20000,
-    "image": "Hex:#0a4da2",
-    "mainBenefits": ["대중교통 10% 할인", "주유 리터당 60원 할인", "스트리밍 50% 할인"],
-    "categories": ["TRANSPORT", "SUBSCRIPTION", "ETC"],
-    "cardType": "신용",
-    "summary": "이동이 많은 사람들을 위한 모빌리티 중심의 혜택 설계",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 55, "femaleRate": 45},
-      "ageGroups": [{"label": "20대", "value": 40}, {"label": "30대", "value": 40}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "주거지원",
+    "content" : "관리비, 가스, 전기요금 통합 10% 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "리빙 우대 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "LIVING",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "현대카드 American Express Green",
+  "company" : "현대카드",
+  "annualFee" : 100000,
+  "image" : "Hex:#000000",
+  "mainBenefits" : [ "전 가맹점 MR 적립", "여행/호텔 특별 적립", "프리미엄 바우처" ],
+  "categories" : [ "ETC", "CULTURE", "FOOD" ],
+  "summary" : "아멕스의 헤리티지를 실속 있게 담아낸 사회초년생 프리미엄 카드",
+  "condition" : "전월 실적 50만원 이상",
+  "officialLink" : "https://www.hyundaicard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 48,
+      "femaleRate" : 52
     },
-    "detailBenefits": [{"title": "이동혜택", "content": "지하철, 버스, 택시 10% 할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.1, "description": "교통구간"}],
-    "benefitRules": [{"category": "TRANSPORT", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 400000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.samsungcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 40
+    }, {
+      "label" : "30대",
+      "value" : 45
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "KB국민 위시 투게더",
-    "company": "국민카드",
-    "annualFee": 15000,
-    "image": "Hex:#ffbc00",
-    "mainBenefits": ["가족 통합 할인", "외식 10% 할인", "카페 5% 할인"],
-    "categories": ["FOOD", "LIVING", "CULTURE"],
-    "cardType": "신용",
-    "summary": "가족 구성원들과 함께 쓰는 공유형 베네핏 카드",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 40, "femaleRate": 60},
-      "ageGroups": [{"label": "20대", "value": 10}, {"label": "30대", "value": 40}, {"label": "40대", "value": 40}, {"label": "50대+", "value": 10}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "포인트교환",
+    "content" : "1MR당 10원 가치로 포인트 사용 가능",
+    "detailLimit" : "제한없음"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 500000,
+    "maxAmount" : 1000000,
+    "rate" : 0.01,
+    "description" : "기본적립"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "ETC",
+    "rate" : 0.01,
+    "benefitType" : "POINT",
+    "benefitLimit" : 999999
+  } ],
+  "bestPerformance" : 500000,
+  "baseRate" : 0.01,
+  "maxBenefit" : "무제한",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "삼성카드 iD MOVE",
+  "company" : "삼성카드",
+  "annualFee" : 20000,
+  "image" : "Hex:#0a4da2",
+  "mainBenefits" : [ "교통 10% 할인", "통신 10% 할인", "배달앱 10% 할인" ],
+  "categories" : [ "TRANSPORT", "FOOD", "LIVING" ],
+  "summary" : "이동이 많은 사람들을 위해 교통과 통신에 혜택을 집중한 카드",
+  "condition" : "전월 실적 40만원 이상",
+  "officialLink" : "https://www.samsungcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 51,
+      "femaleRate" : 49
     },
-    "detailBenefits": [{"title": "모임", "content": "음식점, 커피 통합 10% 할인", "detailLimit": "월 2만원"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.1, "description": "1구간"}],
-    "benefitRules": [{"category": "FOOD", "rate": 0.1, "benefitType": "DISCOUNT", "benefitLimit": 20000}],
-    "bestPerformance": 400000,
-    "maxBenefit": "35,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.card.kbcard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 45
+    }, {
+      "label" : "30대",
+      "value" : 40
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
   },
-  {
-    "name": "신한카드 RPM+ Platinum#",
-    "company": "신한카드",
-    "annualFee": 35000,
-    "image": "Hex:#0046ff",
-    "mainBenefits": ["모든 주유소 100원 적립", "마트 5% 적립", "무료 주차 서비스"],
-    "categories": ["TRANSPORT", "SHOPPING", "ETC"],
-    "cardType": "신용",
-    "summary": "적립부터 무료 주차까지, 드라이버를 위한 프리미엄의 표본",
-    "condition": "전월 실적 50만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 80, "femaleRate": 20},
-      "ageGroups": [{"label": "20대", "value": 5}, {"label": "30대", "value": 35}, {"label": "40대", "value": 45}, {"label": "50대+", "value": 15}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "모빌리티",
+    "content" : "지하철, 버스, 택시 이용 시 10% 할인",
+    "detailLimit" : "월 1만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 400000,
+    "maxAmount" : 800000,
+    "rate" : 0.1,
+    "description" : "이동 우대 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "TRANSPORT",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 400000,
+  "baseRate" : 0.05,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : null,
+  "name" : "KB국민 청춘대로 톡톡",
+  "company" : "국민카드",
+  "annualFee" : 10000,
+  "image" : "Hex:#ffbc00",
+  "mainBenefits" : [ "스타벅스 50% 할인", "버거/패스트푸드 20% 할인", "간편결제 10% 할인" ],
+  "categories" : [ "FOOD", "ETC", "SHOPPING" ],
+  "summary" : "MZ세대의 식습관과 결제 패턴을 그대로 반영한 실속 카드",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.kbcard.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : null,
+    "gender" : {
+      "maleRate" : 40,
+      "femaleRate" : 60
     },
-    "detailBenefits": [{"title": "무료주차", "content": "주요 도심 중심가 1일 무료 주차", "detailLimit": "월 3회"}],
-    "performanceTiers": [{"minAmount": 500000, "maxAmount": 1000000, "rate": 0.05, "description": "기본적립"}],
-    "benefitRules": [{"category": "TRANSPORT", "rate": 0.05, "benefitType": "POINT", "benefitLimit": 50000}],
-    "bestPerformance": 500000,
-    "maxBenefit": "60,000원",
-    "baseRate": 0.01,
-    "officialLink": "https://www.shinhancard.com"
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 65
+    }, {
+      "label" : "30대",
+      "value" : 25
+    }, {
+      "label" : "40대",
+      "value" : 7
+    }, {
+      "label" : "50대+",
+      "value" : 3
+    } ]
   },
-  {
-    "name": "현대카드 Z work",
-    "company": "현대카드",
-    "annualFee": 20000,
-    "image": "Hex:#000000",
-    "mainBenefits": ["커피 50% 할인", "점심식사 10% 할인", "대중교통 10% 할인"],
-    "categories": ["FOOD", "TRANSPORT", "ETC"],
-    "cardType": "신용",
-    "summary": "대한민국 직장인들의 하루 일과를 할인으로 채우다",
-    "condition": "전월 실적 40만원 이상",
-    "statistics": {
-      "gender": {"maleRate": 52, "femaleRate": 48},
-      "ageGroups": [{"label": "20대", "value": 35}, {"label": "30대", "value": 45}, {"label": "40대", "value": 15}, {"label": "50대+", "value": 5}]
+  "detailBenefits" : [ {
+    "id" : null,
+    "title" : "카페/버거",
+    "content" : "스타벅스 50%, 맥도날드 20% 할인",
+    "detailLimit" : "월 1.5만원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : null,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.5,
+    "description" : "청춘 우대"
+  } ],
+  "benefitRules" : [ {
+    "id" : null,
+    "category" : "FOOD",
+    "rate" : 0.5,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 10000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.1,
+  "maxBenefit" : "25,000원",
+  "viewCount" : 0
+}, {
+  "id" : 2,
+  "name" : "신한카드 Mr.Life",
+  "company" : "신한카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#0065bd",
+  "mainBenefits" : [ "온라인쇼핑 5% 할인", "관리비/통신 5% 할인", "해외 가맹점 1% 할인" ],
+  "categories" : [ "SHOPPING", "LIVING", "ETC" ],
+  "summary" : "라이프스타일 맞춤형 혜택의 카드",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.shinhan.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : 2,
+    "gender" : {
+      "maleRate" : 40,
+      "femaleRate" : 60
     },
-    "detailBenefits": [{"title": "직장인", "content": "편의점, 대중교통 이용 시 10% 할인", "detailLimit": "월 1만원"}],
-    "performanceTiers": [{"minAmount": 400000, "maxAmount": 800000, "rate": 0.1, "description": "기본구간"}],
-    "benefitRules": [{"category": "FOOD", "rate": 0.5, "benefitType": "DISCOUNT", "benefitLimit": 10000}],
-    "bestPerformance": 400000,
-    "maxBenefit": "30,000원",
-    "baseRate": 0.05,
-    "officialLink": "https://www.hyundaicard.com"
-  }
-]
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 35
+    }, {
+      "label" : "30대",
+      "value" : 50
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
+  },
+  "detailBenefits" : [ {
+    "id" : 81,
+    "title" : null,
+    "content" : null,
+    "detailLimit" : null
+  }, {
+    "id" : 82,
+    "title" : null,
+    "content" : null,
+    "detailLimit" : null
+  }, {
+    "id" : 83,
+    "title" : null,
+    "content" : null,
+    "detailLimit" : null
+  } ],
+  "performanceTiers" : [ ],
+  "benefitRules" : [ ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.005,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+}, {
+  "id" : 41,
+  "name" : "신한카드 에코체크 카드",
+  "company" : "신한카드",
+  "annualFee" : 15000,
+  "image" : "Hex:#3498db",
+  "mainBenefits" : [ "대중교통 10% 할인", "온라인쇼핑 5% 할인", "통신비 5% 할인" ],
+  "categories" : [ "TRANSPORT", "SHOPPING", "LIVING" ],
+  "summary" : "환경을 생각하는 에코 프렌들리 체크카드",
+  "condition" : "전월 실적 30만원 이상",
+  "officialLink" : "https://www.shinhan.com",
+  "cardType" : "신용",
+  "statistics" : {
+    "id" : 41,
+    "gender" : {
+      "maleRate" : 40,
+      "femaleRate" : 60
+    },
+    "ageGroups" : [ {
+      "label" : "20대",
+      "value" : 35
+    }, {
+      "label" : "30대",
+      "value" : 50
+    }, {
+      "label" : "40대",
+      "value" : 10
+    }, {
+      "label" : "50대+",
+      "value" : 5
+    } ]
+  },
+  "detailBenefits" : [ {
+    "id" : 162,
+    "title" : "대중교통",
+    "content" : "대중교통 10% 할인",
+    "detailLimit" : "월 5,000원"
+  } ],
+  "performanceTiers" : [ {
+    "id" : 159,
+    "minAmount" : 300000,
+    "maxAmount" : 600000,
+    "rate" : 0.05,
+    "description" : "기본 할인 구간"
+  } ],
+  "benefitRules" : [ {
+    "id" : 159,
+    "category" : "TRANSPORT",
+    "rate" : 0.1,
+    "benefitType" : "DISCOUNT",
+    "benefitLimit" : 5000
+  } ],
+  "bestPerformance" : 300000,
+  "baseRate" : 0.005,
+  "maxBenefit" : "30,000원",
+  "viewCount" : 0
+} ]

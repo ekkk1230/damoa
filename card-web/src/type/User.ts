@@ -1,5 +1,6 @@
 import type { Card } from "./Card";
 
+export type UserRole = "ADMIN" | "USER";
 export interface UserCard {
     cardInfo: Card;
     nickname?: string;
@@ -21,6 +22,9 @@ export interface User {
     id: string;
     name: string;
     joinDate: string;
+    role: UserRole;
+    gender?: "M" | "F";
+    birthDate?: string;
 }
 
 export interface AuthFormData {
@@ -28,4 +32,6 @@ export interface AuthFormData {
     password: string;
     confirmPassword?: string;
     name?: string;
+    gender?: "M" | "F";
+    birthDate?: string;
 }

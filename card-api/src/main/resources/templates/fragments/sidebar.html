@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="menu" class="sidebar">
+    <div class="logo">
+        <img th:src="@{/images/logo-sm.png}" alt="DAMOA LOGO">
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/admin/dashboard}">대시보드</a></li>
+            <li><a th:href="@{/admin/cards}">카드 관리</a></li>
+            <li><a th:href="@{/admin/users}">사용자 관리</a></li>
+            <li><a th:href="@{/admin/community}">커뮤니티</a></li>
+        </ul>
+    </nav>
+</div>
+</html>

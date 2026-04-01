@@ -72,4 +72,5 @@ export interface Card {
     baseRate?: number;
     maxBenefit?: string;
     officialLink?: string;
+    viewCount: number;
 }

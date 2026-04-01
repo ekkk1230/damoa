@@ -1,0 +1,171 @@
+/* 리셋 및 베이스 */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; }
+
+body {
+    font-family: 'Pretendard', sans-serif; /* 사용자님이 선호하실만한 깔끔한 폰트 */
+    background-color: #f4f7f6;
+}
+
+/* 전체 감싸는 영역 */
+.admin-wrapper {
+    display: flex; /* float 대신 flex가 레이아웃 잡기 훨씬 편해요! */
+    min-height: 100vh;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 250px;
+    background-color: #1a1a1a; /* 살짝 더 세련된 블랙 */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* 사이드바 고정 */
+    height: 100vh;
+}
+
+.sidebar .logo {
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.sidebar .logo img {
+    max-width: 60px;
+}
+
+.sidebar nav {
+    padding: 20px 0;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: #adb5bd;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar nav ul li a:hover {
+    background-color: #333;
+    color: #ffffff;
+}
+
+/* 메인 콘텐츠 영역 */
+.content {
+    flex: 1; /* 남은 공간 모두 차지 */
+    margin-left: 250px; /* 사이드바 너비만큼 띄워주기 */
+    padding: 40px;
+}
+
+.admin-login-wrap { display: flex; height: 100vh; width: 100%; }
+
+/* [왼쪽] 푸른 계열의 신뢰감 있는 배경 */
+.admin-login-left {
+    flex: 1.2; background: linear-gradient(135deg, #1e3a8a 0%, #1e1b4b 100%);
+    display: flex; align-items: center; justify-content: center; color: #fff;
+}
+.logo-box { text-align: center; }
+.admin-logo-img { width: 180px; margin-bottom: 20px; filter: brightness(0) invert(1); }
+.logo-text { font-size: 1.1rem; opacity: 0.7; letter-spacing: 1px; }
+
+/* [오른쪽] 깔끔한 화이트 로그인 폼 */
+.admin-login-right {
+    flex: 1; background: #fff; display: flex; align-items: center; justify-content: center; padding: 40px;
+}
+.login-form-container { width: 100%; max-width: 380px; }
+.login-title { font-size: 2rem; font-weight: 800; color: #1e3a8a; margin-bottom: 8px; }
+.login-subtitle { color: #666; margin-bottom: 40px; font-size: 0.95rem; }
+
+/* 입력창 그룹 */
+.admin-login-form .input-group { margin-bottom: 20px; }
+.admin-login-form label { display: block; font-size: 0.8rem; font-weight: 700; color: #333; margin-bottom: 8px; text-transform: uppercase; }
+.admin-login-form input {
+    width: 100%; padding: 14px 16px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 1rem;
+    background: #f8fafc; transition: all 0.3s;
+}
+.admin-login-form input:focus {
+    outline: none; border-color: #1e3a8a; background: #fff; box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+}
+
+/* 로그인 버튼 */
+.btn-login {
+    width: 100%; padding: 16px; background: #1e3a8a; color: #fff; border: none; border-radius: 8px;
+    font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s;
+}
+.btn-login:hover { background: #1e40af; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2); }
+
+/* 하단 헬퍼 링크 */
+.login-helper { list-style: none; display: flex; justify-content: center; align-items: center; margin-top: 30px; gap: 10px; }
+.login-helper a { color: #94a3b8; text-decoration: none; font-size: 0.85rem; transition: 0.2s; }
+.login-helper a:hover { color: #1e3a8a; text-decoration: underline; }
+.divider { color: #e2e8f0; font-size: 0.8rem; }
+
+/* 대시보드 메인 레이아웃 */
+.content {
+    padding: 30px;
+    background-color: #f4f7f9;
+    min-height: 100vh;
+}
+
+/* 상단 요약 카드 */
+.summary-container { margin-bottom: 25px; }
+.summary-card {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: inline-block;
+    min-width: 200px;
+}
+.summary-label { color: #888; font-size: 14px; font-weight: 500; }
+.summary-value { font-size: 28px; font-weight: 700; color: #333; margin-top: 5px; }
+
+/* 공통 카드 컨테이너 */
+.card-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    padding: 20px;
+    margin-bottom: 25px;
+}
+.card-header { margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+.card-header h3 { font-size: 18px; color: #333; }
+
+/* 50:50 차트 영역 */
+.chart-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50:50 */
+    gap: 25px;
+}
+.chart-view { width: 100%; height: 300px; }
+
+/* 60:40 리스트 영역 */
+.list-row {
+    display: grid;
+    grid-template-columns: 6fr 4fr; /* 60:40 */
+    gap: 25px;
+}
+
+/* 데이터 리스트 스타일 */
+.data-list { list-style: none; padding: 0; }
+.data-list li {
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #f9f9f9;
+    transition: background 0.2s;
+}
+.data-list li:hover { background: #fcfcfc; }
+.list-info { flex: 1; }
+.list-info strong { display: block; font-size: 15px; color: #444; }
+.list-info p { font-size: 13px; color: #999; margin-top: 3px; }
+
+/* 인기 순위 전용 스타일 */
+.rank-num { font-weight: 800; color: #5470c6; margin-right: 15px; font-size: 16px; width: 20px; }
+.view-count { display: flex; align-items: center; color: #666; font-size: 13px; background: #f0f2f5; padding: 4px 10px; border-radius: 20px; }
+.view-count .icon { margin-right: 4px; font-size: 11px; }
+.date-badge { background: #eef2ff; color: #4f46e5; font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }

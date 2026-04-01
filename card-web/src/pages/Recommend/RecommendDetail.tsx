@@ -5,12 +5,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import AgeChart from "../../components/common/charts/AgeChart";
 import GenderChart from "../../components/common/charts/GenderChart";
 import { useUIStore } from "../../store/useUIStore";
+import { useEffect } from "react";
 
 function RecommendDetail() {
     const { getMyCards, cardList, setSelectedCard } = useCardStore();
     const { openModal } = useUIStore();
 
     const { id } = useParams();
+
+    useEffect(() => {
+        if (id) {
+            fetch(`http://localhost:8080/api/cards/${id}`)
+            .then(res => res.json())
+            .then(data => console.log(data));
+        }
+    }, [id]);
 
     const card = cardList.find(c => c.id === Number(id));
 
