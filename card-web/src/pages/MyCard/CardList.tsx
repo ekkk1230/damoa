@@ -4,10 +4,17 @@ import { useCardStore } from "../../store/useCardStore"
 import type { MyCardProgress, UserCard } from "../../type/User";
 import * as S from "./MyCard.styles";
 import { useUIStore } from "../../store/useUIStore";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useEffect } from "react";
 
 function CardList() {
-    const { getMyCards, benefit, recentSpendList, deleteCard } = useCardStore();
+    const { getMyCards, benefit, recentSpendList, deleteCard, fetchCards } = useCardStore();
+    const { user } = useAuthStore();
     const { openModal } = useUIStore();
+
+    useEffect(() => {
+        if (user?.id) fetchCards(user.id)
+    }, [user?.id, fetchCards])
 
     const handleDeleteCard = (card: UserCard) => {
         openModal('CONFIRM', {
@@ -16,18 +23,17 @@ function CardList() {
             onConfirm: () => deleteCard(card.cardInfo.id),
             onCancel: () => {},
         })
-        
     };
 
     return (
         <S.ListContainer>
             <S.Header>
                 <p>내 카드 목록</p>
-                <Link to="/myCard/add">카드 등록</Link>
+                <Link to="/damoa/myCard/register">카드 등록</Link>
             </S.Header>
 
             <div>
-                {getMyCards.length !== 0 ? (
+                {Array.isArray(getMyCards) && getMyCards.length > 0 ? (
                     <div>
                         {getMyCards.map((card: MyCardProgress) => (
                             <S.CardItem key={card.cardInfo.id}>

@@ -57,7 +57,7 @@ function Login() {
 
             <S.BottomMenu>
                 <span>계정이 없으신가요?</span>
-                <S.SignupLink onClick={() => navigate('/signup')}>회원가입</S.SignupLink>
+                <S.SignupLink onClick={() => navigate('/damoa/signup')}>회원가입</S.SignupLink>
             </S.BottomMenu>
         </S.LoginContainer>
     )

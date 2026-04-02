@@ -4,6 +4,7 @@ import AgeChart from '../../common/charts/AgeChart';
 import GenderChart from '../../common/charts/GenderChart';
 import * as S from '../ModalComponents.styles'
 import { useCardStore } from '../../../store/useCardStore';
+import { useAuthStore } from '../../../store/useAuthStore';
 
 function RecommendCard() {
     const { selectedCard } = useCardStore();

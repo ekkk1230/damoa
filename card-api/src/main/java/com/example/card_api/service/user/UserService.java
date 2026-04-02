@@ -18,8 +18,7 @@ public class UserService {
 
     public Optional<User> login(String loginId, String password) {
         return userRepository.findByLoginId(loginId)
-                .filter(u -> u.getPassword().equals(password))
-                .filter(u -> u.getRole() == UserRole.ADMIN);
+                .filter(u -> u.getPassword().equals(password));
     }
 
     public String getTotalUserCount() {
@@ -44,5 +43,20 @@ public class UserService {
                 "age40", userRepository.countByAgeRange(40, 49),
                 "age50Plus", userRepository.countByAgeRange(50, 120) // 50대 이상
         );
+    }
+
+    public User signUp(User user) {
+        User newUser = new User();
+        newUser.setLoginId(user.getLoginId());
+        newUser.setPassword(user.getPassword());
+        newUser.setName(user.getName());
+        newUser.setGender(user.getGender());
+        newUser.setBirthDate(user.getBirthDate());
+
+        return userRepository.save(newUser);
+    }
+
+    public Optional<User> login(User user) {
+        return userRepository.findByLoginId(user.getLoginId());
     }
 }

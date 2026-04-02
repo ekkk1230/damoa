@@ -1,16 +1,17 @@
 import { useCardStore } from '../../store/useCardStore';
 import React, { useState, useMemo, useEffect, type ChangeEvent } from 'react';
 import * as S from './MyCard.styles';
-import { CARD_LIST } from '../../data/CARD_LIST';
 import { BRAND_COLORS } from '../../type/Card';
 import type { MyCardProgress } from '../../type/User';
 import { getPerformancePeriod } from '../../utils/cardUtils';
 import { useUIStore } from '../../store/useUIStore';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../store/useAuthStore';
 
 function AddCard() {
   const navigate = useNavigate();
   const { addCard, cardList } = useCardStore();
+  const { user } = useAuthStore();
   const { openModal } = useUIStore();
 
   const [selectedCompany, setSelectedCompany] = useState('');
@@ -89,7 +90,6 @@ function AddCard() {
 
     const newCard: MyCardProgress = {
       cardInfo: updatedCardInfo,
-      nickname: selectedCardName,
       targetAmount: performanceGoal,
       currentAmount: 0,
       billingDate: Number(paymentDate),
@@ -100,11 +100,11 @@ function AddCard() {
       progress: 0
     };
 
-    addCard(newCard);
+    addCard(user?.id!, newCard);
     openModal('CONFIRM', {
       title: '',
       content: '카드가 성공적으로 등록되었습니다.',
-      onConfirm: () => navigate('/myCard'),
+      onConfirm: () => navigate('/damoa/myCard'),
   })
   }
 

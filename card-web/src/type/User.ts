@@ -3,7 +3,6 @@ import type { Card } from "./Card";
 export type UserRole = "ADMIN" | "USER";
 export interface UserCard {
     cardInfo: Card;
-    nickname?: string;
     targetAmount: number;
     currentAmount: number;
 
@@ -19,7 +18,8 @@ export interface MyCardProgress extends UserCard {
 };
 
 export interface User {
-    id: string;
+    id: number;
+    loginId: string;
     name: string;
     joinDate: string;
     role: UserRole;
@@ -28,7 +28,7 @@ export interface User {
 }
 
 export interface AuthFormData {
-    id: string;
+    loginId: string;
     password: string;
     confirmPassword?: string;
     name?: string;

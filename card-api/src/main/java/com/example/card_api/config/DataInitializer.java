@@ -27,16 +27,25 @@ public class DataInitializer {
     @Bean
     public CommandLineRunner initData() {
         return args -> {
+            System.out.println(">>> 데이터 초기화 시작!");
             try {
                 ClassPathResource resource = new ClassPathResource("cards.json");
                 InputStream inputStream = resource.getInputStream();
 
                 List<Card> cards = objectMapper.readValue(inputStream, new TypeReference<List<Card>>() {});
 
-                cardService.saveOrUpdateCards(cards);
+                System.out.println(">>> JSON 파일에서 읽어온 카드 개수: " + (cards != null ? cards.size() : "null"));
+
+                if (cards != null && !cards.isEmpty()) {
+                    cardService.saveOrUpdateCards(cards);
+                    System.out.println(cards.size() + "개의 카드를 DB에 저장하라고 명령했습니다!");
+                } else {
+                    System.err.println("cards.json 파일이 비어있거나 배열 형식이 아닙니다.");
+                }
 
             } catch (Exception e) {
-                System.err.println("❌ 데이터를 읽어오는 중 오류가 발생했습니다: " + e.getMessage());
+                System.err.println("에러 발생: " + e.getMessage());
+                e.printStackTrace();
             }
 
             try {

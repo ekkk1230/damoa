@@ -14,5 +14,4 @@ public interface CardRepository extends JpaRepository<Card, Long>{
     List<Card> findAllByOrderByIdDesc();
 
     List<Card> findTop5ByOrderByViewCountDesc();
-
 }

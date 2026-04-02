@@ -2,10 +2,8 @@ import { create } from 'zustand';
 import type { Card } from '../type/Card';
 import type { MyCardProgress, UserCard } from '../type/User';
 import type { AnalyzedReceipt, Spending } from '../type/Spending';
-import { CARD_LIST } from '../data/CARD_LIST';
 import { USER_CARDS } from '../data/USER_CARD_LIST';
 import { fetchReceiptAnalysis } from '../api/receipt';
-import { MOCK_SPENDING } from '../data/MOCK_SPENDING';
 
 export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[], allCards: Card[]) => {
     if (spendings.length === 0) {
@@ -46,9 +44,6 @@ export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[
 
         // 한도(Limit) 적용
         if (rule?.benefitLimit) {
-            const alreadyUsedBenefit = benefitMap[cardId] || 0;
-            // 이번에 받을 혜택이 남은 한도를 넘지 않게 계산
-            const remainingbenefitLimit = rule.benefitLimit - (alreadyUsedBenefit % rule.benefitLimit); // 간이 로직
             benefit = Math.min(benefit, rule.benefitLimit); 
         }
     
@@ -140,7 +135,7 @@ interface CardState {
     setIsExpanded: (expanded: boolean) => void;
 
     cardList: Card[];
-    fetchCards: () => Promise<void>;
+    fetchCards: (userId: number) => Promise<void>;
 
     // 필터 상태
     searchTerm: string;
@@ -174,22 +169,14 @@ interface CardState {
     updateAnalyzedItem: (id:number, updatedItem: any) => void;
 
     deleteCard: (cardId: number) => void;
-    addCard: (newCard: MyCardProgress) => void;
+    addCard: (userId: number, newCard: MyCardProgress) => Promise<void>;
 
     categoryTotals: any | string | number [],
 }
 
 export const useCardStore = create<CardState>((set, get) => {
 
-    const initialMyCards: MyCardProgress[] = USER_CARDS.map(uc => ({
-        ...uc,
-        currentAmount: 0,
-        progress: 0
-    }))
-
-    const initialCards: Card[] = CARD_LIST.map(card => ({
-        ...card
-    }))
+    const initialMyCards: MyCardProgress[] = [];
 
     const initial = analyzeSpendings([], initialMyCards, []);
 
@@ -201,25 +188,36 @@ export const useCardStore = create<CardState>((set, get) => {
         setIsExpanded: expanded => set({ isExpanded: expanded }),
 
         cardList: [],
-        fetchCards: async() => {
+        fetchCards: async(userId: number) => {
             try {
-                const res = await fetch("http://localhost:8080/api/cards");
-                const serverCards: Card[] = await res.json();
-
-                const { spendings, getMyCards } = get();
-                const result = analyzeSpendings(spendings, getMyCards, serverCards);
-
+                // 1. 전체 카드 목록 가져오기
+                const resAll = await fetch("http://localhost:8080/damoa");
+                const serverAllCards: Card[] = await resAll.json();
+        
+                // 2. 내 카드 목록 가져오기
+                const resMy = await fetch(`http://localhost:8080/damoa/my-cards/list/${userId}`);
+                const serverMyCards = await resMy.json(); 
+        
+                // 3. 매핑 작업
+                const formattedMyCards: MyCardProgress[] = serverMyCards.map((item: any) => ({
+                    ...item,
+                    cardInfo: item.card, // 백엔드의 card -> 프론트의 cardInfo
+                    progress: 0          // 기본값 설정
+                }));
+        
+                const { spendings } = get();
+                const result = analyzeSpendings(spendings, formattedMyCards, serverAllCards);
+        
                 set({
-                    cardList: serverCards,
+                    cardList: serverAllCards,
                     topSpendingCategory: result.topCategory,
                     getMyCards: result.myCards,
                     recommendedCards: result.recommendedCards,
                     totalBenefit: result.totalBenefit,
                     benefit: result.benefitMap,
                     categoryTotals: result.categoryMap
-                })
-
-                // console.log("DB 카드 데이터 로드 및 분석 완료");
+                });
+        
             } catch (err) {
                 console.error("카드 로드 실패: ", err);
             }
@@ -256,7 +254,7 @@ export const useCardStore = create<CardState>((set, get) => {
         topSpendingCategory: initial.topCategory,
         totalSpending: initial.totalSpending,
 
-        getMyCards: initial.myCards,
+        getMyCards: [],
         recommendedCards: initial.recommendedCards,
 
         recentSpendList: initial.recentSpend,
@@ -332,20 +330,65 @@ export const useCardStore = create<CardState>((set, get) => {
             })
         },
 
-        addCard: (newCard: MyCardProgress) => {
-            set((state) => {
-                const updatedCards = [...state.getMyCards, newCard];
-                const result = analyzeSpendings(state.spendings, updatedCards, state.cardList);
+        // addCard: (newCard: MyCardProgress) => {
+        //     set((state) => {
+        //         const updatedCards = [...state.getMyCards, newCard];
+        //         const result = analyzeSpendings(state.spendings, updatedCards, state.cardList);
 
-                return {
-                    getMyCards: result.myCards,
-                    recommendedCards: result.recommendedCards,
-                    topSpendingCategory: result.topCategory,
-                    totalBenefit: result.totalBenefit,
-                    benefit: result.benefitMap,
-                    totalSpending: result.totalSpending,
-                }
-            })
+        //         return {
+        //             getMyCards: result.myCards,
+        //             recommendedCards: result.recommendedCards,
+        //             topSpendingCategory: result.topCategory,
+        //             totalBenefit: result.totalBenefit,
+        //             benefit: result.benefitMap,
+        //             totalSpending: result.totalSpending,
+        //         }
+        //     })
+        // },
+        addCard: async (userId, newCard: MyCardProgress) => {
+            try {
+                const postData = {
+                    user: { id: userId },
+                    card: { id: newCard.cardInfo.id },
+                    targetAmount: newCard.targetAmount || 0,
+                    currentAmount: 0,
+                    billingDate: newCard.billingDate || 14,
+                    startDate: newCard.performancePeriod?.startDate,
+                    endDate: newCard.performancePeriod?.endDate,
+                };
+
+                const response = await fetch("http://localhost:8080/damoa/my-cards/add", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(postData),
+                })
+
+                if (!response.ok) throw new Error("서버 저장 실패");
+
+                const savedCardFromServer = await response.json();
+
+                set((state) => {
+                    const formattedCard = {
+                        ...savedCardFromServer,
+                        cardInfo: savedCardFromServer.card, 
+                        progress: 0
+                    };
+                    const currentCards = Array.isArray(state.getMyCards) ? state.getMyCards : [];
+                    const updatedCards = [...currentCards, formattedCard];
+                    const result = analyzeSpendings(state.spendings, updatedCards, state.cardList);
+
+                    return {
+                        getMyCards: result.myCards,
+                        recommendedCards: result.recommendedCards,
+                        topSpendingCategory: result.topCategory,
+                        totalBenefit: result.totalBenefit,
+                        benefit: result.benefitMap,
+                        totalSpending: result.totalSpending,
+                    };
+                })
+            } catch (err) {
+                console.error("카드 등록 중 오류 발생: ", err);
+            }
         },
 
         categoryTotals: initial.categoryMap,

@@ -5,19 +5,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import AgeChart from "../../components/common/charts/AgeChart";
 import GenderChart from "../../components/common/charts/GenderChart";
 import { useUIStore } from "../../store/useUIStore";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 function RecommendDetail() {
     const { getMyCards, cardList, setSelectedCard } = useCardStore();
     const { openModal } = useUIStore();
 
     const { id } = useParams();
+    const isFetched = useRef(false);
 
     useEffect(() => {
+        if (isFetched.current) return;
+
         if (id) {
-            fetch(`http://localhost:8080/api/cards/${id}`)
-            .then(res => res.json())
-            .then(data => console.log(data));
+            isFetched.current = true;
+            fetch(`http://localhost:8080/damoa/recommend/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    // console.log("데이터 로드 완료:", data);
+                });
         }
     }, [id]);
 

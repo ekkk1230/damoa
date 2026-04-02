@@ -1,6 +1,6 @@
 import * as S from "./Reccommend.styles"
 import { useCardStore } from "../../store/useCardStore"
-import { BRAND_COLORS } from "../../type/Card";
+import { BRAND_COLORS, type Card } from "../../type/Card";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { normalizeCompanyName } from "../../utils/cardUtils";
@@ -32,36 +32,45 @@ function RecommendList() {
         let valueA = 0;
         let valueB = 0;
 
-        const getAgeValue = (card: any, targetLabel: string) => {
-            return card.statistics?.ageGroup.find((age: any) => age.label.includes(targetLabel))?.value || 0;
+        const getAgeValue = (card: Card, targetLabel: string) => {
+            return card.statistics?.ageGroups.find((age: any) => age.label.includes(targetLabel))?.value || 0;
+            
         }
 
         if (sortType === '20대 인기순') {
-            valueA = getAgeValue(a, '20');
-            valueB = getAgeValue(b, '20');
+            valueA = getAgeValue(a, '20대');
+            valueB = getAgeValue(b, '20대');
         }
         else if (sortType === '30대 인기순') {
-            valueA = getAgeValue(a, '30');
-            valueB = getAgeValue(b, '30');
+            valueA = getAgeValue(a, '30대');
+            valueB = getAgeValue(b, '30대');
         }
         else if (sortType === '40대 인기순') {
-            valueA = getAgeValue(a, '40');
-            valueB = getAgeValue(b, '40');
+            valueA = getAgeValue(a, '40대');
+            valueB = getAgeValue(b, '40대');
         }
         else if (sortType === '50대 인기순') {
-            valueA = getAgeValue(a, '50');
-            valueB = getAgeValue(b, '50');
+            valueA = getAgeValue(a, '50대+');
+            valueB = getAgeValue(b, '50대+');
         }
         else if (sortType === '여성 선호순') {
-            valueA = a.statistics?.gender.female || 0;
-            valueB = b.statistics?.gender.female || 0;
+            valueA = a.statistics?.gender.femaleRate || 0;
+            valueB = b.statistics?.gender.femaleRate || 0;
         }
         else if (sortType === '남성 선호순') {
-            valueA = a.statistics?.gender.male || 0;
-            valueB = b.statistics?.gender.male || 0;
+            valueA = a.statistics?.gender.maleRate || 0;
+            valueB = b.statistics?.gender.maleRate || 0;
         }
 
-        return valueB - valueA;
+        else {
+            return b.viewCount - a.viewCount;
+        }
+
+        if (valueB !== valueA) {
+            return valueB - valueA;
+        } else {
+            return (b.viewCount || 0) - (a.viewCount || 0);
+        }
     })
 
     return (
@@ -70,7 +79,7 @@ function RecommendList() {
                 {isRecommendOnly && (
                     <div style={{ padding: '10px', background: '#f0f7ff', borderRadius: '8px', marginBottom: '15px' }}>
                         ✨ 사용자님 지출 패턴에 딱 맞는 카드들만 모아봤어요!
-                        <button onClick={() => navigate('/recommend')} style={{ marginLeft: '10px', fontSize: '12px', textDecoration: 'underline' }}>전체 보기</button>
+                        <button onClick={() => navigate('/damoa/recommend')} style={{ marginLeft: '10px', fontSize: '12px', textDecoration: 'underline' }}>전체 보기</button>
                     </div>
                 )}
 
@@ -86,7 +95,7 @@ function RecommendList() {
                         {Object.keys(BRAND_COLORS)
                             .filter(c => c !== "기타")
                             .map((c, idx) => (
-                                <li key={idx}><button onClick={() => setSelectedCompany(c)}>{c}</button></li>
+                                <li key={`${c}-${idx}`}><button onClick={() => setSelectedCompany(c)}>{c}</button></li>
                             ))    
                         }
                     </ul>
@@ -105,16 +114,17 @@ function RecommendList() {
                         sortedCards.map(card => {
                             const companyName = normalizeCompanyName(card.company);
                             const brandColor = BRAND_COLORS[companyName];
+                            // console.log(card)
                             return (
-                                <S.CardItem key={card.id} $brandColor={brandColor}>
-                                    <Link to={`/recommend/${card.id}`}>
+                                <S.CardItem key={`${card.id}-${card.name}`} $brandColor={brandColor}>
+                                    <Link to={`/damoa/recommend/${card.id}`}>
                                         <div className="card-content">
                                             <p className="card-name">{card.name}</p>
                                             <p className="annual-fee">연회비 {card.annualFee.toLocaleString()}원</p>
                                             <p className="summary">{card.summary}</p>
                                             <div className="benefits-tag">
-                                                {card.mainBenefits.map(benefit => (
-                                                    <p>{benefit}</p>
+                                                {card.mainBenefits.map((benefit, idx) => (
+                                                    <p key={`${benefit}-${idx}`}>{benefit}</p>
                                                 ))}
                                             </div>
                                         </div>

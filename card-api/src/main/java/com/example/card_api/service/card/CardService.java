@@ -1,6 +1,9 @@
 package com.example.card_api.service.card;
 
 import com.example.card_api.model.card.Card;
+import com.example.card_api.model.card.DetailBenefit;
+import com.example.card_api.model.card.BenefitRule;
+import com.example.card_api.model.card.PerformanceTier;
 import com.example.card_api.repository.card.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,20 +44,23 @@ public class CardService {
 
     @Transactional
     public void saveOrUpdateCards(List<Card> newCards) {
+        if (newCards == null) return;
+
         for (Card cardFromAi : newCards) {
             cardRepository.findByName(cardFromAi.getName())
                     .ifPresentOrElse(
                             existingCard -> updateCardInfo(existingCard, cardFromAi),
-
                             () -> {
                                 linkCardWithDetails(cardFromAi);
                                 cardRepository.save(cardFromAi);
+                                System.out.println(">>> [신규 저장] " + cardFromAi.getName());
                             }
                     );
         }
     }
 
     private void updateCardInfo(Card existingCard, Card newInfo) {
+        // 1. 기본 정보 업데이트
         existingCard.setCompany(newInfo.getCompany());
         existingCard.setAnnualFee(newInfo.getAnnualFee());
         existingCard.setImage(newInfo.getImage());
@@ -63,14 +69,34 @@ public class CardService {
         existingCard.setOfficialLink(newInfo.getOfficialLink());
         existingCard.setCardType(newInfo.getCardType());
 
-        existingCard.getDetailBenefits().clear();
-        existingCard.getDetailBenefits().addAll(newInfo.getDetailBenefits());
+        // 2. 상세 혜택 (DetailBenefit) 업데이트
+        if (newInfo.getDetailBenefits() != null && !newInfo.getDetailBenefits().isEmpty()) {
+            existingCard.getDetailBenefits().clear();
+            newInfo.getDetailBenefits().forEach(benefit -> {
+                benefit.setCard(existingCard);
+                existingCard.getDetailBenefits().add(benefit);
+            });
+        }
 
-        existingCard.getBenefitRules().clear();
-        existingCard.getBenefitRules().addAll(newInfo.getBenefitRules());
+        // 3. 혜택 룰 (BenefitRule) 업데이트
+        if (newInfo.getBenefitRules() != null && !newInfo.getBenefitRules().isEmpty()) {
+            existingCard.getBenefitRules().clear();
+            newInfo.getBenefitRules().forEach(rule -> {
+                rule.setCard(existingCard);
+                existingCard.getBenefitRules().add(rule);
+            });
+        }
 
-        existingCard.getPerformanceTiers().clear();
-        existingCard.getPerformanceTiers().addAll(newInfo.getPerformanceTiers());
+        // 4. 실적 구간 (PerformanceTier) 업데이트
+        if (newInfo.getPerformanceTiers() != null && !newInfo.getPerformanceTiers().isEmpty()) {
+            existingCard.getPerformanceTiers().clear();
+            newInfo.getPerformanceTiers().forEach(tier -> {
+                tier.setCard(existingCard);
+                existingCard.getPerformanceTiers().add(tier);
+            });
+        }
+
+        System.out.println(">>> [업데이트 완료] " + existingCard.getName());
     }
 
     private void linkCardWithDetails(Card card) {

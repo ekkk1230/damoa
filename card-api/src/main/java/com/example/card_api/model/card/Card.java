@@ -62,4 +62,19 @@ public class Card {
     private void increamentViewCount() {
         this.viewCount++;
     }
+
+    public void addDetailBenefit(DetailBenefit benefit) {
+        this.detailBenefits.add(benefit);
+        benefit.setCard(this);
+    }
+
+    public void addPerformanceTier(PerformanceTier tier) {
+        this.performanceTiers.add(tier);
+        tier.setCard(this);
+    }
+
+    public void addBenefitRule(BenefitRule rule) {
+        this.benefitRules.add(rule);
+        rule.setCard(this);
+    }
 }

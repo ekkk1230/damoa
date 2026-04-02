@@ -17,4 +17,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT COUNT(u) FROM User u WHERE " +
             "FUNCTION('TIMESTAMPDIFF', YEAR, u.birthDate, CURRENT_DATE) BETWEEN :start AND :end")
     long countByAgeRange(@Param("start") Integer start, @Param("end") Integer end);
+
 }

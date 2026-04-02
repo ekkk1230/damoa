@@ -2183,61 +2183,7 @@
   "maxBenefit" : "25,000원",
   "viewCount" : 0
 }, {
-  "id" : 2,
-  "name" : "신한카드 Mr.Life",
-  "company" : "신한카드",
-  "annualFee" : 15000,
-  "image" : "Hex:#0065bd",
-  "mainBenefits" : [ "온라인쇼핑 5% 할인", "관리비/통신 5% 할인", "해외 가맹점 1% 할인" ],
-  "categories" : [ "SHOPPING", "LIVING", "ETC" ],
-  "summary" : "라이프스타일 맞춤형 혜택의 카드",
-  "condition" : "전월 실적 30만원 이상",
-  "officialLink" : "https://www.shinhan.com",
-  "cardType" : "신용",
-  "statistics" : {
-    "id" : 2,
-    "gender" : {
-      "maleRate" : 40,
-      "femaleRate" : 60
-    },
-    "ageGroups" : [ {
-      "label" : "20대",
-      "value" : 35
-    }, {
-      "label" : "30대",
-      "value" : 50
-    }, {
-      "label" : "40대",
-      "value" : 10
-    }, {
-      "label" : "50대+",
-      "value" : 5
-    } ]
-  },
-  "detailBenefits" : [ {
-    "id" : 81,
-    "title" : null,
-    "content" : null,
-    "detailLimit" : null
-  }, {
-    "id" : 82,
-    "title" : null,
-    "content" : null,
-    "detailLimit" : null
-  }, {
-    "id" : 83,
-    "title" : null,
-    "content" : null,
-    "detailLimit" : null
-  } ],
-  "performanceTiers" : [ ],
-  "benefitRules" : [ ],
-  "bestPerformance" : 300000,
-  "baseRate" : 0.005,
-  "maxBenefit" : "30,000원",
-  "viewCount" : 0
-}, {
-  "id" : 41,
+  "id" : null,
   "name" : "신한카드 에코체크 카드",
   "company" : "신한카드",
   "annualFee" : 15000,
@@ -2249,7 +2195,7 @@
   "officialLink" : "https://www.shinhan.com",
   "cardType" : "신용",
   "statistics" : {
-    "id" : 41,
+    "id" : null,
     "gender" : {
       "maleRate" : 40,
       "femaleRate" : 60
@@ -2269,20 +2215,20 @@
     } ]
   },
   "detailBenefits" : [ {
-    "id" : 162,
+    "id" : null,
     "title" : "대중교통",
     "content" : "대중교통 10% 할인",
     "detailLimit" : "월 5,000원"
   } ],
   "performanceTiers" : [ {
-    "id" : 159,
+    "id" : null,
     "minAmount" : 300000,
     "maxAmount" : 600000,
     "rate" : 0.05,
     "description" : "기본 할인 구간"
   } ],
   "benefitRules" : [ {
-    "id" : 159,
+    "id" : null,
     "category" : "TRANSPORT",
     "rate" : 0.1,
     "benefitType" : "DISCOUNT",

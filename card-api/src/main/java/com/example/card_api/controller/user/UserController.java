@@ -1,50 +1,37 @@
 package com.example.card_api.controller.user;
 
-import com.example.card_api.model.user.UserRole;
-import com.example.card_api.repository.user.UserRepository;
+import com.example.card_api.model.user.User;
 import com.example.card_api.service.card.CardService;
 import com.example.card_api.service.user.UserService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/damoa/auth")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     private final UserService userService;
-    private final CardService cardService;
 
-    @GetMapping("/admin/login")
-    public String loginPage() {
-        return "pages/login/login";
+    @PostMapping("/signup")
+    public ResponseEntity<?> signUp(@RequestBody User user) {
+        try {
+            User savedUser = userService.signUp(user);
+
+            return ResponseEntity.ok(savedUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("회원가입 실패: " + e.getMessage());
+        }
     }
 
-    @PostMapping("/admin/login")
-    public String loginProcess(@RequestParam String loginId, @RequestParam String password, HttpSession session) {
-        return userService.login(loginId, password)
-                .map(u -> {
-                    session.setAttribute("loginUser", u);
-                    return "redirect:/admin/dashboard";
-                })
-                .orElse("redirect:/admin/login?error");
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+        return userService.login(user.getLoginId(), user.getPassword()) // 💡 기존 아이디/비번 체크 로직 사용
+                .map(u -> ResponseEntity.ok(u)) // 성공 시 200 OK + 유저 정보
+                .orElse(ResponseEntity.status(401).body(null));
     }
 
-    @GetMapping("/admin/dashboard")
-    public String dashboardPage(Model model) {
-        model.addAttribute("recentCards", cardService.getRecentCardsForDashboard());
 
-        model.addAttribute("totalUserCount", userService.getTotalUserCount());
-
-        model.addAttribute("genderStats", userService.getGenderStatistics());
-        model.addAttribute("ageStats", userService.getAgeStatistics());
-
-        model.addAttribute("popularCards", cardService.getPopularCards());
-
-        return "pages/dashboard/index";
-    }
 }

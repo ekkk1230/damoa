@@ -1,16 +1,21 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import * as S from "./Header.styles";
-import { IoChevronBack, IoMenu } from "react-icons/io5";
+import { IoChevronBack, IoMenu, IoLogOutOutline } from "react-icons/io5";
 import Sidebar from "./Sidebar";
+import { useAuthStore } from "../../../store/useAuthStore";
 
 const Header = () => {
+    const { isLoggedIn, logout } = useAuthStore();
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
 
     const isMain = location.pathname === "/";
+
+    const handleLogout = () => logout();
 
     return (
         <S.HeaderWrapper>
@@ -29,6 +34,12 @@ const Header = () => {
                 </S.CenterSection>
 
                 <S.SideSection $isRight>
+                    {isLoggedIn && !isMain && (
+                        <button onClick={handleLogout} aria-label="로그아웃">
+                        <IoLogOutOutline size={22} />
+                        </button>
+                    )}
+
                     <button onClick={() => setIsMenuOpen(true)}>
                         <IoMenu size={24} />
                     </button>

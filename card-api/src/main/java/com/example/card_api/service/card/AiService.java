@@ -76,10 +76,10 @@ public class AiService {
             // 4. JSON -> 객체 변환
             Card newCard = objectMapper.readValue(jsonResult, Card.class);
 
-            // ⭐ [핵심] ID 세척 및 연관 관계 설정 (ID 충돌 방지)
+            // ID 충돌 방지
             newCard.setId(null);
 
-            // 자식 엔티티들에게 부모(newCard)를 연결해줘야 DB 외래키가 생성됩니다.
+            // 자식 엔티티들에게 부모(newCard)를 연결
             if (newCard.getDetailBenefits() != null) {
                 newCard.getDetailBenefits().forEach(db -> {
                     db.setId(null);
@@ -100,10 +100,9 @@ public class AiService {
             }
             if (newCard.getStatistics() != null) {
                 newCard.getStatistics().setId(null);
-                // Statistics가 Card와 1:1 관계라면 필요시 setCard 추가
             }
 
-            // 5. DB 저장 (저장된 객체를 다시 받아야 새 ID가 포함됩니다)
+            // 5. DB 저장
             Card savedCard = cardRepository.save(newCard);
             System.out.println(">>> [3-1] DB 저장 완료: ");
 
@@ -112,7 +111,7 @@ public class AiService {
             System.out.println(">>> [3-2] cards.json 파일 업데이트 완료!");
 
         } catch (Exception e) {
-            e.printStackTrace(); // 상세 에러 추적을 위해 유지
+            e.printStackTrace();
             System.err.println("저장 실패 상세 원인: " + e.getMessage());
         }
 
@@ -122,11 +121,11 @@ public class AiService {
     private void saveToCardsJson(Card newCard) {
         try {
             String projectRoot = System.getProperty("user.dir");
-            // 경로 확인: 프로젝트 구조에 따라 "card-api/" 부분이 필요 없을 수도 있습니다.
+            // 경로 확인
             File file = new File(projectRoot, "card-api/src/main/resources/cards.json");
 
             if (!file.exists()) {
-                System.err.println("⚠️ 파일을 찾을 수 없습니다: " + file.getAbsolutePath());
+                System.err.println("파일을 찾을 수 없습니다: " + file.getAbsolutePath());
                 return;
             }
 

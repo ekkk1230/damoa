@@ -19,49 +19,56 @@ import { useCardStore } from "./store/useCardStore";
 
 function App() {
 	const { fetchCards } = useCardStore();
-	const { isLoggedIn, setInitialized } = useAuthStore();
-	const [showSplash, setShowSplash] = useState(true);
+	const { isLoggedIn, user, setInitialized } = useAuthStore();
+	const [isAppLoading, setIsAppLoading] = useState(true);
 
 	useEffect(() => {
-		fetchCards()
-	}, [])
+		console.log(user)
+        const prepareApp = async () => {
+            if (isLoggedIn && user?.id) {
+                await fetchCards(user.id);
+            }
 
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			setShowSplash(false);
-			setInitialized(true);
-		}, 1500);
+            setTimeout(() => {
+                setIsAppLoading(false);
+                setInitialized(true);
+            }, 1000);
+        };
 
-		return () => clearTimeout(timer);
-	}, [])
+        prepareApp();
+    }, [isLoggedIn, user?.id, fetchCards, setInitialized]);
 
-	if (showSplash) {
-		return <Splash />
-	}
+    if (isAppLoading) {
+        return <Splash />;
+    }
 
-	return (
+    return (
 		<BrowserRouter>
 			<GlobalStyle />  
 			<Routes>
 				{!isLoggedIn ? (
 					<>
-						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<SignUp />} />
-						<Route path="*" element={<Navigate to="/login" replace />} />
+						<Route path="/" element={<Navigate to="/damoa/ogin" replace />} />
+						<Route path="/damoa/login" element={<Login />} />
+						<Route path="/damoa/signup" element={<SignUp />} />
+						<Route path="/damoa/*" element={<Navigate to="/damoa/login" replace />} />
 					</>
 				) : (
-					<Route path="/" element={<RootLayout />}>
-						<Route index element={<HomePage />} />
-						<Route path="myCard" element={<CardList />} />
-						<Route path="myCard/add" element={<AddCard />} />
-						<Route path="recommend" element={<RecommendList />} />
-						<Route path="recommend/:id" element={<RecommendDetail />} />
-						<Route path="community" element={<CommunityList />} />
-						<Route path="community/add" element={<CommunityWrite />} />
-						<Route path="community/edit/:id" element={<CommunityWrite />} />
-						<Route path="community/:id" element={<CommunityDetail />} />
-						<Route path="*" element={<Navigate to="/" replace />} />
-					</Route>
+					<>
+						<Route path="/" element={<Navigate to="/damoa" replace />} />
+						<Route path="/damoa" element={<RootLayout />}>
+							<Route index element={<HomePage />} />
+							<Route path="/damoa/myCard" element={<CardList />} />
+							<Route path="/damoa/myCard/register" element={<AddCard />} />
+							<Route path="/damoa/recommend" element={<RecommendList />} />
+							<Route path="/damoa/recommend/:id" element={<RecommendDetail />} />
+							<Route path="/damoa/community" element={<CommunityList />} />
+							<Route path="/damoa/community/add" element={<CommunityWrite />} />
+							<Route path="/damoa/community/edit/:id" element={<CommunityWrite />} />
+							<Route path="/damoa/community/:id" element={<CommunityDetail />} />
+							<Route path="/damoa/*" element={<Navigate to="/" replace />} />
+						</Route>
+					</>
 				)}
 			</Routes>
 		</BrowserRouter>

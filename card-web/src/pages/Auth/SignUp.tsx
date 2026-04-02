@@ -9,7 +9,9 @@ function SignUp() {
         id: '',
         password: '',
         confirmPassword: '',
-        name: ''
+        name: '',
+        gender: 'M', 
+        birthDate: ''
     });
     const navigate = useNavigate();
     const { signup, isLoading } = useAuthStore();
@@ -20,32 +22,46 @@ function SignUp() {
         setFormData(prev => ({ ...prev, [name]: value }));
     }
 
-    const handleSignUp = async (e:React.FormEvent) => {
+    const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        // 1. 비밀번호 일치 확인
         if (formData.password !== formData.confirmPassword) {
             openModal('CONFIRM', {
                 title: '회원가입',
                 content: '비밀번호가 일치하지 않습니다.',
-                onConfirm: () => {},
             })
             return;
         }
 
-        const success = await signup(formData.id, formData.password, formData.name);
+        // 2. 생년월일 입력 확인
+        if (!formData.birthDate) {
+            openModal('CONFIRM', {
+                title: '회원가입',
+                content: '생년월일을 선택해주세요.',
+            })
+            return;
+        }
+
+        // 💡 3. signup 함수 호출 (성별, 생년월일 추가 전달) 🦾
+        const success = await signup(
+            formData.id, 
+            formData.password, 
+            formData.name, 
+            formData.gender, 
+            formData.birthDate
+        );
 
         if (success) {
             openModal('CONFIRM', {
                 title: '회원가입',
                 content: '회원가입을 완료했습니다.',
-                onConfirm: () => {},
+                onConfirm: () => navigate('/damoa/login'), 
             })
-            navigate('/login');
         } else {
             openModal('CONFIRM', {
                 title: '회원가입',
-                content: '회원가입에 실패했습니다.',
-                onConfirm: () => {},
+                content: '회원가입에 실패했습니다. 아이디 중복을 확인해주세요.',
             })
         }
     };
@@ -57,34 +73,52 @@ function SignUp() {
 
             <S.SignUpForm onSubmit={handleSignUp}>
                 <S.Input 
-                name="name" 
-                placeholder="이름을 입력하세요" 
-                onChange={handleChange} 
-                required 
+                    name="name" 
+                    placeholder="이름" 
+                    onChange={handleChange} 
+                    required 
                 />
                 <S.Input 
-                name="id" 
-                placeholder="아이디를 입력하세요" 
-                onChange={handleChange} 
-                required 
+                    name="id" 
+                    placeholder="아이디" 
+                    onChange={handleChange} 
+                    required 
+                />
+
+                <div style={{ display: 'flex', gap: '20px', margin: '10px 0', justifyContent: 'center' }}>
+                    <label style={{ cursor: 'pointer' }}>
+                        <input type="radio" name="gender" value="M" checked={formData.gender === 'M'} onChange={handleChange} /> 남성
+                    </label>
+                    <label style={{ cursor: 'pointer' }}>
+                        <input type="radio" name="gender" value="F" checked={formData.gender === 'F'} onChange={handleChange} /> 여성
+                    </label>
+                </div>
+
+                <S.Input 
+                    type="date"
+                    name="birthDate" 
+                    placeholder="생년월일" 
+                    onChange={handleChange} 
+                    required 
+                />
+
+                <S.Input 
+                    type="password" 
+                    name="password" 
+                    placeholder="비밀번호" 
+                    onChange={handleChange} 
+                    required 
                 />
                 <S.Input 
-                type="password" 
-                name="password" 
-                placeholder="비밀번호" 
-                onChange={handleChange} 
-                required 
-                />
-                <S.Input 
-                type="password" 
-                name="confirmPassword" 
-                placeholder="비밀번호 확인" 
-                onChange={handleChange} 
-                required 
+                    type="password" 
+                    name="confirmPassword" 
+                    placeholder="비밀번호 확인" 
+                    onChange={handleChange} 
+                    required 
                 />
                 
                 <S.SignUpButton type="submit" disabled={isLoading}>
-                {isLoading ? '처리 중...' : '회원가입 완료'}
+                    {isLoading ? '처리 중...' : '회원가입 완료'}
                 </S.SignUpButton>
             </S.SignUpForm>
 
