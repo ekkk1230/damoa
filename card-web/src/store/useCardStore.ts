@@ -147,7 +147,7 @@ interface CardState {
 
     // 지출 내역 등록
     spendings: Spending[];
-    addSpending: (newSpending: Spending) => void;
+    addSpending: (newSpending: Spending) => Promise<void>;
 
     topSpendingCategory: string;    
     totalSpending: number;
@@ -197,6 +197,10 @@ export const useCardStore = create<CardState>((set, get) => {
                 // 2. 내 카드 목록 가져오기
                 const resMy = await fetch(`http://localhost:8080/damoa/my-cards/list/${userId}`);
                 const serverMyCards = await resMy.json(); 
+
+                // 내 결제내역
+                const resSpending = await fetch(`http://localhost:8080/api/spending/${userId}`);
+                const spendingAll: Spending[] = await resSpending.json();
         
                 // 3. 매핑 작업
                 const formattedMyCards: MyCardProgress[] = serverMyCards.map((item: any) => ({
@@ -205,17 +209,19 @@ export const useCardStore = create<CardState>((set, get) => {
                     progress: 0          // 기본값 설정
                 }));
         
-                const { spendings } = get();
-                const result = analyzeSpendings(spendings, formattedMyCards, serverAllCards);
+                const result = analyzeSpendings(spendingAll, formattedMyCards, serverAllCards);
         
                 set({
                     cardList: serverAllCards,
+                    spendings: spendingAll,
                     topSpendingCategory: result.topCategory,
                     getMyCards: result.myCards,
                     recommendedCards: result.recommendedCards,
                     totalBenefit: result.totalBenefit,
                     benefit: result.benefitMap,
-                    categoryTotals: result.categoryMap
+                    categoryTotals: result.categoryMap,
+                    totalSpending: result.totalSpending,
+                    recentSpendList: result.recentSpend
                 });
         
             } catch (err) {
@@ -235,21 +241,45 @@ export const useCardStore = create<CardState>((set, get) => {
         userCards: USER_CARDS,
 
         spendings: [],
-        addSpending: (newSpending) => set((state) => {
-            const updatedSpendings = [newSpending, ...state.spendings];
-            const result = analyzeSpendings(updatedSpendings, state.getMyCards, state.cardList);
+        addSpending: async(newSpending) => {
+            try {
+                const response = await fetch("http://localhost:8080/api/spending/add", {
+                    method: "POST", 
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        userId: 1,
+                        userCardId: newSpending.cardId,
+                        storeName: newSpending.storeName,
+                        amount: newSpending.amount,
+                        category: newSpending.category,
+                        date: newSpending.date
+                    }),
+                });
 
-            return { 
-                spendings: updatedSpendings,
-                topSpendingCategory: result.topCategory,
-                totalSpending: result.totalSpending,
-                getMyCards: result.myCards,
-                recommendedCards: result.recommendedCards,
-                recentSpendList: result.recentSpend,
-                totalBenefit: result.totalBenefit,
-                benefit: result.benefitMap,
+                if (!response.ok) throw new Error("저장 실패");
+
+                const savedSpending: Spending = await response.json();
+
+                const { spendings, getMyCards, cardList } = get();
+
+                const updatedSpendings = [savedSpending, ...spendings];
+                const result = analyzeSpendings(updatedSpendings, getMyCards, cardList);
+
+                set({
+                    spendings: updatedSpendings,
+                    topSpendingCategory: result.topCategory,
+                    totalSpending: result.totalSpending,
+                    getMyCards: result.myCards,
+                    recommendedCards: result.recommendedCards,
+                    recentSpendList: result.recentSpend,
+                    totalBenefit: result.totalBenefit,
+                    benefit: result.benefitMap,
+                })
+
+            } catch (err) {
+                console.log('지출내역 저장 실패: ', err)
             }
-        }),
+        },
 
         topSpendingCategory: initial.topCategory,
         totalSpending: initial.totalSpending,
@@ -329,22 +359,7 @@ export const useCardStore = create<CardState>((set, get) => {
                 }
             })
         },
-
-        // addCard: (newCard: MyCardProgress) => {
-        //     set((state) => {
-        //         const updatedCards = [...state.getMyCards, newCard];
-        //         const result = analyzeSpendings(state.spendings, updatedCards, state.cardList);
-
-        //         return {
-        //             getMyCards: result.myCards,
-        //             recommendedCards: result.recommendedCards,
-        //             topSpendingCategory: result.topCategory,
-        //             totalBenefit: result.totalBenefit,
-        //             benefit: result.benefitMap,
-        //             totalSpending: result.totalSpending,
-        //         }
-        //     })
-        // },
+        
         addCard: async (userId, newCard: MyCardProgress) => {
             try {
                 const postData = {

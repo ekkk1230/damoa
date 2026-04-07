@@ -3,7 +3,8 @@ import { useCardStore } from "../../store/useCardStore";
 import CategoryTag from "./CategoryTag";
 
 function RecentSection() {
-    const { recentSpendList, cardList } = useCardStore();
+    const { recentSpendList, getMyCards } = useCardStore();
+
 
     return (
         <S.RecentSection>
@@ -14,13 +15,14 @@ function RecentSection() {
             
             <S.SpendList>
                 {recentSpendList.slice(0, 5).map((item, index) => {
-                    const recentCard = cardList.find(card => item.id === card.id);
+                    console.log(recentSpendList)
+                    const recentCard = getMyCards.find(card => item.cardId === card.cardInfo.id);
 
                     return (
                         <S.SpendItem key={`${index}-${item.id}`}>
                             <div className="item-left">
                             <div className="info">
-                                <p className="name">{recentCard?.name}</p>
+                                <p className="name">{recentCard?.cardInfo.name}</p>
                                 <p className="store">{item.storeName}</p>
                                 <p className="date">{item.date} · <CategoryTag categoryKey={item.category} /></p>
                             </div>

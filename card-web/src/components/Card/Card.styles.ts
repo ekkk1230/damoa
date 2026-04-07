@@ -53,7 +53,7 @@ export const SpendItem = styled.div`
   .item-left {
     .info {
       display: flex;
-      flex-direction: column;
+      flex-direction: column; align-items: flex-start; justify-content: flex-start;
       gap: 4px;
 
       .name {

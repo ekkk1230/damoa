@@ -38,10 +38,10 @@ public class UserService {
     public Map<String, Long> getAgeStatistics() {
         // 현재 날짜 기준으로 나이를 계산해서 각 연령대별 카운트 추출
         return Map.of(
-                "age20", userRepository.countByAgeRange(20, 29),
-                "age30", userRepository.countByAgeRange(30, 39),
-                "age40", userRepository.countByAgeRange(40, 49),
-                "age50Plus", userRepository.countByAgeRange(50, 120) // 50대 이상
+            "age20", userRepository.countByAgeRange(20, 29),
+            "age30", userRepository.countByAgeRange(30, 39),
+            "age40", userRepository.countByAgeRange(40, 49),
+            "age50Plus", userRepository.countByAgeRange(50, 120) // 50대 이상
         );
     }
 

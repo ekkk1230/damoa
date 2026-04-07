@@ -1,6 +1,7 @@
 package com.example.card_api.model.user;
 
 import com.example.card_api.model.card.Card;
+import com.example.card_api.model.spending.Spending;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
@@ -8,6 +9,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -34,6 +37,9 @@ public class UserCard {
     private LocalDate endDate;
 
     private LocalDateTime registeredDate;
+
+    @OneToMany(mappedBy = "userCard", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Spending> spendings = new ArrayList<>();
 
     @PrePersist
     public void prePersist() {
