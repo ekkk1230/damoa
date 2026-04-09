@@ -30,17 +30,24 @@ public class SpendingService {
 
     @Transactional
     public SpendingResponse saveSpending(SpendingRequest request) {
+        System.out.println("요청 받은 데이터: " + request.toString());
+
         Spending spending = new Spending();
         spending.setStoreName(request.getStoreName());
         spending.setAmount(request.getAmount());
         spending.setCategory(request.getCategory());
         spending.setDate(request.getDate());
 
-        User user = userRepository.findById(request.getUserId()).orElseThrow();
-        UserCard card = userCardRepository.findById(request.getUserCardId()).orElseThrow();
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("사용자(ID: " + request.getUserId() + ")를 찾을 수 없습니다."));
+
+        UserCard card = userCardRepository.findById(request.getUserCardId())
+                .orElseThrow(() -> new RuntimeException("카드(ID: " + request.getUserCardId() + ")가 DB에 없습니다. 새로고침 후 다시 시도해주세요."));
 
         int current = (card.getCurrentAmount() == null) ? 0 : card.getCurrentAmount();
         card.setCurrentAmount(current + request.getAmount());
+
+        userCardRepository.save(card);
 
         spending.setUser(user);
         spending.setUserCard(card);
@@ -59,8 +66,8 @@ public class SpendingService {
     }
 
     public List<SpendingResponse> getSpendingHistory(Long userId) {
-        List<Spending> spendings = spendingRepository.findAllByUserId(userId);
-        return spendings.stream().map(s -> {
+        List<Spending> spending = spendingRepository.findAllByUserId(userId);
+        return spending.stream().map(s -> {
             SpendingResponse res = new SpendingResponse();
             res.setId(s.getId());
             res.setStoreName(s.getStoreName());

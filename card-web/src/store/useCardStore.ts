@@ -28,7 +28,7 @@ export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[
         const cardId = Number(s.cardId);
 
         // 현재 카드의 실적 확인
-        const myCard = currentCards.find(c => c.cardInfo.id === cardId);
+        const myCard = currentCards.find(c => c.id === cardId);
         const cardInfo = myCard?.cardInfo;
         const currentPerformance = myCard?.currentAmount || 0;
 
@@ -60,7 +60,7 @@ export const analyzeSpendings = (spendings: any[], currentCards: MyCardProgress[
 
     const myCards: MyCardProgress[] = currentCards
         .map(card => {
-            const current = spendingMap[card.cardInfo.id] || 0;
+            const current = spendingMap[card.id] || 0;
             const tiers = card.cardInfo.performanceTiers || [];
 
             const nextTier = tiers.find(tier => tier.minAmount > current);
@@ -241,13 +241,15 @@ export const useCardStore = create<CardState>((set, get) => {
         userCards: USER_CARDS,
 
         spendings: [],
-        addSpending: async(newSpending) => {
+        addSpending: async (newSpending) => {
+            const currentUserId = newSpending.userId;
+
             try {
                 const response = await fetch("http://localhost:8080/api/spending/add", {
-                    method: "POST", 
+                    method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        userId: 1,
+                        userId: currentUserId,
                         userCardId: newSpending.cardId,
                         storeName: newSpending.storeName,
                         amount: newSpending.amount,
@@ -256,7 +258,11 @@ export const useCardStore = create<CardState>((set, get) => {
                     }),
                 });
 
-                if (!response.ok) throw new Error("저장 실패");
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("서버 응답 에러 내용:", errorText);
+                    throw new Error("저장 실패");
+                }
 
                 const savedSpending: Spending = await response.json();
 
@@ -274,10 +280,13 @@ export const useCardStore = create<CardState>((set, get) => {
                     recentSpendList: result.recentSpend,
                     totalBenefit: result.totalBenefit,
                     benefit: result.benefitMap,
-                })
+                    categoryTotals: result.categoryMap, 
+                });
+
+                await get().fetchCards(Number(currentUserId));
 
             } catch (err) {
-                console.log('지출내역 저장 실패: ', err)
+                console.log('지출내역 저장 실패: ', err);
             }
         },
 
@@ -320,6 +329,7 @@ export const useCardStore = create<CardState>((set, get) => {
             const { analyzedList, addSpending } = get();
 
             analyzedList.forEach(item => {
+                console.log('analyzedList', item)
                 addSpending({
                     ...item,
                     cardId: cardId

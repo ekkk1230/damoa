@@ -14,6 +14,7 @@ export interface UserCard {
 }
 
 export interface MyCardProgress extends UserCard {
+    id: number;
     progress: number;
 };
 

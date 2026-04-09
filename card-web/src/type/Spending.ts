@@ -7,6 +7,7 @@ export interface AnalyzedReceipt {
 }
 
 export interface Spending extends Omit<AnalyzedReceipt, 'id'> {
-    id: string | number;
+    id: number;
     cardId?: number;
+    userId?: number;
 }

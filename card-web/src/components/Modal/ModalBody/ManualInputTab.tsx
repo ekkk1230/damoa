@@ -3,9 +3,11 @@ import * as S from '../ModalComponents.styles'
 import { useCardStore } from '../../../store/useCardStore';
 import { EXPENDITURE_CATEGORIES } from '../../../constance/categories';
 import { useUIStore } from '../../../store/useUIStore';
+import { useAuthStore } from '../../../store/useAuthStore';
 
 function ManualInputTab() {
-    const { getMyCards, addSpending } = useCardStore();
+    const { getMyCards, addSpending, selectedCard } = useCardStore();
+    const { user } = useAuthStore();
     const { openModal } = useUIStore();
 
     const [form, setForm] = useState({
@@ -17,6 +19,8 @@ function ManualInputTab() {
     })
 
     const handleSubmit = () => {
+        if (!user?.id) return;
+
         if (!form.amount || !form.cardId || !form.storeName || !form.date) {
             openModal('CONFIRM', {
                 title: '',
@@ -31,6 +35,7 @@ function ManualInputTab() {
             ...form,
             amount: Number(form.amount),
             cardId: Number(form.cardId),
+            userId: user.id,
         })
         setForm({ amount: '', cardId: '', storeName: '', date: new Date().toISOString().split('T')[0], category: '' })
     }
@@ -43,9 +48,14 @@ function ManualInputTab() {
                 onChange={e => setForm({ ...form, cardId: e.target.value })}
             >
                 <option selected hidden>카드를 선택해주세요</option>
-                {getMyCards.map(item => (
-                    <option key={item.cardInfo.id} value={item.cardInfo.id}>{item.cardInfo.name}</option>
-                ))}
+                {getMyCards.map(item => {
+                    console.log(item)
+                    return (
+                    <option key={item.id} value={item.id}>
+                        {item.cardInfo.name}
+                    </option>
+                    )
+})}
             </S.StyledSelect>
 
             <S.FormLabel>분류</S.FormLabel>

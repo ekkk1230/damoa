@@ -47,22 +47,6 @@ public class DataInitializer {
                 System.err.println("에러 발생: " + e.getMessage());
                 e.printStackTrace();
             }
-
-            try {
-                if (userRepository.findByLoginId("admin").isEmpty()) {
-                    User admin = new User();
-                    admin.setLoginId("admin");
-                    admin.setPassword("1234");
-                    admin.setName("관리자");
-                    admin.setGender("F");
-                    admin.setBirthDate(LocalDate.parse("1985-01-27"));
-                    admin.setRole(UserRole.ADMIN);
-
-                    userRepository.save(admin);
-                }
-            } catch (Exception e) {
-                System.err.println("관리자 계정 생성 실패");
-            }
         };
     }
 

@@ -39,7 +39,9 @@ public class CardService {
         Card card = cardRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("카드가 없습니다."));
 
-        card.setViewCount(card.getViewCount() + 1);
+        // card.setViewCount(card.getViewCount() + 1);
+        Long currentCount = card.getViewCount();
+        card.setViewCount((currentCount == null ? 0L : currentCount) + 1);
         return card;
     }
 
