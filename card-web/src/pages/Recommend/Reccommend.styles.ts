@@ -336,3 +336,52 @@ const TierSection = styled.div`
     width: 100%;
     background: #00f2fe;
 `
+export const MyCardSwiperSection = styled.div`
+  margin: 40px 0;
+  padding: 0 20px;
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .swiper {
+    padding: 10px 0 30px 0; // 하단 그림자 잘림 방지
+  }
+`;
+
+// 개별 카드 슬라이드 스타일
+export const CardSlideItem = styled.div`
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 20px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: #3b82f6; // 포인트 컬러
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+  }
+
+  .company {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  .name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #222;
+    word-break: keep-all;
+  }
+`;

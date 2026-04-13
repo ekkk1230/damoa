@@ -1,4 +1,5 @@
 import * as S from "./Reccommend.styles"
+import { Pagination } from 'swiper/modules';
 import { useParams } from "react-router-dom"
 import { useCardStore } from "../../store/useCardStore";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -116,19 +117,28 @@ function RecommendDetail() {
 
                 {isMyCard === false && (
                     <>
-                        <Swiper>
-                            {getMyCards.map(card => {
-                                return (
-                                    <SwiperSlide 
-                                        key={card.cardInfo.id}
-                                        onClick={() => handleCardClick(card)}
-                                    >
-                                        <p>{card.cardInfo.company}</p>
-                                        <p>{card.cardInfo.name}</p>
+                        <S.MyCardSwiperSection>
+                            <h3>내 카드와 혜택 비교하기</h3>
+                            <Swiper
+                                modules={[Pagination]}
+                                spaceBetween={16}
+                                slidesPerView={1.2}
+                                breakpoints={{
+                                    768: { slidesPerView: 2.5 }, 
+                                    1024: { slidesPerView: 1.5 } 
+                                }}
+                                pagination={{ clickable: true }}
+                            >
+                                {getMyCards.map((myCard) => (
+                                    <SwiperSlide key={myCard.cardInfo.id}>
+                                        <S.CardSlideItem onClick={() => handleCardClick(myCard)}>
+                                            <p className="company">{myCard.cardInfo.company}</p>
+                                            <p className="name">{myCard.cardInfo.name}</p>
+                                        </S.CardSlideItem>
                                     </SwiperSlide>
-                                )
-                            })}
-                        </Swiper>
+                                ))}
+                            </Swiper>
+                        </S.MyCardSwiperSection>
                     </>
                 )}
                 

@@ -18,7 +18,6 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 	const { categoryMap } = analyzeSpendings(currentCardSpendings, getMyCards, cardList);
 	
 	const safeCategoryMap = categoryMap || {};
-
 	const targetCard = cardList.find(c => c.id === cardId);
 	const recommendCard = cardList.find(c => c.id === recommendId);
 
@@ -30,17 +29,11 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 	const allCategoryKeys = Object.keys(EXPENDITURE_CATEGORIES);
 
 	const meaningfulCategories = allCategoryKeys.filter(cate => {
-		const isSpent = (safeCategoryMap[cate] || 0) > 0; // 내가 돈을 썼는가?
-		// const hasTargetBenefit = (targetRes.categoryBenefits[cate] || 0) > 0; // 내 카드가 혜택을 주는가?
-		// const hasRecommendBenefit = (recommendRes.categoryBenefits[cate] || 0) > 0; // 추천 카드가 혜택을 주는가?
-		const isRecommendTarget = recommendCard?.categories.some(c => c.includes(cate));
-
-		return isSpent && isRecommendTarget;
+		const isSpent = (safeCategoryMap[cate] || 0) > 0;
+		return isSpent; 
 	});
 
-	const categories = meaningfulCategories;
-
-	const comparisonDetail = categories.map((cate) => {
+	const comparisonDetail = meaningfulCategories.map((cate) => {
 		const spent = safeCategoryMap[cate] || 0;
 		const targetBenefit = targetRes.categoryBenefits[cate] || 0;
 		const recommendBenefit = recommendRes.categoryBenefits[cate] || 0;
@@ -55,9 +48,7 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 		};
 	});
 
-	const filteredComparisonResult = comparisonDetail.filter(d => recommendCard?.categories.some(cate => cate.includes(d.category)));
-
-	const emptyCategories = categories.reduce((acc, cate) => ({ ...acc, [cate]: 0 }), {});
+	const emptyCategories = meaningfulCategories.reduce((acc, cate) => ({ ...acc, [cate]: 0 }), {});
 	
 	const chartData = [
 		{
@@ -99,10 +90,16 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 				<p className="result-msg">현재 카드가 가장 효율적입니다.</p>
 			)}
 
-			<BenefitBarChart data={chartData} categories={categories} />
+
+			{(targetRes.totalBenefit === 0 && currentCardSpendings.length > 0) && (
+				<p style={{ color: '#ff6b6b', fontSize: '0.9rem', marginBottom: '10px' }}>
+					⚠️ 현재 실적 조건을 충족하지 못해 예상 혜택이 0원으로 계산되었습니다.
+				</p>
+			)}
+
+			<BenefitBarChart data={chartData} categories={meaningfulCategories} />
 
 			<S.StyledTable>
-				<caption>소비분석 결과</caption>
 				<thead>
 					<tr>
 						<th>카테고리</th>
@@ -113,21 +110,24 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 					</tr>
 				</thead>
 				<tbody>
-					{filteredComparisonResult.length !== 0 &&
-						filteredComparisonResult.map(item => (
+					{comparisonDetail.length > 0 ? (
+						comparisonDetail.map(item => (
 							<tr key={item.category}>
 								<td><CategoryTag categoryKey={item.category} /></td>
 								<td>{item.spent.toLocaleString()}원</td>
+
 								<td>{item.targetBenefit.toLocaleString()}원</td>
 								<td>{item.recommendBenefit.toLocaleString()}원</td>
 								<td>
 									<S.DiffText $isPlus={item.diff > 0}>
-										{item.diff.toLocaleString()}원
+										{item.diff > 0 ? `${item.diff.toLocaleString()}` : item.diff.toLocaleString()}원
 									</S.DiffText>
 								</td>
 							</tr>
 						))
-					}
+					) : (
+						<tr><td colSpan={5}>소비 분석 데이터가 없습니다.</td></tr>
+					)}
 				</tbody>
 			</S.StyledTable>
 		</S.ComparisonWrapper>

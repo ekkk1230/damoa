@@ -36,12 +36,12 @@ function CardList() {
                 {Array.isArray(getMyCards) && getMyCards.length > 0 ? (
                     <div>
                         {getMyCards.map((card: MyCardProgress) => (
-                            <S.CardItem key={card.cardInfo.id}>
+                            <S.CardItem key={card.id}>
                                 <S.CardInfo>
                                     <p className="company">{card.cardInfo.company}</p>
                                     <p className="name">{card.cardInfo.name}</p>
                                     <p className="benefit-amount">
-                                        누적 혜택: {benefit[card.cardInfo.id]?.toLocaleString() || 0}원
+                                        누적 혜택: {benefit[card.id]?.toLocaleString() || 0}원
                                     </p>
                                 </S.CardInfo>
 
