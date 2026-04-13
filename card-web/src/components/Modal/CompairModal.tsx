@@ -10,14 +10,16 @@ function CompairModal({ recommendId }: { recommendId: any }) {
     
     if (modalType !== 'COMPAIR') return null;
 
-    const targetId = (selectedCard as any)?.cardInfo?.id || (selectedCard as any)?.id;
-    const selectCardSpendList = spendings.filter(s => Number(s.cardId) === Number(targetId));
+    const userCardPk = (selectedCard as any).id;
+    const targetCardInfoId = (selectedCard as any).cardInfo.id;
+
+    const selectCardSpendList = spendings.filter(s => Number(s.cardId) === Number(userCardPk));
     
     return (
         <ModalLayout title="카드 비교">
             <SpendChart data={selectCardSpendList} />
 
-            <CardComparison recommendId={Number(recommendId)} cardId={targetId} />
+            <CardComparison recommendId={Number(recommendId)} cardId={targetCardInfoId} />
         </ModalLayout>
     )
 }

@@ -12,7 +12,9 @@ function CardComparison({recommendId, cardId}: {recommendId: number, cardId: num
 
 	const { spendings, getMyCards, cardList } = useCardStore();
 
-    const currentCardSpendings = spendings.filter(s => Number(s.cardId) === Number(cardId));
+	const userCard = getMyCards.find(c => c.cardInfo.id === cardId);
+	const currentCardSpendings = spendings.filter(s => Number(s.cardId) === Number(userCard?.id));
+
 	const { categoryMap } = analyzeSpendings(currentCardSpendings, getMyCards, cardList);
 	
 	const safeCategoryMap = categoryMap || {};

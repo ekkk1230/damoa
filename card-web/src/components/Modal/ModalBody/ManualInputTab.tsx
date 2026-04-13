@@ -6,7 +6,7 @@ import { useUIStore } from '../../../store/useUIStore';
 import { useAuthStore } from '../../../store/useAuthStore';
 
 function ManualInputTab() {
-    const { getMyCards, addSpending, selectedCard } = useCardStore();
+    const { getMyCards, addSpending } = useCardStore();
     const { user } = useAuthStore();
     const { openModal } = useUIStore();
 
@@ -49,13 +49,12 @@ function ManualInputTab() {
             >
                 <option selected hidden>카드를 선택해주세요</option>
                 {getMyCards.map(item => {
-                    console.log(item)
                     return (
-                    <option key={item.id} value={item.id}>
-                        {item.cardInfo.name}
-                    </option>
-                    )
-})}
+                        <option key={item.id} value={item.id}>
+                            {item.cardInfo.name}
+                        </option>
+                        )
+                })}
             </S.StyledSelect>
 
             <S.FormLabel>분류</S.FormLabel>

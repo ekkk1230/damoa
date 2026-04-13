@@ -46,9 +46,9 @@ function CardList() {
                                 </S.CardInfo>
 
                                 <S.SpendList>
-                                    {recentSpendList.filter(s => s.cardId === card.cardInfo.id).length > 0 ? (
+                                    {recentSpendList.filter(s => s.cardId === card.id).length > 0 ? (
                                         recentSpendList
-                                            .filter(s => s.cardId === card.cardInfo.id)
+                                            .filter(s => s.cardId === card.id)
                                             .map(s => (
                                                 <li key={s.cardId}>
                                                     <span>{s.storeName}</span>

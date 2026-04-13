@@ -60,8 +60,6 @@ export const HomePage = () => {
 									const companyName = normalizeCompanyName(cardInfo.company);
 									const brandColor = BRAND_COLORS[companyName];
 									
-									console.log(card)
-
 									return (
 										<SwiperSlide key={cardInfo.id} onClick={() => handleCardClick(cardInfo)}>
 											<S.CreditCardBox $brandColor={brandColor}>

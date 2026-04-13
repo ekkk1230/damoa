@@ -10,25 +10,23 @@ function RecentSection() {
         <S.RecentSection>
             <div className="section-header">
                 <h3>최근 지출 내역</h3>
-                <button className="more-btn">전체보기</button>
             </div>
             
             <S.SpendList>
-                {recentSpendList.slice(0, 5).map((item, index) => {
-                    console.log(recentSpendList)
-                    const recentCard = getMyCards.find(card => item.cardId === card.cardInfo.id);
+                {recentSpendList.map((item, index) => {
+                    const recentCard = getMyCards.find(card => item.cardId === card.id);
 
                     return (
                         <S.SpendItem key={`${index}-${item.id}`}>
                             <div className="item-left">
-                            <div className="info">
-                                <p className="name">{recentCard?.cardInfo.name}</p>
-                                <p className="store">{item.storeName}</p>
-                                <p className="date">{item.date} · <CategoryTag categoryKey={item.category} /></p>
-                            </div>
+                                <div className="info">
+                                    <p className="name">{recentCard?.cardInfo.name}</p>
+                                    <p className="store">{item.storeName}</p>
+                                    <p className="date">{item.date} · <CategoryTag categoryKey={item.category} /></p>
+                                </div>
                             </div>
                             <div className="item-right">
-                            <p className="amount">{item.amount.toLocaleString()}원</p>
+                                <p className="amount">{item.amount.toLocaleString()}원</p>
                             </div>
                         </S.SpendItem>
                     )

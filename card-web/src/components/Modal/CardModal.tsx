@@ -8,7 +8,7 @@ import CategoryTag from '../Card/CategoryTag';
 import { useUIStore } from '../../store/useUIStore';
 
 const CardModal = () => {
-    const { selectedCard } = useCardStore();
+    const { selectedCard, getMyCards } = useCardStore();
     const { modalType } = useUIStore();
 
     if (modalType != 'CARD_DETAIL' || !selectedCard) return null;
@@ -16,7 +16,7 @@ const CardModal = () => {
     const color = getCardColor(selectedCard.company);
     const imageUrl = `https://placehold.co/100x64/${color}/${color}`;
 
-    const isMyCard = selectedCard.isOwned;
+    const isMyCard = getMyCards.find(card => card.cardInfo.id === selectedCard.id);
 
     return (
         <ModalLayout title="카드 상세 안내">
@@ -41,7 +41,7 @@ const CardModal = () => {
                     {selectedCard?.detailBenefits.map((benefit, index) => (
                         <p key={index}>
                             <strong>{benefit.title}</strong>: {benefit.content} 
-                            <span>({benefit.limit})</span>
+                            <span>({benefit?.detailLimit})</span>
                         </p>
                     ))}
                 </S.DetailItem>
@@ -56,8 +56,6 @@ const CardModal = () => {
                     ))}
                 </ul>
             </S.DetailItem>
-
-
 
             <S.ModalBody>
                 {isMyCard ? (

@@ -68,7 +68,7 @@ function RecommendSection({ variant = 'main' }: RecommendSectionProps) {
                 </S.CardListMini>
                 
                 {recommendedCards.length >= 1 && (
-                    <S.BannerFooter onClick={() => navigate('/recommend?filter=recommend')}>
+                    <S.BannerFooter onClick={() => navigate('/damoa/recommend?filter=recommend')}>
                         총 {recommendedCards.length}개의 맞춤 카드 보러가기 <span>&gt;</span>
                     </S.BannerFooter>
                 )}
