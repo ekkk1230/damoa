@@ -53,24 +53,40 @@ export interface DetailBenefit {
 }
 
 export interface Card {
+    // id: number;
+    // name: string;
+    // company: string;
+    // annualFee: number;
+    // image: string;
+    // mainBenefits: string[];
+    // categories: string[];
+    // cardType: "신용" | "체크" | "하이브리드";
+    // summary?: string;
+    // statistics?: CardStatistics;
+    // detailBenefits?: DetailBenefit[]; 
+    // benefitRules?: BenefitRule[]; 
+    // condition?: string;
+    // performanceTiers?: PerformanceTier[];
+    // baseRate?: number;
+    // maxBenefit?: string;
+    // officialLink?: string;
+    
+    // 1. 필수 마스터 데이터
     id: number;
     name: string;
     company: string;
-    annualFee: number;
-    image: string;
-    mainBenefits: string[];
-    categories: string[];
-    isOwned: boolean;
     cardType: "신용" | "체크" | "하이브리드";
-    summary?: string;
-    statistics?: CardStatistics;
-    detailBenefits?: DetailBenefit[]; 
-    benefitRules?: BenefitRule[]; 
-    condition?: string;
-    performanceTiers?: PerformanceTier[];
-    bestPerformance?: number;
-    baseRate?: number;
-    maxBenefit?: string;
+    categories: string[]; // 추천 알고리즘용
+
+    // 2. 혜택 엔진 (추천 로직 핵심!)
+    benefitRules: BenefitRule[]; 
+    performanceTiers: PerformanceTier[];
+    baseRate?: number; // 실적 미달 시 적용될 기본율
+
+    // 3. UI/화면 표시용 (AI가 생성한 텍스트 등)
+    image: string;
+    summary?: string; // AI가 요약한 핵심 문구
+    detailBenefits?: DetailBenefit[]; // 상세 혜택 텍스트
     officialLink?: string;
-    viewCount: number;
+    annualFee: number;
 }

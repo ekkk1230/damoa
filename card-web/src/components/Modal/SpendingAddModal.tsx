@@ -15,7 +15,7 @@ const SpendingAddModal = () => {
 
     return (
         <ModalLayout title="지출 내역 등록">
-            <S.TabGroup>
+            {/* <S.TabGroup>
                 <S.TabButton
                     $isActive={activeTab === 'manual'}
                     onClick={() => setActiveTab('manual')}
@@ -34,7 +34,8 @@ const SpendingAddModal = () => {
                 <ManualInputTab />
             ) : (
                 <ImageInputTab />
-            )}
+            )} */}
+            <ManualInputTab />
         </ModalLayout>
     )
 }
